@@ -8,6 +8,7 @@ on:
 jobs:
   Mirror Repository:
     runs-on: ubuntu-latest
+    needs: Explore-GitHub-Actions
     steps:
       - name: Mirror Repository
         uses: git@github.com:Sosantoo/Arcade.git
