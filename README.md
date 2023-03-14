@@ -11,13 +11,29 @@ This project is ...
 
 ## Build
 
-Simple guide to setup the project via cmake...
+The CMakeLists.txt build the program. The project is composed with three graphics dynamic libraries and two game dynamic libraries at the root of the repository.
+Simple guide to setup the project via CMake as follows:
 
 ```
-$ ./build_exemple
+$ mkdir ./build/ && cd ./build/
+$ cmake .. -G “Unix Makefiles” -DCMAKE_BUILD_TYPE=Release
+[. . .]
+$ cmake --build .
+[. . .]
+$ cd ..
+$ ls ./arcade ./lib/
+./arcade
+
+./lib/:
+arcade_ncurses.so
+arcade_pacman.so
+arcade_sdl2.so
+arcade_sfml.so
+arcade_solarfox.so
+[. . .]
 ```
 
-Enjoy the game
+Enjoy the game !
 
 ## Documentation
 
