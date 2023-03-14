@@ -1,1 +1,0 @@
-/usr/bin/c++ -fPIC -O3 -DNDEBUG -shared -Wl,-soname,arcade_pacman.so -o ../../lib/arcade_pacman.so CMakeFiles/arcade_pacman.dir/src/pacman.cpp.o 

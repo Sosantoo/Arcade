@@ -1,1 +1,0 @@
-/usr/bin/c++ -fPIC -O3 -DNDEBUG -shared -Wl,-soname,arcade_nibbler.so -o ../../lib/arcade_nibbler.so CMakeFiles/arcade_nibbler.dir/src/nibbler.cpp.o 
