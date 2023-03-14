@@ -15,7 +15,27 @@ jobs:
         arr=($(find . \( -name "#*#" -o -name "*~" \
         -o -name "*.o" -o -name "*.a" \
         -o -name "*.so" -o -name "*.gcno" -o -name "*.gcda" -o -name "*.gcov" \
-         -o -path '*tmp/*' \)))
+        -o -path '*tmp/*' \
+        -o -name "Dockerfile" \
+        -o -name "build" \
+        -o -name "CMakeCache.txt" \
+        -o -name "cmake_install.cmake" \
+        -o -name "CMakeFiles" \
+        -o -name "MakeFile" \
+        -o -name "CMakeLists.txt.user" \
+        -o -name "CMakeCache.txt" \
+        -o -name "CMakeFiles" \
+        -o -name "CMakeScripts" \
+        -o -name "Makefile" \
+        -o -name "compile_commands.json" \
+        -o -name "CTestTestfile.cmake" \
+        -o -name "_deps" \
+        -o -name ".cmake" \
+        -o -name ".vscode" \
+        -o -name ".idea" \
+        -o -name ".dockerignore" \
+        -o -name ".cache" \
+        \)))
         for i in ${arr[@]}; do echo "::error file=$i,line=1,endLine=1,title=Unwanted file detected::$i"; done
         if ((${#arr[@]})); then
           exit 1
