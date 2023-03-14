@@ -1,0 +1,1 @@
+/usr/bin/c++ -fPIC -O3 -DNDEBUG -shared -Wl,-soname,arcade_ncurses.so -o ../../lib/arcade_ncurses.so CMakeFiles/arcade_ncurses.dir/src/nCurses.cpp.o 

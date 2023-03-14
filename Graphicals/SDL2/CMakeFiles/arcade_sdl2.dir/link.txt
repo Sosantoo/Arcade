@@ -1,0 +1,1 @@
+/usr/bin/c++ -fPIC -O3 -DNDEBUG -shared -Wl,-soname,arcade_sdl2.so -o ../../lib/arcade_sdl2.so CMakeFiles/arcade_sdl2.dir/src/sdl2.cpp.o 

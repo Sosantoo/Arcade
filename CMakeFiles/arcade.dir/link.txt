@@ -1,0 +1,1 @@
+/usr/bin/c++ -O3 -DNDEBUG CMakeFiles/arcade.dir/Core/src/core.cpp.o CMakeFiles/arcade.dir/Core/src/libWrapper.cpp.o CMakeFiles/arcade.dir/Core/src/main.cpp.o -o arcade 

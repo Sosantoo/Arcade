@@ -1,0 +1,4 @@
+# Hashes of file build rules.
+62fda81af83faf5c06cd09a293cbaa8d CMakeFiles/core
+3f60a3f17e8ec9c3eab4a87c999ea2a0 CMakeFiles/games
+cd8fd37dbf2037a17981909d3e8f0521 CMakeFiles/graphicals
