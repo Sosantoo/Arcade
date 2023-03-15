@@ -19,6 +19,7 @@ namespace Core
             ~Core();
 
             void testGraphicals();
+            void testGame();
             void start(const std::string GraphicalsLibPath, const std::string GameLibPath);
 
         private:

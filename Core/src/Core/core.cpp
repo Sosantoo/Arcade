@@ -28,12 +28,25 @@ void Core::Core::testGraphicals() {
     interface->setSize();
 }
 
+void Core::Core::testGame() {
+    IGame *interface = _game.getInterface();
+    interface->start();
+    interface->stop();
+    interface->reset();
+    interface->getLife();
+    interface->getScore();
+    interface->handleEvent();
+    interface->checkAroundCells();
+    interface->move(1, 1);
+}
+
 void Core::Core::start(const std::string GraphicalsLibPath, const std::string GameLibPath) {
     std::cout << "start" << std::endl;
     _graphical.load(GraphicalsLibPath);
     _game.load(GameLibPath);
 
     testGraphicals();
+    testGame();
 }
 
 int coreEntryPoint(const std::string &baseGraphicalsLibsName)
