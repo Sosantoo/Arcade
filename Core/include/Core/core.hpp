@@ -8,6 +8,7 @@
 #ifndef CORE_H_
     #define CORE_H_
     #include "../various.hpp"
+    #include "../interface.hpp"
     #include "../Wrapper/Wrapper.hpp"
 
 namespace Core
@@ -17,7 +18,12 @@ namespace Core
             Core();
             ~Core();
 
+            void testGraphicals();
+            void start(const std::string GraphicalsLibPath, const std::string GameLibPath);
+
         private:
+            InterfaceWrapper<IGraphical> _graphical;
+            InterfaceWrapper<IGame> _game;
     };
 }
 

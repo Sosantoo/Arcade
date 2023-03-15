@@ -18,7 +18,8 @@ namespace Core
 
             std::map<std::string, std::string> refreshAvailableLib();
             std::map<std::string, std::string> availableLib();
-            bool isAvailable(std::string path);
+            bool isAvailable(const std::string &);
+            void displayavailableLib();
 
         private:
             std::string _pathLib;

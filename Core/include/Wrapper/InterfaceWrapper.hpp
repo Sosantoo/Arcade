@@ -20,7 +20,7 @@ class InterfaceWrapper: public DlfcnWrapper {
         typedef Interface_t* create_interface_t();
         typedef void destroy_interface_t(Interface_t*);
 
-        void load(const std::string& libPath);
+        void load(const std::string &);
         Interface_t *getInterface();
 
     private:

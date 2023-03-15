@@ -7,22 +7,23 @@
 
 #include "arcade.hpp"
 
-DlfcnWrapper::DlfcnWrapper()
+DlfcnWrapper::DlfcnWrapper():
+    _Handle{NULL}
 {
 }
 
 DlfcnWrapper::DlfcnWrapper(const std::string &libName, int flags)
 {
-    this->open(libName, flags);
+    this->open(libName.c_str(), flags);
 }
 
 DlfcnWrapper::~DlfcnWrapper()
 {
-    if (_Handle)
+    if (_Handle != NULL)
         dlclose(_Handle);
 }
 
-void DlfcnWrapper::open(const std::string &libName, int flags ) {
+void DlfcnWrapper::open(const std::string &libName, int flags) {
     if (islibLoaded())
         close();
     _Handle = dlopen(libName.c_str(), flags);

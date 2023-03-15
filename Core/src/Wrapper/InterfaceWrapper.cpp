@@ -28,8 +28,8 @@ InterfaceWrapper<Interface_t>::~InterfaceWrapper()
 }
 
 template <typename Interface_t>
-void InterfaceWrapper<Interface_t>::load(const std::string& libPath) {
-    open(libPath, 1);
+void InterfaceWrapper<Interface_t>::load(const std::string &libPath) {
+    open(libPath, RTLD_NOW);
     _constructorGraphical = (create_interface_t*)sym("create");
     _destructorGraphical = (destroy_interface_t*)sym("destroy");
     _interface.reset(_constructorGraphical());
