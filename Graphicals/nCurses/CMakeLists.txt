@@ -5,9 +5,11 @@
 add_library(arcade_ncurses SHARED)
 
 # Add the source files for the library
+file(GLOB_RECURSE SRC_FILES ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp)
+
 target_sources(arcade_ncurses
     PRIVATE
-        src/nCurses.cpp
+        ${SRC_FILES}
 )
 
 # Add the include directories for the library

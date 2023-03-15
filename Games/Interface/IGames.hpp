@@ -29,4 +29,7 @@ class IGame {
         virtual void move(int hor, int vir) = 0;
 };
 
+typedef IGame* create_game_t();
+typedef void destroy_game_t(IGame *);
+
 #endif

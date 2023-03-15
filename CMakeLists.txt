@@ -37,7 +37,7 @@ add_custom_target(core
 ################################
 
 add_subdirectory(Games/Nibbler)
-add_subdirectory(Games/PacMan)
+add_subdirectory(Games/Snake)
 
 add_custom_target(games
     COMMAND ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR} --target nibbler PacMan
@@ -52,6 +52,7 @@ add_custom_target(games
 
 add_subdirectory(Graphicals/SDL2)
 add_subdirectory(Graphicals/nCurses)
+add_subdirectory(Graphicals/OpenGL)
 
 add_custom_target(graphicals
     COMMAND ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR} --target nCurses SDL2
