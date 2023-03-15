@@ -13,20 +13,33 @@
 
 namespace Core
 {
+
     class Core {
         public:
-            Core();
+            Core(libWrapper &);
             ~Core();
 
             void testGraphicals();
             void testGame();
-            void start(const std::string GraphicalsLibPath, const std::string GameLibPath);
+            void start(const std::string, const std::string);
+            void test();
 
-        private:
+            //actions
+            void nextGraphicsLibrary();
+            void nextGame();
+            void restartGame();
+            void goToMenu();
+            void exit();
+
+        protected:
             InterfaceWrapper<IGraphical> _graphical;
             InterfaceWrapper<IGame> _game;
+            Lib::lib_t _graphical_details;
+            Lib::lib_t _game_details;
+            libWrapper &_libs;
+
     };
-}
+};
 
 // entrypoint core
 int coreEntryPoint(const std::string &baseGraphicalsLibsName = "arcade_sdl2.so");

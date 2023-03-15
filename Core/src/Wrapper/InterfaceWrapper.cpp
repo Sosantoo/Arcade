@@ -14,25 +14,27 @@ InterfaceWrapper<Interface_t>::InterfaceWrapper()
 }
 
 template <typename Interface_t>
-InterfaceWrapper<Interface_t>::InterfaceWrapper(const std::string& libPath, int flags)
-    : DlfcnWrapper(libPath, flags)
+InterfaceWrapper<Interface_t>::InterfaceWrapper(const Lib::lib_t &lib)
+    : DlfcnWrapper(lib.path)
 {
-    load(libPath);
+    load(lib);
 }
 
 template <typename Interface_t>
 InterfaceWrapper<Interface_t>::~InterfaceWrapper()
 {
     if (_interface)
-        _destructorGraphical(_interface.get());
+        _destructor(_interface.get());
 }
 
 template <typename Interface_t>
-void InterfaceWrapper<Interface_t>::load(const std::string &libPath) {
-    open(libPath, RTLD_NOW);
-    _constructorGraphical = (create_interface_t*)sym("create");
-    _destructorGraphical = (destroy_interface_t*)sym("destroy");
-    _interface.reset(_constructorGraphical());
+void InterfaceWrapper<Interface_t>::load(const Lib::lib_t &lib) {
+    open(lib.path);
+
+    _constructor = (create_interface_t*)sym("create");
+    _destructor = (destroy_interface_t*)sym("destroy");
+
+    _interface.reset(_constructor());
 }
 
 template <typename Interface_t>

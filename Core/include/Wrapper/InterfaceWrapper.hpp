@@ -14,19 +14,19 @@ template <typename Interface_t>
 class InterfaceWrapper: public DlfcnWrapper {
     public:
         InterfaceWrapper();
-        InterfaceWrapper(const std::string& libPath, int flags);
+        InterfaceWrapper(const Lib::lib_t &lib);
         ~InterfaceWrapper();
 
         typedef Interface_t* create_interface_t();
         typedef void destroy_interface_t(Interface_t*);
 
-        void load(const std::string &);
+        void load(const Lib::lib_t &lib);
         Interface_t *getInterface();
 
     private:
         std::unique_ptr<Interface_t> _interface;
-        create_interface_t* _constructorGraphical;
-        destroy_interface_t* _destructorGraphical;
+        create_interface_t* _constructor;
+        destroy_interface_t* _destructor;
 };
 
 #endif /* !INTERFACEWRAPPER_HPP_ */

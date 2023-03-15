@@ -19,8 +19,7 @@ DlfcnWrapper::DlfcnWrapper(const std::string &libName, int flags)
 
 DlfcnWrapper::~DlfcnWrapper()
 {
-    if (_Handle != NULL)
-        dlclose(_Handle);
+    close();
 }
 
 void DlfcnWrapper::open(const std::string &libName, int flags) {
@@ -33,7 +32,9 @@ void DlfcnWrapper::open(const std::string &libName, int flags) {
 }
 
 void DlfcnWrapper::close() {
-    dlclose(_Handle);
+    if (_Handle != NULL)
+        dlclose(_Handle);
+    _Handle = NULL;
 }
 
 std::string DlfcnWrapper::error() {
