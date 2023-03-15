@@ -7,7 +7,8 @@
 
 #ifndef CORE_H_
     #define CORE_H_
-    #include "various.hpp"
+    #include "../various.hpp"
+    #include "../Wrapper/Wrapper.hpp"
 
 namespace Core
 {
@@ -15,15 +16,12 @@ namespace Core
         public:
             Core();
             ~Core();
+
+        private:
     };
 }
 
-/**
- * @brief Core entry point
- *
- * @param baseGraphicalsLibsName
- * @return int
- */
-int coreEntryPoint(const std::string &baseGraphicalsLibsName);
+// entrypoint core
+int coreEntryPoint(const std::string &baseGraphicalsLibsName = "arcade_sdl2.so");
 
 #endif /* !CORE_H_ */

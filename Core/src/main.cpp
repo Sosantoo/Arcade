@@ -11,7 +11,6 @@ int main(const int ac, const char **av)
 {
     try {
         if (ac != 2) throw std::runtime_error("invalid arguments");
-
         coreEntryPoint(av[1]);
     }
     catch (const std::exception &e) {
