@@ -7,7 +7,7 @@
 
 #ifndef LIBWRAPPER_HPP_
     #define LIBWRAPPER_HPP_
-    #include "various.hpp"
+    #include "../various.hpp"
 
 namespace Core
 {

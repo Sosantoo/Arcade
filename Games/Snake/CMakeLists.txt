@@ -1,25 +1,27 @@
 ################################
-# arcade_PacMan LIB
+# arcade_snake LIB
 ################################
 
-add_library(arcade_pacman SHARED)
+add_library(arcade_snake SHARED)
 
 # Add the source files for the library
-target_sources(arcade_pacman
+file(GLOB_RECURSE SRC_FILES ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp)
+
+target_sources(arcade_snake
     PRIVATE
-        src/pacman.cpp
+        ${SRC_FILES}
 )
 
 # Add the include directories for the library
-target_include_directories(arcade_pacman
+target_include_directories(arcade_snake
     PUBLIC
         include
 )
 
 # Set the output directory for the library
-set_target_properties(arcade_pacman
+set_target_properties(arcade_snake
     PROPERTIES
         PREFIX ""
         LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib
-        OUTPUT_NAME arcade_pacman
+        OUTPUT_NAME arcade_snake
 )

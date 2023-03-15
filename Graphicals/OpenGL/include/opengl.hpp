@@ -2,11 +2,11 @@
 ** EPITECH PROJECT, 2023
 ** arcade
 ** File description:
-** sdl2
+** opengl
 */
 
-#ifndef SDL2_HPP_
-    #define SDL2_HPP_
+#ifndef OPENGL_HPP_
+    #define OPENGL_HPP_
     #include "../../../Core/include/various.hpp"
     #include "../../Interface/IGraphicals.hpp"
 
@@ -35,4 +35,4 @@ class AGraphicals: public IGraphical {
 
 };
 
-#endif /* !SDL2_HPP_ */
+#endif /* !OPENGL_HPP_ */

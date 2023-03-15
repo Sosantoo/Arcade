@@ -5,9 +5,11 @@
 add_library(arcade_sdl2 SHARED)
 
 # Add the source files for the library
+file(GLOB_RECURSE SRC_FILES ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp)
+
 target_sources(arcade_sdl2
     PRIVATE
-        src/sdl2.cpp
+        ${SRC_FILES}
 )
 
 # Add the include directories for the library
