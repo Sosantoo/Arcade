@@ -44,6 +44,6 @@ int coreEntryPoint(const std::string &baseGraphicalsLibsName)
     libs.displayavailableLib();
     if (!libs.isAvailable(baseGraphicalsLibsName))
         throw CoreExceptions::LibUnknowExceptions(baseGraphicalsLibsName);
-    core.start(baseGraphicalsLibsName, "");
+    core.start(baseGraphicalsLibsName, "./lib/arcade_menu.so");
     return 0;
 }
