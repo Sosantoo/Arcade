@@ -126,7 +126,7 @@ int main(int argc, char *argv[])
         // Effacement de l'écran
         SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
         SDL_RenderClear(renderer);
-        // SDL_RenderCopy(renderer, backgroundTexture, NULL, NULL);
+        SDL_RenderCopy(renderer, backgroundTexture, NULL, NULL);
         //  Affichage des colonnes de texte
         if (finish == 0) {
             drawText(renderer, font, "Game selected: " + game + " with " + lib,
