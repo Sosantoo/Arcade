@@ -17,15 +17,15 @@ AGame::~AGame()
 
 }
 
-void AGame::start() {
+void AGame::start(IGraphical &graphicalInterface) const {
     std::cout << "[MENU game] start"<< std::endl;
 }
 
-void AGame::stop() {
+void AGame::stop() const {
     std::cout << "[MENU game] stop" << std::endl;
 }
 
-void AGame::reset() {
+void AGame::reset() const {
     std::cout << "[MENU game] reset" << std::endl;
 }
 
@@ -48,7 +48,7 @@ void AGame::checkAroundCells() const {
     std::cout << "[MENU game] checkAroundCells" << std::endl;
 }
 
-void AGame::move(int hor, int vir) {
+void AGame::move(int hor, int vir) const {
     (void)hor;
     (void)vir;
 

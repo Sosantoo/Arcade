@@ -19,8 +19,6 @@ namespace Core
             Core(libWrapper &);
             ~Core();
 
-            void testGraphicals();
-            void testGame();
             void start(const std::string, const std::string);
             void test();
 

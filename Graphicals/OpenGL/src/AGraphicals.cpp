@@ -7,55 +7,56 @@
 
 #include "opengl.hpp"
 
-AGraphicals::AGraphicals()
-{
+std::unordered_map<int, bool> keyState;
+
+void keyPressed(unsigned char key, int x, int y) {
+    keyState[key] = true;
 }
 
-AGraphicals::~AGraphicals()
-{
+void keyReleased(unsigned char key, int x, int y) {
+    keyState[key] = false;
 }
 
-void AGraphicals::display() {
-    std::cout << "[opengl] display" << std::endl;
-};
-
-void AGraphicals::openWindow() {
-    std::cout << "[opengl] openWindow" << std::endl;
-};
-
-void AGraphicals::closeWindow() {
-    std::cout << "[opengl] closeWindow" << std::endl;
-};
-
-void AGraphicals::createGrid() {
-    std::cout << "[opengl] createGrid" << std::endl;
-};
-
-void AGraphicals::updateCell() {
-    std::cout << "[opengl] updateCell" << std::endl;
-};
-
-void AGraphicals::setName() {
-    std::cout << "[opengl] setName" << std::endl;
-};
-
-int AGraphicals::setSize() {
-    return 0;
-};
-
-int AGraphicals::getState() {
-    return 0;
-};
-
-int AGraphicals::getKey() {
-    return 0;
-};
-
-extern "C" IGraphical* create() {
-    return new AGraphicals;
+void idleFunc() {
+    glutPostRedisplay();
 }
 
-extern "C" void destroy(AGraphicals* p) {
-    (void) p;
-    // delete p;
+void AGraphical::initWindow(std::string WindowName, std::pair<size_t, size_t> size) const {
+    std::cout << "initWindow" << std::endl;
+
+    int ac = 1;
+    char *av[3] = {"program name", "ee", NULL};
+    glutInit(&ac, av);
+    glutInitWindowSize(size.first, size.second);
+    glutCreateWindow(WindowName.c_str());
+    glutInitDisplayMode(GLUT_SINGLE | GLUT_RGBA);
+    glutInitWindowPosition(100, 100);
+    glutKeyboardUpFunc(keyReleased);
+}
+
+void AGraphical::openWindow() const {
+    std::cout << "openWindow" << std::endl;
+
+    if (_eventBinding == nullptr) {
+        std::cout << "no event binded" << std::endl;
+        return;
+    }
+
+
+    (*_eventBinding)[IEvent::EventType::UP_pressed]();
+    (*_eventBinding)[IEvent::EventType::LEFT_pressed]();
+    (*_eventBinding)[IEvent::EventType::DOWN_pressed]();
+    (*_eventBinding)[IEvent::EventType::RIGHT_pressed]();
+
+    // glutMainLoop();
+    // launchSnakeTest(1, NULL);
+}
+
+void AGraphical::closeWindow() const {
+    std::cout << "closeWindow" << std::endl;
+}
+
+void AGraphical::loadEventBindings(IEvent::EventHandler &eventBinding) {
+    std::cout << "event binded" << std::endl;
+    _eventBinding = &eventBinding;
 }

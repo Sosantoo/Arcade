@@ -1,8 +1,8 @@
 /*
 ** EPITECH PROJECT, 2023
-** arcadeMirror
+** arcade
 ** File description:
-** ncurses
+** entryPoint
 */
 
 #include "ncurses.hpp"
@@ -11,9 +11,16 @@ void __attribute__((constructor)) calledFirst();
 void __attribute__((destructor)) calledLast();
 
 void calledFirst() {
-    std::cout << "[ncurses] Loading" << '\n';
+    std::cout << "[Ncurses] Loading" << '\n';
 }
 
 void calledLast() {
-    std::cout << "[ncurses] UnLoading" << '\n';
+    std::cout << "[Ncurses] UnLoading" << '\n';
 }
+
+// extern "C" {
+//     IGraphical *create() {
+//         return new AGraphical;
+//     }
+// }
+

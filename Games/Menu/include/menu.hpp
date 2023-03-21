@@ -8,18 +8,18 @@
 #ifndef AGAME_HPP_
     #define AGAME_HPP_
     #include "../../../Core/include/various.hpp"
-    #include "../../Interface/IGames.hpp"
+    #include "../../../Interface/IGames.hpp"
 
 class AGame: public IGame {
     public:
         AGame();
         ~AGame();
 
-        virtual void start();
+        virtual void start(IGraphical &) const;
 
-        virtual void stop();
+        virtual void stop() const;
 
-        virtual void reset();
+        virtual void reset() const;
 
         virtual int getLife() const;
 
@@ -29,7 +29,7 @@ class AGame: public IGame {
 
         virtual void checkAroundCells() const;
 
-        virtual void move(int hor, int vir);
+        virtual void move(int hor, int vir) const;
 
 };
 

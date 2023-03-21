@@ -2,7 +2,7 @@
 ** EPITECH PROJECT, 2023
 ** arcade
 ** File description:
-** opengl
+** entryPoint
 */
 
 #include "opengl.hpp"
@@ -11,9 +11,15 @@ void __attribute__((constructor)) calledFirst();
 void __attribute__((destructor)) calledLast();
 
 void calledFirst() {
-    std::cout << "[sopengl] Loading" << '\n';
+    std::cout << "[openGL] Loading" << '\n';
 }
 
 void calledLast() {
-    std::cout << "[sopengl] UnLoading" << '\n';
+    std::cout << "[openGL] UnLoading" << '\n';
+}
+
+extern "C" {
+    IGraphical *create() {
+        return new AGraphical;
+    }
 }

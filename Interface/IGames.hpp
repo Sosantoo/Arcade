@@ -7,26 +7,18 @@
 
 #ifndef IGAME_HPP_
     #define IGAME_HPP_
+    #include "IGraphicals.hpp"
+    #include "IGames.hpp"
 
 class IGame {
     public:
         ~IGame() = default;
 
-        virtual void start() = 0;
+        virtual void start(IGraphical &, IEvent::EventHandler &) = 0;
 
         virtual void stop() = 0;
 
         virtual void reset() = 0;
-
-        virtual int getLife() const = 0;
-
-        virtual int getScore() const = 0;
-
-        virtual int handleEvent() const = 0;
-
-        virtual void checkAroundCells() const = 0;
-
-        virtual void move(int hor, int vir) = 0;
 };
 
 typedef IGame* create_game_t();
