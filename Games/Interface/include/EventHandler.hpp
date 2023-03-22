@@ -10,6 +10,10 @@
     #include "various.hpp"
 
 class EventHandler {
+private:
+    IEvent::EventHandler eventHandler;
+    IGraphical &_graphical;
+
 public:
     EventHandler(IGraphical &graphical);
     ~EventHandler();
@@ -24,10 +28,6 @@ public:
 
     IEvent::EventHandler &getEventBindings();
 
-protected:
-    IEvent::EventHandler eventHandler;
-private:
-    IGraphical &_graphical;
 };
 
 #endif /* !EVENTHANDLER_HPP_ */

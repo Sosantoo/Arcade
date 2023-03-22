@@ -11,6 +11,7 @@ void AGameWrapper::start() {
     std::cout << "[GAME test] start" << std::endl;
     _graphical.initWindow("test game", {600, 600});
     _graphical.loadEventBindings(gameEngine->getEventBindings());
+    _graphical.loadEventBindings(_coreEvent);
 
     gameEngine->GameEngineLoop();
 };

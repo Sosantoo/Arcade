@@ -25,14 +25,14 @@ struct GraphicalInfo {
 
 class AGraphical: public IGraphical {
 private:
-    EventHandler *_eventBinding;
+    EventHandler _eventBinding;
     std::unordered_map<int, bool> keyState;
     GraphicalInfo graphicalInfo;
 
     void callEvent(const IEvent::EventType);
 
 public:
-    AGraphical(): _eventBinding{ nullptr} {};
+    AGraphical() {};
     ~AGraphical() {};
 
     // IGraphical

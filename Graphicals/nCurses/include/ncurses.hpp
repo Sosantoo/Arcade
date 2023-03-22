@@ -27,7 +27,7 @@ struct GraphicalInfo {
 
 class AGraphical: public IGraphical {
     private:
-        EventHandler *_eventBinding;
+        EventHandler _eventBinding;
         GraphicalInfo graphicalInfo;
 
         void callEvent(const IEvent::EventType);
@@ -35,8 +35,8 @@ class AGraphical: public IGraphical {
         void EventPool(int);
 
     public:
-    AGraphical()
-        : _eventBinding{ nullptr} {};
+    AGraphical() {
+    };
     ~AGraphical() {};
 
     // IGraphical
