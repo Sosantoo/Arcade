@@ -28,7 +28,7 @@ class AGameWrapper {
         IEvent::EventHandler &_coreEvent;
 };
 
-class AGame:public IGame {
+class AGame: public IGame {
     public:
         AGame(): _gameWrapper{nullptr} {};
         ~AGame();

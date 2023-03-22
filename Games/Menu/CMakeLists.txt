@@ -19,6 +19,8 @@ target_include_directories(arcade_menu
         include
 )
 
+# target_link_libraries(arcade_menu AGameLib)
+
 # Set the output directory for the library
 set_target_properties(arcade_menu
     PROPERTIES
@@ -26,3 +28,4 @@ set_target_properties(arcade_menu
         LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib
         OUTPUT_NAME arcade_menu
 )
+

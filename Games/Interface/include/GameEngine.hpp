@@ -18,7 +18,7 @@ class GameEngine: public EventHandler {
         void GameEngineLoop();
 
     private:
-        IGraphical *_graphical;
+        IGraphical &_graphical;
 };
 
 #endif /* !GAMEENGINE_HPP_ */

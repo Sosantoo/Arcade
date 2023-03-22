@@ -18,6 +18,8 @@ target_include_directories(arcade_snake
         include
 )
 
+# target_link_libraries(arcade_snake AGameLib)
+
 # Set the output directory for the library
 set_target_properties(arcade_snake
     PROPERTIES

@@ -19,6 +19,8 @@ target_include_directories(arcade_nibbler
         include
 )
 
+# target_link_libraries(arcade_nibbler AGameLib)
+
 # Set the output directory for the library
 set_target_properties(arcade_nibbler
     PROPERTIES

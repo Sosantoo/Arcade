@@ -5,21 +5,21 @@
 ** entryPoint
 */
 
-#include "menu.hpp"
+#include "AGame.hpp"
 
 void __attribute__((constructor)) calledFirst();
 void __attribute__((destructor)) calledLast();
 
 void calledFirst() {
-    std::cout << "[Menu] Loading" << '\n';
+    std::cout << "[GAME lib] Loading" << '\n';
 }
 
 void calledLast() {
-    std::cout << "[Menu] UnLoading" << '\n';
+    std::cout << "[GAME lib] UnLoading" << '\n';
 }
 
-// extern "C" {
-//     IGame *create() {
-//         return new AGame;
-//     }
-// }
+extern "C" {
+    IGame *create() {
+        return new AGame;
+    }
+}
