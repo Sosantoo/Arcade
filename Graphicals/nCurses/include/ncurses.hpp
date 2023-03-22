@@ -9,6 +9,7 @@
     #define NCURSES_HPP_
     #include "../../../Core/include/various.hpp"
     #include "../../../Interface/Graphical/IGraphicals.hpp"
+    #include <ncurses.h>
 
 class AGraphical: public IGraphical {
     public:

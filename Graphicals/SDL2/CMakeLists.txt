@@ -4,6 +4,12 @@
 
 add_library(arcade_sdl2 SHARED)
 
+# Add SDL2 libraries
+find_package(SDL2 REQUIRED)
+if (NOT SDL2_FOUND)
+    message(FATAL_ERROR "SDL2 not found. Please install SDL2 and try again.")
+endif()
+
 # Add the source files for the library
 file(GLOB_RECURSE SRC_FILES ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp)
 
@@ -16,7 +22,10 @@ target_sources(arcade_sdl2
 target_include_directories(arcade_sdl2
     PUBLIC
         include
+        ${SDL2_INCLUDE_DIRS}
 )
+
+target_link_libraries(arcade_sdl2 ${SDL2_LIBRARIES})
 
 # Set the output directory for the library
 set_target_properties(arcade_sdl2

@@ -9,6 +9,7 @@
     #define SDL2_HPP_
     #include "../../../Core/include/various.hpp"
     #include "../../../Interface/Graphical/IGraphicals.hpp"
+    #include <SDL2/SDL.h>
 
 class AGraphical: public IGraphical {
     public:
