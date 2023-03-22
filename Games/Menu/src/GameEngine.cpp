@@ -8,7 +8,8 @@
 #include "menu.hpp"
 
 GameEngine::GameEngine(IGraphical &graphical)
-    :_graphical{graphical}
+    : EventHandler(graphical),
+    _graphical{graphical}
 {
 }
 

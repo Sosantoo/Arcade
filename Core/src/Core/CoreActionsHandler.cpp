@@ -10,17 +10,17 @@
 void Core::Core::nextGraphicsLibrary() {
     Lib::lib_t nextLib = _libs.getNextGraphicalsLib(_graphical_details);
     _graphical_details = nextLib;
-    _graphical.load(nextLib);
+    _graphical.load(nextLib, Lib::_GRAPHICALS_);
 }
 
 void Core::Core::nextGame() {
     Lib::lib_t nextLib = _libs.getNextGraphicalsLib(_game_details);
     _game_details = nextLib;
-    _game.load(nextLib);
+    _game.load(nextLib, Lib::_GAMES_);
 }
 
 void Core::Core::restartGame() {
-   _game.load(_game_details);
+   _game.load(_game_details, Lib::_GAMES_);
 }
 
 void Core::Core::goToMenu() {
@@ -28,7 +28,7 @@ void Core::Core::goToMenu() {
         .name = "arcade_menu.so",
         .path = "./lib/arcade_menu.so",
         .type = Lib::_GAMES_,
-    });
+    }, Lib::_GAMES_);
 }
 
 void Core::Core::exit() {

@@ -7,7 +7,8 @@
 
 #include "test.hpp"
 
-EventHandler::EventHandler()
+EventHandler::EventHandler(IGraphical &graphical):
+    _graphical{graphical}
 {
 }
 
@@ -38,6 +39,6 @@ IEvent::EventHandler &EventHandler::getEventBindings() {
         {IEvent::EventType::DOWN_pressed, [this](){this->downKeyPress(); }},
         {IEvent::EventType::LEFT_pressed, [this](){this->leftKeyPress(); }},
         {IEvent::EventType::RIGHT_pressed, [this](){this->rightKeyPress(); }},
+        {IEvent::EventType::QUIT, [this](){ _graphical.closeWindow(); }},
     });
-
 }

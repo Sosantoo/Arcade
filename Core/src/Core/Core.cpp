@@ -16,7 +16,7 @@ Core::Core::~Core()
 {
 }
 
-void Core::Core::test() {
+void Core::Core::launch() {
     auto &gameInterface = _game.getInterface();
     auto &graphicalInterface = _graphical.getInterface();
 
@@ -28,16 +28,17 @@ void Core::Core::start(const std::string GraphicalsLibPath, const std::string Ga
     _graphical_details = _libs.getLibBypath(GraphicalsLibPath);
     _game_details = _libs.getLibBypath(GameLibPath);
 
-    _graphical.load(_graphical_details);
-    _game.load(_game_details);
-    test();
+    _graphical.load(_graphical_details, Lib::_GRAPHICALS_);
+    _game.load(_game_details, Lib::_GAMES_);
+
+    launch();
 }
 
 int coreEntryPoint(const std::string &baseGraphicalsLibsName)
 {
     libWrapper libs("./lib");
 
-    libs.displayavailableLib();
+    // libs.displayavailableLib();
     if (!libs.isAvailable(baseGraphicalsLibsName))
         throw CoreExceptions::LibUnknowExceptions(baseGraphicalsLibsName);
 

@@ -12,7 +12,6 @@ AGameWrapper::AGameWrapper(IGraphical &graphical, IEvent::EventHandler &coreEven
     _coreEvent{coreEvent}
 {
     gameEngine = std::make_shared<GameEngine>(_graphical);
-    _graphical.loadEventBindings(gameEngine->getEventBindings());
 }
 
 AGameWrapper::~AGameWrapper()

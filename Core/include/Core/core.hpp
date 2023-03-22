@@ -20,7 +20,7 @@ namespace Core
             ~Core();
 
             void start(const std::string, const std::string);
-            void test();
+            void launch();
 
             //actions
             void nextGraphicsLibrary();

@@ -16,10 +16,10 @@ class InterfaceWrapper: public DlfcnWrapper {
         using create_interface_t = Interface_t* (*)();
 
         InterfaceWrapper();
-        InterfaceWrapper(const Lib::lib_t &lib);
+        InterfaceWrapper(const Lib::lib_t &, const Lib::lib_type);
         ~InterfaceWrapper();
 
-        void load(const Lib::lib_t &lib);
+        void load(const Lib::lib_t &, const Lib::lib_type);
 
         Interface_t& getInterface() const;
 
