@@ -11,7 +11,7 @@
 
 class EventHandler {
 public:
-    EventHandler();
+    EventHandler(IGraphical &graphical);
     ~EventHandler();
 
     void upKeyPress();
@@ -26,6 +26,8 @@ public:
 
 protected:
     IEvent::EventHandler eventHandler;
+private:
+    IGraphical &_graphical;
 };
 
 #endif /* !EVENTHANDLER_HPP_ */

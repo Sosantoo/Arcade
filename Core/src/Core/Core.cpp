@@ -16,7 +16,7 @@ Core::Core::~Core()
 {
 }
 
-void Core::Core::test() {
+void Core::Core::launch() {
     auto &gameInterface = _game.getInterface();
     auto &graphicalInterface = _graphical.getInterface();
 
@@ -30,7 +30,8 @@ void Core::Core::start(const std::string GraphicalsLibPath, const std::string Ga
 
     _graphical.load(_graphical_details, Lib::_GRAPHICALS_);
     _game.load(_game_details, Lib::_GAMES_);
-    test();
+
+    launch();
 }
 
 int coreEntryPoint(const std::string &baseGraphicalsLibsName)
