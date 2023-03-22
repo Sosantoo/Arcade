@@ -11,6 +11,8 @@
 #include <ncurses.h>
 using namespace std;
 
+
+
 int main(int argc, char **argv)
 {
     initscr();
@@ -25,12 +27,14 @@ int main(int argc, char **argv)
     refresh();
     wrefresh(menuWin);
     keypad(menuWin, TRUE);
+
     string LibChoices[3] = {"OpenGl", "Ncurses", "SDL2"};
     string GameLibChoices[2] = {"Nibbler", "Snake"};
     int choice;
     int choice2;
     int highlight = 0;
     int highlight2 = 0;
+
     while (1) {
         attron(A_BOLD);
         mvwprintw(menuWin, 1, xMax / 3 - 15, "Arcade");
