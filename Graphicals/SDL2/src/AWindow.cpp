@@ -71,4 +71,5 @@ void AGraphical::display()
             return;
         }
     }
+    // callEvent(IEvent::EventType::NEXT_LIB);
 };

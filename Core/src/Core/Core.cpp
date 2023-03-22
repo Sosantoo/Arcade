@@ -20,8 +20,10 @@ void Core::Core::launch() {
     auto &gameInterface = _game.getInterface();
     auto &graphicalInterface = _graphical.getInterface();
 
-    IEvent::EventHandler event = {};
-    gameInterface.start(graphicalInterface, event);
+    gameInterface.start(
+        graphicalInterface,
+        getCoreEventBind()
+    );
 }
 
 void Core::Core::start(const std::string GraphicalsLibPath, const std::string GameLibPath) {
