@@ -42,7 +42,8 @@ add_subdirectory(Games/Menu)
 add_subdirectory(Games/test)
 
 add_custom_target(games
-    COMMAND ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR} --target nibbler PacMan
+    COMMAND ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR} --target arcade_nibbler arcade_snake arcade_menu
+    DEPENDS arcade_nibbler arcade_snake arcade_menu
     COMMENT "Build the games libraries"
     VERBATIM
 )
@@ -57,11 +58,11 @@ add_subdirectory(Graphicals/nCurses)
 add_subdirectory(Graphicals/OpenGL)
 
 add_custom_target(graphicals
-    COMMAND ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR} --target nCurses SDL2
+    COMMAND ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR} --target arcade_sdl2 arcade_ncurses arcade_opengl
+    DEPENDS arcade_nibbler arcade_snake arcade_menu
     COMMENT "Build the graphicals libraries"
     VERBATIM
 )
-
 
 ################################
 # Tests
