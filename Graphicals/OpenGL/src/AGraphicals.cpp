@@ -7,55 +7,31 @@
 
 #include "opengl.hpp"
 
-AGraphicals::AGraphicals()
-{
-}
+std::unordered_map<int, bool> keyState;
 
-AGraphicals::~AGraphicals()
-{
-}
+// void AGraphical::initWindow(std::string WindowName, std::pair<size_t, size_t> size) {
+//     std::cout << "initWindow" << std::endl;
+// }
 
-void AGraphicals::display() {
-    std::cout << "[opengl] display" << std::endl;
-};
+// void AGraphical::openWindow() {
+//     std::cout << "openWindow" << std::endl;
+//     if (_eventBinding == nullptr) {
+//         std::cout << "no event binded" << std::endl;
+//         return;
+//     }
 
-void AGraphicals::openWindow() {
-    std::cout << "[opengl] openWindow" << std::endl;
-};
+//     (*_eventBinding)[IEvent::EventType::UP_pressed]();
+//     (*_eventBinding)[IEvent::EventType::LEFT_pressed]();
+//     (*_eventBinding)[IEvent::EventType::DOWN_pressed]();
+//     (*_eventBinding)[IEvent::EventType::RIGHT_pressed]();
 
-void AGraphicals::closeWindow() {
-    std::cout << "[opengl] closeWindow" << std::endl;
-};
+// }
 
-void AGraphicals::createGrid() {
-    std::cout << "[opengl] createGrid" << std::endl;
-};
+// void AGraphical::closeWindow() {
+//     std::cout << "closeWindow" << std::endl;
+// }
 
-void AGraphicals::updateCell() {
-    std::cout << "[opengl] updateCell" << std::endl;
-};
-
-void AGraphicals::setName() {
-    std::cout << "[opengl] setName" << std::endl;
-};
-
-int AGraphicals::setSize() {
-    return 0;
-};
-
-int AGraphicals::getState() {
-    return 0;
-};
-
-int AGraphicals::getKey() {
-    return 0;
-};
-
-extern "C" IGraphical* create() {
-    return new AGraphicals;
-}
-
-extern "C" void destroy(AGraphicals* p) {
-    (void) p;
-    // delete p;
-}
+// void AGraphical::loadEventBindings(EventHandler &eventBinding) {
+//     std::cout << "event binded" << std::endl;
+//     _eventBinding = &eventBinding;
+// }

@@ -29,6 +29,7 @@ std::map<std::string, Lib::lib_type> libs_register {
     {"arcade_centipede.so", Lib::_GAMES_},
     {"arcade_solarfox.so",  Lib::_GAMES_},
     {"arcade_menu.so",      Lib::_GAMES_},
+    {"testGame.so",         Lib::_GAMES_},
 };
 
 libWrapper::libWrapper(const std::string &path):

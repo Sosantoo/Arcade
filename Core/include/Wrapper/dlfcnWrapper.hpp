@@ -10,6 +10,10 @@
     #include "../various.hpp"
 
 class DlfcnWrapper {
+    protected:
+        using CloseFunc = int (*)(void*);
+        std::unique_ptr<void, CloseFunc> _Handle;
+
     public:
         DlfcnWrapper();
         DlfcnWrapper(const std::string &, int = RTLD_LAZY);
@@ -17,12 +21,9 @@ class DlfcnWrapper {
 
         void open(const std::string &, int = RTLD_LAZY);
         void close();
-        std::string error();
+        std::string error() const;
         void *sym(const std::string &);
-        bool islibLoaded();
-
-    protected:
-        void *_Handle;
+        bool isLibLoaded() const;
 };
 
 #endif /* !DLFCNWRAPPER_HPP_ */

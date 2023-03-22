@@ -7,37 +7,38 @@
 
 #include "arcade.hpp"
 
-DlfcnWrapper::DlfcnWrapper():
-    _Handle{NULL}
+DlfcnWrapper::DlfcnWrapper()
+    : _Handle(nullptr, dlclose)
 {
 }
 
-DlfcnWrapper::DlfcnWrapper(const std::string &libName, int flags)
+DlfcnWrapper::DlfcnWrapper(const std::string& libName, int flags)
+    : _Handle(nullptr, dlclose)
 {
-    this->open(libName.c_str(), flags);
+    open(libName, flags);
 }
 
 DlfcnWrapper::~DlfcnWrapper()
 {
-    close();
 }
 
 void DlfcnWrapper::open(const std::string &libName, int flags) {
-    if (islibLoaded())
+   if (isLibLoaded())
         close();
-    _Handle = dlopen(libName.c_str(), flags);
 
-    if (!islibLoaded())
+    _Handle.reset(dlopen(libName.c_str(), flags));
+    if (!isLibLoaded())
         throw DlfcnExceptions::CannotOpenExceptions(dlerror());
 }
 
 void DlfcnWrapper::close() {
-    if (_Handle != NULL)
-        dlclose(_Handle);
-    _Handle = NULL;
+    if (isLibLoaded()) {
+        dlclose(_Handle.get());
+        _Handle.release();
+    }
 }
 
-std::string DlfcnWrapper::error() {
+std::string DlfcnWrapper::error() const {
     char *dl_error = dlerror();
 
     return (dl_error != nullptr) ? std::string{dl_error} : "";
@@ -47,14 +48,14 @@ void *DlfcnWrapper::sym(const std::string &symbol) {
     void *out;
 
     dlerror();
-    out = dlsym(_Handle, symbol.c_str());
+    out = dlsym(_Handle.get(), symbol.c_str());
 
     std::string dlsym_error = error();
-    if (!dlsym_error.empty())
+    if (!out || !dlsym_error.empty())
         throw DlfcnExceptions::CannotLoadExceptions(dlsym_error);
     return out;
 }
 
-bool DlfcnWrapper::islibLoaded() {
-    return _Handle != NULL;
+bool DlfcnWrapper::isLibLoaded() const {
+    return _Handle.operator bool();
 }

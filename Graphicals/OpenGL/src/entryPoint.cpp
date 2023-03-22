@@ -2,18 +2,24 @@
 ** EPITECH PROJECT, 2023
 ** arcade
 ** File description:
-** sdl2
+** entryPoint
 */
 
-#include "sdl2.hpp"
+#include "opengl.hpp"
 
 void __attribute__((constructor)) calledFirst();
 void __attribute__((destructor)) calledLast();
 
 void calledFirst() {
-    std::cout << "[ssdl2] Loading" << '\n';
+    std::cout << "[openGL] Loading" << '\n';
 }
 
 void calledLast() {
-    std::cout << "[ssdl2] UnLoading" << '\n';
+    std::cout << "[openGL] UnLoading" << '\n';
+}
+
+extern "C" {
+    IGraphical *create() {
+        return new AGraphical;
+    }
 }

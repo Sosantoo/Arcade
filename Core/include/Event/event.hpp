@@ -2,5 +2,9 @@
 ** EPITECH PROJECT, 2023
 ** arcade
 ** File description:
-** snake
+** event
 */
+
+#pragma once
+
+#include "Event.hpp"

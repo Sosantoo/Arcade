@@ -18,6 +18,12 @@ target_include_directories(arcade_opengl
         include
 )
 
+# add open GL lib
+find_package(OpenGL REQUIRED)
+set(OpenGL_GL_PREFERENCE GLVND)
+
+target_link_libraries(arcade_opengl ${OPENGL_gl_LIBRARY} ${OPENGL_glu_LIBRARY} glut)
+
 # Set the output directory for the library
 set_target_properties(arcade_opengl
     PROPERTIES
