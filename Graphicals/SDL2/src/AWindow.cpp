@@ -43,15 +43,6 @@ void AGraphical::clear()
     // SDL_RenderClear(graphicalInfo.window);
 };
 
-void AGraphical::callEvent(const IEvent::EventType eventType)
-{
-    if (_eventBinding == nullptr) {
-        std::cout << "no event binded" << std::endl;
-        return;
-    }
-    (*_eventBinding)[eventType]();
-}
-
 void AGraphical::display()
 {
     while (SDL_PollEvent(&graphicalInfo.event)) {
