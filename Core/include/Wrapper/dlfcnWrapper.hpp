@@ -17,12 +17,14 @@ class DlfcnWrapper {
 
         void open(const std::string &, int = RTLD_LAZY);
         void close();
-        std::string error();
+        std::string error() const;
         void *sym(const std::string &);
-        bool islibLoaded();
+        bool isLibLoaded() const;
 
     protected:
-        void *_Handle;
+        // std::unique_ptr<void, decltype(&dlclose)> _Handle;
+        using CloseFunc = int (*)(void*);
+        std::unique_ptr<void, CloseFunc> _Handle;
 };
 
 #endif /* !DLFCNWRAPPER_HPP_ */
