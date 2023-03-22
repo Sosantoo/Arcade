@@ -22,5 +22,6 @@ void GameEngine::GameEngineLoop()
     while (_graphical.windowIsOpen()) {
         _graphical.display();
     }
+    _graphical.destroy();
 }
 
