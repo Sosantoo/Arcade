@@ -5,10 +5,5 @@
 ** nibbler
 */
 
-#ifndef NIBBLER_HPP_
-    #define NIBBLER_HPP_
-    #include "../../../Interface/IGames.hpp"
-    #include "../../../Interface/IGraphicals.hpp"
-
-
-#endif /* !NIBBLER_HPP_ */
+#pragma once
+#include "../../Interface/include/AGame.hpp"

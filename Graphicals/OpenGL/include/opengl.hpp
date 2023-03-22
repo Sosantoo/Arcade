@@ -5,10 +5,9 @@
 ** opengl
 */
 
-#ifndef OPENGL_HPP_
-    #define OPENGL_HPP_
+#pragma once
     #include "../../../Core/include/various.hpp"
-    #include "../../../Interface/IGraphicals.hpp"
+    #include "../../../Interface/Graphical/IGraphicals.hpp"
     #include <GL/glut.h>
 
 class AGraphical: public IGraphical {
@@ -17,27 +16,33 @@ class AGraphical: public IGraphical {
         : _eventBinding{ nullptr} {};
     ~AGraphical() {};
 
-    //Basics
-    virtual void createSprite() const {};
-
-    //IGrid
-    virtual void createGrid() const {};
-    virtual void updateCell() const {};
+    // IGraphical
+    virtual void loadResource() {};
+    virtual void resetResource() {};
 
     //IWindow
-    virtual void display() const {};
-    virtual void initWindow(std::string, std::pair<size_t, size_t>) const;
-    virtual void openWindow() const;
-    virtual void closeWindow() const;
+    virtual void openWindow() final {};
+    virtual void closeWindow() final {};
+    virtual void initWindow(std::string, std::pair<size_t, size_t>) final {};
+    virtual bool windowIsOpen() final {};
+    virtual void clear() final {};
+    virtual void display() final {};
 
     //IEvent
-    virtual void loadEventBindings(IEvent::EventHandler &);
+    virtual void loadEventBindings(EventHandler &) final {};
+
+    // IEntity
+    virtual void create() final {};
+
+    virtual void setSize() final {};
+
+    virtual void setPosition() final {};
+
+    virtual void destroy() final {};
+
+    virtual void displayEntity() final {};
 
     private:
-        IEvent::EventHandler *_eventBinding;
+        EventHandler *_eventBinding;
         std::unordered_map<int, bool> keyState;
 };
-
-int launchSnakeTest(int argc, char** argv);
-
-#endif /* !OPENGL_HPP_ */

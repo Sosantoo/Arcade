@@ -18,9 +18,9 @@ void calledLast() {
     std::cout << "[Ncurses] UnLoading" << '\n';
 }
 
-// extern "C" {
-//     IGraphical *create() {
-//         return new AGraphical;
-//     }
-// }
+extern "C" {
+    IGraphical *create() {
+        return new AGraphical;
+    }
+}
 

@@ -11,11 +11,11 @@ void __attribute__((constructor)) calledFirst();
 void __attribute__((destructor)) calledLast();
 
 void calledFirst() {
-    std::cout << "[GAME lib] Loading" << '\n';
+    std::cout << "[GAME] Loading" << '\n';
 }
 
 void calledLast() {
-    std::cout << "[GAME lib] UnLoading" << '\n';
+    std::cout << "[GAME] UnLoading" << '\n';
 }
 
 extern "C" {

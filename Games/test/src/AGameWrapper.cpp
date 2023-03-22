@@ -8,11 +8,13 @@
 #include "test.hpp"
 
 void AGameWrapper::start() {
-    std::cout << "oui test" << std::endl;
+    std::cout << "[GAME test] start" << std::endl;
 };
 
 void AGameWrapper::stop() {
+    std::cout << "[GAME test] stop" << std::endl;
 };
 
-void AGameWrapper::reset() {
+void AGameWrapper::restart() {
+    std::cout << "[GAME test] restart" << std::endl;
 };

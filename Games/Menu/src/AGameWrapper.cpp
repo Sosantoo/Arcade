@@ -15,6 +15,6 @@ void AGameWrapper::stop() {
     std::cout << "[GAME menu] stop" << std::endl;
 };
 
-void AGameWrapper::reset() {
+void AGameWrapper::restart() {
     std::cout << "[GAME menu] reset" << std::endl;
 };

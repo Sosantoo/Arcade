@@ -5,10 +5,5 @@
 ** snake
 */
 
-#ifndef SNAKE_HPP_
-    #define SNAKE_HPP_
-    #include "../../../Interface/IGames.hpp"
-    #include "../../../Interface/IGraphicals.hpp"
-
-
-#endif /* !SNAKE_HPP_ */
+#pragma once
+#include "../../Interface/include/AGame.hpp"

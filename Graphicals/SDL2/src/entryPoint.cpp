@@ -18,8 +18,8 @@ void calledLast() {
     std::cout << "[sdl2] UnLoading" << '\n';
 }
 
-// extern "C" {
-//     IGraphical *create() {
-//         return new AGraphical;
-//     }
-// }
+extern "C" {
+    IGraphical *create() {
+        return new AGraphical;
+    }
+}

@@ -13,14 +13,17 @@
 class AGameWrapper {
     public:
         AGameWrapper(IGraphical &, IEvent::EventHandler &);
+        AGameWrapper(const AGameWrapper&) = delete;
+        AGameWrapper& operator=(const AGameWrapper&) = delete;
+        AGameWrapper(AGameWrapper&&) = delete;
+        AGameWrapper& operator=(AGameWrapper&&) = delete;
         ~AGameWrapper();
-        AGameWrapper(const IGraphical &&) = delete;
 
-        virtual void start();
+        virtual void start() final;
 
-        virtual void stop();
+        virtual void stop() final ;
 
-        virtual void reset();
+        virtual void restart() final;
 
     private:
         std::shared_ptr<GameEngine> gameEngine;
@@ -31,24 +34,24 @@ class AGameWrapper {
 class AGame: public IGame {
     public:
         AGame(): _gameWrapper{nullptr} {};
-        ~AGame();
+        ~AGame() {};
         AGame(const IGraphical &&) = delete;
 
         virtual void start(IGraphical &graphical, IEvent::EventHandler &eventHandler) {
-            _gameWrapper = new AGameWrapper(graphical, eventHandler);
+            _gameWrapper = std::make_unique<AGameWrapper>(graphical, eventHandler);
             _gameWrapper->start();
         };
 
-        virtual void stop() {
+        virtual void stop() override {
             _gameWrapper->stop();
         };
 
-        virtual void reset() {
-            _gameWrapper->reset();
+        virtual void restart() override {
+            _gameWrapper->restart();
         };
 
     private:
-        AGameWrapper *_gameWrapper;
+        std::unique_ptr<AGameWrapper> _gameWrapper;
 };
 
 #endif /* !AGAME_HPP_ */

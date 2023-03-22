@@ -8,5 +8,5 @@
 #pragma once
 
 #include "../../../Core/include/various.hpp"
-#include "../../../Interface/IGames.hpp"
-#include "../../../Interface/IGraphicals.hpp"
+#include "../../../Interface/Game/IGames.hpp"
+#include "../../../Interface/Graphical/IGraphicals.hpp"

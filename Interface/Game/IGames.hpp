@@ -5,10 +5,8 @@
 ** IGames
 */
 
-#ifndef IGAME_HPP_
-    #define IGAME_HPP_
-    #include "IGraphicals.hpp"
-    #include "IGames.hpp"
+#pragma once
+#include "../Graphical/IGraphicals.hpp"
 
 class IGame {
     public:
@@ -18,10 +16,8 @@ class IGame {
 
         virtual void stop() = 0;
 
-        virtual void reset() = 0;
+        virtual void restart() = 0;
 };
 
 typedef IGame* create_game_t();
 typedef void destroy_game_t(IGame *);
-
-#endif
