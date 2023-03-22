@@ -7,7 +7,8 @@
 
 #include "menu.hpp"
 
-EventHandler::EventHandler()
+EventHandler::EventHandler(IGraphical &graphical):
+    _graphical{graphical}
 {
 }
 

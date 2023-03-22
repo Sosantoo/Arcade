@@ -21,12 +21,12 @@ class AGraphical: public IGraphical {
     virtual void resetResource() {};
 
     //IWindow
-    virtual void openWindow() final {};
-    virtual void closeWindow() final {};
-    virtual void initWindow(std::string, std::pair<size_t, size_t>) final {};
-    virtual bool windowIsOpen() final {};
-    virtual void clear() final {};
-    virtual void display() final {};
+    virtual void openWindow() final;
+    virtual void closeWindow() final;
+    virtual void initWindow(std::string, std::pair<size_t, size_t>) final;
+    virtual bool windowIsOpen() final;
+    virtual void clear() final;
+    virtual void display() final;
 
     //IEvent
     virtual void loadEventBindings(EventHandler &) final {};
@@ -43,6 +43,8 @@ class AGraphical: public IGraphical {
     virtual void displayEntity() final {};
 
     private:
+        void callEvent(const IEvent::EventType);
+
         EventHandler *_eventBinding;
         std::unordered_map<int, bool> keyState;
 };
