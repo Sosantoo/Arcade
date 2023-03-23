@@ -8,7 +8,8 @@
 #pragma once
     #include "../../../Core/include/various.hpp"
     #include "../../../Interface/Graphical/IGraphicals.hpp"
-    #include <GL/glut.h>
+    #include <GL/glew.h>
+    #include <GLFW/glfw3.h>
 
 class AGraphical : public IGraphical
 {
