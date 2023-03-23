@@ -11,17 +11,28 @@
     #include "../../../Interface/Graphical/IGraphicals.hpp"
     #include <SDL2/SDL.h>
 
-typedef struct {
-    SDL_Window* window;
+struct GraphicalInfo {
+    SDL_Window *window;
     SDL_Event event;
     bool isOpen;
-} GraphicalInfo_t;
+
+    GraphicalInfo()
+        : window(nullptr)
+        , event({})
+        , isOpen(false)
+    {}
+};
 
 class AGraphical: public IGraphical {
-    public:
-    AGraphical()
-        : _eventBinding{ nullptr},
-          graphicalInfo{{}} {};
+private:
+    EventHandler *_eventBinding;
+    std::unordered_map<int, bool> keyState;
+    GraphicalInfo graphicalInfo;
+
+    void callEvent(const IEvent::EventType);
+
+public:
+    AGraphical(): _eventBinding{ nullptr} {};
     ~AGraphical() {};
 
     // IGraphical
@@ -49,14 +60,6 @@ class AGraphical: public IGraphical {
     virtual void destroy() final {};
 
     virtual void displayEntity() final {};
-
-    private:
-
-        void callEvent(const IEvent::EventType);
-
-        EventHandler *_eventBinding;
-        std::unordered_map<int, bool> keyState;
-        GraphicalInfo_t graphicalInfo;
 };
 
 #endif /* !SDL2_HPP_ */

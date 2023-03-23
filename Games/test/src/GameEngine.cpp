@@ -25,4 +25,5 @@ void GameEngine::GameEngineLoop()
         _graphical.display();
         //_graphical.loadEventBindings();
     }
+    _graphical.destroy();
 }

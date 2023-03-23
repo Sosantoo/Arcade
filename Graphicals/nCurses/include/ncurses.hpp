@@ -11,7 +11,29 @@
     #include "../../../Interface/Graphical/IGraphicals.hpp"
     #include <ncurses.h>
 
+struct GraphicalInfo {
+    WINDOW *win;
+    bool isOpen;
+    int xMax;
+    int yMax;
+
+    GraphicalInfo()
+        : win(nullptr)
+        , isOpen(false)
+        , xMax(0)
+        , yMax(0)
+    {}
+};
+
 class AGraphical: public IGraphical {
+    private:
+        EventHandler *_eventBinding;
+        GraphicalInfo graphicalInfo;
+
+        void callEvent(const IEvent::EventType);
+
+        void EventPool(int);
+
     public:
     AGraphical()
         : _eventBinding{ nullptr} {};
@@ -22,15 +44,15 @@ class AGraphical: public IGraphical {
     virtual void resetResource() {};
 
     //IWindow
-    virtual void openWindow() final {};
-    virtual void closeWindow() final {};
-    virtual void initWindow(std::string, std::pair<size_t, size_t>) final {};
-    virtual bool windowIsOpen() final {};
-    virtual void clear() final {};
-    virtual void display() final {};
+    virtual void openWindow() final;
+    virtual void closeWindow() final;
+    virtual void initWindow(std::string, std::pair<size_t, size_t>) final;
+    virtual bool windowIsOpen() final;
+    virtual void clear() final;
+    virtual void display() final;
 
     //IEvent
-    virtual void loadEventBindings(EventHandler &) final {};
+    virtual void loadEventBindings(EventHandler &) final;
 
     // IEntity
     virtual void create() final {};
@@ -42,10 +64,6 @@ class AGraphical: public IGraphical {
     virtual void destroy() final {};
 
     virtual void displayEntity() final {};
-
-    private:
-        EventHandler *_eventBinding;
-        std::unordered_map<int, bool> keyState;
 };
 
 #endif /* !NCURSES_HPP_ */

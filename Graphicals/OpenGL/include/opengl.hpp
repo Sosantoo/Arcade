@@ -6,10 +6,9 @@
 */
 
 #pragma once
-#include "../../../Core/include/various.hpp"
-#include "../../../Interface/Graphical/IGraphicals.hpp"
-#include <GL/glew.h>
-#include <GLFW/glfw3.h>
+    #include "../../../Core/include/various.hpp"
+    #include "../../../Interface/Graphical/IGraphicals.hpp"
+    #include <GL/glut.h>
 
 class AGraphical : public IGraphical
 {
