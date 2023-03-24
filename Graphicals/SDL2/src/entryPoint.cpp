@@ -20,6 +20,6 @@ void calledLast() {
 
 extern "C" {
     IGraphical *create() {
-        return new AGraphical;
+        return new AGraphicalSDL2;
     }
 }

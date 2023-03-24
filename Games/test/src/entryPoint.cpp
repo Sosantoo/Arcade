@@ -5,21 +5,21 @@
 ** entryPoint
 */
 
-#include "opengl.hpp"
+#include "test.hpp"
 
 void __attribute__((constructor)) calledFirst();
 void __attribute__((destructor)) calledLast();
 
 void calledFirst() {
-    std::cout << "[openGL] Loading" << '\n';
+    std::cout << "[GAME test] Loading" << '\n';
 }
 
 void calledLast() {
-    std::cout << "[openGL] UnLoading" << '\n';
+    std::cout << "[GAME test] UnLoading" << '\n';
 }
 
 extern "C" {
-    IGraphical *create() {
-        return new AGraphical;
+    IGame *create() {
+        return new AGameTest;
     }
 }

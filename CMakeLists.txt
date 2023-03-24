@@ -55,7 +55,7 @@ add_custom_target(games
 
 add_subdirectory(Graphicals/SDL2)
 add_subdirectory(Graphicals/nCurses)
-add_subdirectory(Graphicals/OpenGL)
+# add_subdirectory(Graphicals/OpenGL)
 
 add_custom_target(graphicals
     COMMAND ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR} --target arcade_sdl2 arcade_ncurses arcade_opengl
