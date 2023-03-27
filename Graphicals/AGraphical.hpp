@@ -2,35 +2,18 @@
 ** EPITECH PROJECT, 2023
 ** arcade
 ** File description:
-** AGraphical
+** opengl
 */
 
 #pragma once
-#include "nCurses/include/ncurses.hpp"
+#include "../../../Core/include/various.hpp"
+#include "../../../Interface/Graphical/IGraphicals.hpp"
+#include <GL/glut.h>
 
-struct GraphicalInfoNcurses {
-    SDL_Window *window;
-    SDL_Event event;
-    bool isOpen;
-
-    GraphicalInfoNcurses()
-        : window(nullptr)
-        , event({})
-        , isOpen(false)
-    {}
-};
-
-template<typename GraphicalInfo>
 class AGraphical: public IGraphical {
-private:
-    EventHandler _eventBinding;
-    std::unordered_map<int, bool> keyState;
-    GraphicalInfo graphicalInfo;
-
-    void callEvent(const IEvent::EventType);
-
-public:
-    AGraphical() {};
+    public:
+    AGraphical()
+        : _eventBinding{ nullptr} {};
     ~AGraphical() {};
 
     // IGraphical
@@ -46,7 +29,7 @@ public:
     virtual void display() final;
 
     //IEvent
-    virtual void loadEventBindings(EventHandler &) final;
+    virtual void loadEventBindings(EventHandler &) final {};
 
     // IEntity
     virtual void create() final {};
@@ -58,4 +41,10 @@ public:
     virtual void destroy() final {};
 
     virtual void displayEntity() final {};
+
+    private:
+        void callEvent(const IEvent::EventType);
+
+        EventHandler *_eventBinding;
+        std::unordered_map<int, bool> keyState;
 };
