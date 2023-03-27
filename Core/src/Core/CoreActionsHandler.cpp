@@ -9,26 +9,19 @@
 
 void Core::Core::nextGraphicsLibrary() {
     closeGraphical();
-
     _graphical_details = _libs.getNextGraphicalsLib(_graphical_details);;
-    std::cout << "next library: " << _graphical_details.name  << std::endl;
-
     loadGraphical();
-    std::cout << "switch perfectly " << _graphical_details.name  << std::endl;
 }
 
 void Core::Core::nextGameLibrary() {
-    Lib::lib_t nextLib = _libs.getNextGraphicalsLib(_game_details);
-    _game_details = nextLib;
-
+    _game_details = _libs.getNextGraphicalsLib(_game_details);;
     loadStack();
-    launchGame();
 }
 
 void Core::Core::restartGame() {
+    closeGraphical();
     _game.load(_game_details, Lib::_GAMES_);
     loadStack();
-    launchGame();
 }
 
 void Core::Core::goToMenu() {
