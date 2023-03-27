@@ -9,7 +9,7 @@
 
 void AGraphicalNcurses::loadResource()
 {
-    std::cout << "[nCurses loadResource] destroyRessource" << std::endl;
+    std::cout << "[nCurses loadResource] loadResource" << std::endl;
 }
 
 void AGraphicalNcurses::destroyRessource()
@@ -68,23 +68,26 @@ void AGraphicalNcurses::eventPollEvent()
     switch (key) {
     case KEY_UP:
     case 'z':
-        callEvent(IEvent::EventType::UP_pressed);
-        break;
+        return callEvent(IEvent::EventType::UP_pressed);
+
     case KEY_DOWN:
     case 's':
-        callEvent(IEvent::EventType::DOWN_pressed);
-        break;
+        return callEvent(IEvent::EventType::DOWN_pressed);
+
     case KEY_LEFT:
     case 'q':
-        callEvent(IEvent::EventType::LEFT_pressed);
-        break;
+        return callEvent(IEvent::EventType::LEFT_pressed);
+
     case KEY_RIGHT:
     case 'd':
-        callEvent(IEvent::EventType::RIGHT_pressed);
-        break;
+        return callEvent(IEvent::EventType::RIGHT_pressed);
+
+    case 'n':
+        return callEvent(IEvent::EventType::NEXT_LIB);
+
     case 27:
-        callEvent(IEvent::EventType::QUIT);
-        break;
+        return callEvent(IEvent::EventType::QUIT);
+
     default:
         std::cerr << "--! Event Handler Unknown key: " << key << std::endl;
         break;

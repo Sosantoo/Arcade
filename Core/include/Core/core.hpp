@@ -28,15 +28,18 @@ namespace Core
         void nextGameLibrary();
         void restartGame();
         void goToMenu();
-        void closeGame();
+        void closeGraphical();
+
+        //loadings
+        void loadStack();
+        void loadGraphical();
+        void loadGame();
 
     public:
         Core(libWrapper &);
         ~Core();
 
         void init(const std::string, const std::string);
-
-        void loadStack();
 
         void launchGame();
 

@@ -8,11 +8,13 @@
 #include "arcade.hpp"
 
 void Core::Core::nextGraphicsLibrary() {
-    Lib::lib_t nextLib = _libs.getNextGraphicalsLib(_graphical_details);
-    _graphical_details = nextLib;
+    closeGraphical();
 
-    loadStack();
-    launchGame();
+    _graphical_details = _libs.getNextGraphicalsLib(_graphical_details);;
+    std::cout << "next library: " << _graphical_details.name  << std::endl;
+
+    loadGraphical();
+    std::cout << "switch perfectly " << _graphical_details.name  << std::endl;
 }
 
 void Core::Core::nextGameLibrary() {
@@ -40,9 +42,9 @@ void Core::Core::goToMenu() {
     launchGame();
 }
 
-void Core::Core::closeGame() {
-    _graphical.getInterface().closeWindow();
-    _graphical.getInterface().destroyRessource();
+void Core::Core::closeGraphical() {
+    _graphical.getInterface()->closeWindow();
+    _graphical.getInterface()->destroyRessource();
 }
 
 IEvent::EventHandler &Core::Core::getCoreEventBind() {
@@ -51,6 +53,6 @@ IEvent::EventHandler &Core::Core::getCoreEventBind() {
         {IEvent::EventType::NEXT_GAME, [this](){ this->nextGameLibrary(); }},
         {IEvent::EventType::RESTART, [this](){ this->restartGame(); }},
         {IEvent::EventType::GO_TO_MENU, [this](){ this->goToMenu(); }},
-        {IEvent::EventType::QUIT, [this](){ this->closeGame(); }},
+        {IEvent::EventType::QUIT, [this](){ this->closeGraphical(); }},
     });
 }
