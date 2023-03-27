@@ -31,4 +31,7 @@ public:
     using EventHandler = std::map<IEvent::EventType, EventCallBack>;
 
     virtual void loadEventBindings(EventHandler &) = 0;
+
+    virtual void eventPollEvent() = 0;
+
 };

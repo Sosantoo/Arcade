@@ -9,13 +9,17 @@
 #include "../../Core/include/various.hpp"
 
 class IClock {
-    public:
-        ~IClock() = delete;;
+public:
+    ~IClock() = default;
 
-        virtual void startClock() = 0;
+    virtual void startClock() = 0;
 
-        virtual double getTimeElapsed() = 0;
+    virtual time_t getTimeElapsed() = 0;
 
-        virtual void resetClock() = 0;
+    virtual void resetClock() = 0;
+
+    virtual void initClock() = 0;
+
+    virtual IClock &getClock() = 0;
 };
 

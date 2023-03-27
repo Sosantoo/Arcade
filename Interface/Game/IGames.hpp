@@ -12,12 +12,10 @@ class IGame {
     public:
         ~IGame() = default;
 
-        virtual void start(IGraphical &, IEvent::EventHandler &) = 0;
+        virtual IEvent::EventHandler &getEventBinding() = 0;
 
-        virtual void stop() = 0;
+        virtual void processGameTick(IClock &) = 0;
 
-        virtual void restart() = 0;
+        virtual std::vector<IEntity> getEntity() = 0;
+
 };
-
-typedef IGame* create_game_t();
-typedef void destroy_game_t(IGame *);

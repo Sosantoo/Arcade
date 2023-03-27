@@ -14,12 +14,15 @@
 class IGraphical:
     public IWindow,
     public IEvent,
-    public IEntity
+    public IClock
 {
 public:
     ~IGraphical() = default;
 
     virtual void loadResource() = 0;
 
-    virtual void resetResource() = 0;
+    virtual void destroyRessource() = 0;
+
+    virtual void displayEntity(std::vector<IEntity>) = 0;
+
 };
