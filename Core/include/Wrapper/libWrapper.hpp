@@ -16,11 +16,11 @@ namespace Lib
         _GAMES_,
     };
 
-    typedef struct {
+    struct lib_t {
         std::string name;
         std::string path;
         lib_type type;
-    } lib_t;
+    };
 };
 
 class libWrapper {
