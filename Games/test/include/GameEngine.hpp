@@ -8,10 +8,19 @@
 #pragma once
 
 class GameEngine {
-    public:
-        GameEngine() {};
-        ~GameEngine() {};
-
-    protected:
     private:
+        IEvent::EventHandler gameEvent;
+
+        void upKeyPress();
+        void downKeyPress();
+        void leftKeyPress();
+        void rightKeyPress();
+
+    public:
+        GameEngine();
+        ~GameEngine();
+
+        void processGameTick(IClock &clock);
+
+        IEvent::EventHandler &getEventBindings();
 };

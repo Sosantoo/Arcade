@@ -14,10 +14,11 @@ private:
 
 public:
     AGameTest(): AGame<GameEngine>() {};
-    AGameTest(IGraphical &, IEvent::EventHandler &) {};
     ~AGameTest() {};
 
-    virtual void start(IGraphical &, IEvent::EventHandler &) final;
-    virtual void stop() final;
-    virtual void restart() final;
+    virtual IEvent::EventHandler &getEventBinding() final;
+
+    virtual void processGameTick(IClock &clock) final;
+
+    virtual std::vector<IEntity> getEntity() final;
 };
