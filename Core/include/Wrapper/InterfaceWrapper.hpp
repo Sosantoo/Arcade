@@ -21,10 +21,10 @@ class InterfaceWrapper: public DlfcnWrapper {
 
         void load(const Lib::lib_t &, const Lib::lib_type);
 
-        Interface_t& getInterface() const;
+        std::shared_ptr<Interface_t>& getInterface();
 
     private:
-        std::unique_ptr<Interface_t> _interface;
+        std::shared_ptr<Interface_t> _interface;
         create_interface_t _constructor;
 };
 
