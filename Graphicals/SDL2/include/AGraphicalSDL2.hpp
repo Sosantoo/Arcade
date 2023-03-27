@@ -27,11 +27,11 @@ public:
     AGraphicalSDL2(): AGraphical<GraphicalInfo>() {};
     ~AGraphicalSDL2() {};
 
-    void EventPool();
-
+    //base
     virtual void loadResource() final;
     virtual void destroyRessource() final;
 
+    //Iwindow
     virtual void initWindow(std::string name, std::pair<size_t, size_t> size) final;
     virtual void closeWindow() final;
     virtual bool windowIsOpen() final;

@@ -1,11 +1,21 @@
 /*
 ** EPITECH PROJECT, 2023
-** tmp
+** arcade
 ** File description:
-** AWindow
+** AGraphicalNcurses
 */
 
 #include "ncurses.hpp"
+
+void AGraphicalNcurses::loadResource()
+{
+    std::cout << "[nCurses loadResource] destroyRessource" << std::endl;
+}
+
+void AGraphicalNcurses::destroyRessource()
+{
+    std::cout << "[nCurses loadRessousreces] destroyRessource" << std::endl;
+}
 
 void AGraphicalNcurses::openWindow()
 {
@@ -49,5 +59,38 @@ void AGraphicalNcurses::clear()
 void AGraphicalNcurses::display()
 {
     mvwprintw(graphicalInfo.win, 1, graphicalInfo.xMax / 3 - 15, "Arcade");
-    EventPool(getch());
+};
+
+void AGraphicalNcurses::eventPollEvent()
+{
+    int key = wgetch(graphicalInfo.win);
+
+    switch (key) {
+    case KEY_UP:
+    case 'z':
+        callEvent(IEvent::EventType::UP_pressed);
+        break;
+    case KEY_DOWN:
+    case 's':
+        callEvent(IEvent::EventType::DOWN_pressed);
+        break;
+    case KEY_LEFT:
+    case 'q':
+        callEvent(IEvent::EventType::LEFT_pressed);
+        break;
+    case KEY_RIGHT:
+    case 'd':
+        callEvent(IEvent::EventType::RIGHT_pressed);
+        break;
+    case 27:
+        callEvent(IEvent::EventType::QUIT);
+        break;
+    default:
+        std::cerr << "--! Event Handler Unknown key: " << key << std::endl;
+        break;
+    }
+};
+
+IClock &AGraphicalNcurses::getClock() {
+    return _clock;
 };

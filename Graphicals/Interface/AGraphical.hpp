@@ -33,6 +33,7 @@ class AGraphical: public IGraphical {
 protected:
     EventHandler _eventBinding;
     GraphicalInfo graphicalInfo;
+    AClock _clock;
 
     void callEvent(const IEvent::EventType eventType) {
         if (_eventBinding.count(eventType) <= 0)
@@ -88,24 +89,23 @@ public:
     };
 
     // IClock
-    virtual void startClock()override {
-        throw std::runtime_error("graphical method not implemented startClock");
+    virtual void startClock() override {
+        _clock.startClock();
     };
 
-    virtual time_t getTimeElapsed()override {
-        throw std::runtime_error("graphical method not implemented getTimeElapsed");
-        return 0.0;
+    virtual time_t getTimeElapsed() override {
+        return _clock.getTimeElapsed();
     };
 
-    virtual void resetClock()override {
-        throw std::runtime_error("graphical method not implemented resetClock");
+    virtual void resetClock() override {
+        _clock.resetClock();
     };
 
-    virtual void initClock()override {
-        throw std::runtime_error("graphical method not implemented initClock");
+    virtual void initClock() override {
+        _clock.initClock();
     };
 
     virtual IClock &getClock()override {
-        throw std::runtime_error("graphical method not implemented getClock");
+        return _clock.getClock();
     };
 };
