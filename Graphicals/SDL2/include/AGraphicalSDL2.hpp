@@ -13,6 +13,7 @@ struct GraphicalInfo {
     SDL_Window *window;
     SDL_Event event;
     bool isOpen;
+    AClock clock;
 
     GraphicalInfo()
         : window(nullptr)
@@ -26,10 +27,20 @@ public:
     AGraphicalSDL2(): AGraphical<GraphicalInfo>() {};
     ~AGraphicalSDL2() {};
 
-    virtual void openWindow() final;
+    void EventPool();
+
+    virtual void loadResource() final;
+    virtual void destroyRessource() final;
+
     virtual void initWindow(std::string name, std::pair<size_t, size_t> size) final;
     virtual void closeWindow() final;
     virtual bool windowIsOpen() final;
     virtual void clear() final;
     virtual void display() final;
+
+    //event
+    virtual void eventPollEvent() final;
+
+    //Clock
+    virtual IClock &getClock() final;
 };

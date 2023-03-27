@@ -9,6 +9,25 @@
 #include "../../Core/include/various.hpp"
 #include "../../Interface/Graphical/IGraphicals.hpp"
 
+class AClock: public IClock {
+private:
+        time_t time;
+
+public:
+    AClock() {};
+    ~AClock() {};
+
+    virtual void startClock() {};
+
+    virtual time_t getTimeElapsed() { return time; };
+
+    virtual void resetClock() {};
+
+    virtual void initClock() {};
+
+    virtual IClock &getClock() { return *this; };
+};
+
 template <typename GraphicalInfo>
 class AGraphical: public IGraphical {
 protected:
@@ -26,32 +45,37 @@ public:
     ~AGraphical() {};
 
     // IGraphical
-    virtual void loadResource() {};
-    virtual void resetResource() {};
+    virtual void loadResource() override {
+        throw std::runtime_error("graphical method not implemented loadResource");
+    };
+
+    virtual void destroyRessource() override {
+        throw std::runtime_error("graphical method not implemented destroyRessource");
+    };
+
+    virtual void displayEntity(std::vector<IEntity>) override {
+        throw std::runtime_error("graphical method not implemented displayEntity");
+    };
 
     //IWindow
-    virtual void openWindow() override {
-        throw std::runtime_error("graphical method not implemented");
+    virtual void initWindow(std::string, std::pair<size_t, size_t>) override {
+        throw std::runtime_error("graphical method not implemented initWindow");
     };
 
     virtual void closeWindow() override {
-        throw std::runtime_error("graphical method not implemented");
-    };
-
-    virtual void initWindow(std::string, std::pair<size_t, size_t>) override {
-        throw std::runtime_error("graphical method not implemented");
+        throw std::runtime_error("graphical method not implemented closeWindow");
     };
 
     virtual bool windowIsOpen() override {
-        throw std::runtime_error("graphical method not implemented");
+        throw std::runtime_error("graphical method not implemented windowIsOpen");
     };
 
     virtual void clear() override {
-        throw std::runtime_error("graphical method not implemented");
+        throw std::runtime_error("graphical method not implemented clear");
     };
 
     virtual void display() override {
-        throw std::runtime_error("graphical method not implemented");
+        throw std::runtime_error("graphical method not implemented display");
     };
 
     //IEvent
@@ -59,24 +83,29 @@ public:
         _eventBinding.insert(eventBinding.begin(), eventBinding.end());
     };
 
-    // IEntity
-    virtual void create() override {
-        throw std::runtime_error("graphical method not implemented");
+    virtual void eventPollEvent() override {
+        throw std::runtime_error("graphical method not implemented EventPollEvent");
     };
 
-    virtual void setSize() override {
-        throw std::runtime_error("graphical method not implemented");
+    // IClock
+    virtual void startClock()override {
+        throw std::runtime_error("graphical method not implemented startClock");
     };
 
-    virtual void setPosition() override {
-        throw std::runtime_error("graphical method not implemented");
+    virtual time_t getTimeElapsed()override {
+        throw std::runtime_error("graphical method not implemented getTimeElapsed");
+        return 0.0;
     };
 
-    virtual void destroy() override {
-        throw std::runtime_error("graphical method not implemented");
+    virtual void resetClock()override {
+        throw std::runtime_error("graphical method not implemented resetClock");
     };
 
-    virtual void displayEntity() override {
-        throw std::runtime_error("graphical method not implemented");
+    virtual void initClock()override {
+        throw std::runtime_error("graphical method not implemented initClock");
+    };
+
+    virtual IClock &getClock()override {
+        throw std::runtime_error("graphical method not implemented getClock");
     };
 };
