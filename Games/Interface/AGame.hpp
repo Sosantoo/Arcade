@@ -13,7 +13,6 @@ template<typename GameEngine>
 class AGame: public IGame {
 protected:
     IGraphical *_graphical;
-    IEvent::EventHandler _coreEvent;
     GameEngine gameEngine;
 
 public:
@@ -24,9 +23,10 @@ public:
     AGame& operator=(AGame&&) = delete;
     ~AGame() {};
 
-    virtual void start(IGraphical &, IEvent::EventHandler &) override { throw std::runtime_error("method not implemented: start"); };
+    virtual IEvent::EventHandler &getEventBinding() override { throw std::runtime_error("method not implemented: stop"); };
 
-    virtual void stop() override { throw std::runtime_error("method not implemented: stop"); };
+    virtual void processGameTick(IClock &clock) override { (void)clock; throw std::runtime_error("method not implemented: stop"); };
 
-    virtual void restart() override { throw std::runtime_error("method not implemented: restart"); };
+    virtual std::vector<IEntity> getEntity() override { throw std::runtime_error("method not implemented: stop"); };
+
 };

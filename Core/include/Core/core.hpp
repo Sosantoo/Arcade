@@ -28,15 +28,21 @@ namespace Core
         void nextGameLibrary();
         void restartGame();
         void goToMenu();
-        void exit();
+        void closeGraphical();
+
+        //loadings
+        void loadStack();
+        void loadGraphical();
+        void loadGame();
 
     public:
         Core(libWrapper &);
         ~Core();
 
-        void start(const std::string, const std::string);
+        void init(const std::string, const std::string);
 
-        void launch();
+        void launchGame();
+
     protected:
         IEvent::EventHandler &getCoreEventBind();
     };

@@ -7,14 +7,21 @@
 
 #include "sdl2.hpp"
 
-
-void AGraphicalSDL2::openWindow()
+void AGraphicalSDL2::loadResource()
 {
-    return;
+
+}
+
+void AGraphicalSDL2::destroyRessource()
+{
+    std::cout << "[SDL2] destroyRessource" << std::endl;
+    SDL_DestroyWindow(graphicalInfo.window);
+    SDL_Quit();
 }
 
 void AGraphicalSDL2::initWindow(std::string name, std::pair<size_t, size_t> size)
 {
+    std::cout << "[SDL2] initWindow" << std::endl;
     SDL_Init(SDL_INIT_VIDEO);
 
     graphicalInfo.isOpen = true;
@@ -28,8 +35,7 @@ void AGraphicalSDL2::initWindow(std::string name, std::pair<size_t, size_t> size
 void AGraphicalSDL2::closeWindow()
 {
     graphicalInfo.isOpen = false;
-    SDL_DestroyWindow(graphicalInfo.window);
-    SDL_Quit();
+
 };
 
 bool AGraphicalSDL2::windowIsOpen()
@@ -39,11 +45,14 @@ bool AGraphicalSDL2::windowIsOpen()
 
 void AGraphicalSDL2::clear()
 {
-    // SDL_SetRenderDrawColor(graphicalInfo.window, 0, 0, 0, 255);
-    // SDL_RenderClear(graphicalInfo.window);
+
 };
 
 void AGraphicalSDL2::display()
+{
+};
+
+void AGraphicalSDL2::eventPollEvent()
 {
     while (SDL_PollEvent(&graphicalInfo.event)) {
         switch (graphicalInfo.event.type )
@@ -67,9 +76,16 @@ void AGraphicalSDL2::display()
         case SDLK_d:
             callEvent(IEvent::EventType::RIGHT_pressed);
             break;
+        case SDLK_n:
+            callEvent(IEvent::EventType::NEXT_LIB);
+            break;
         default:
             return;
         }
     }
-    // callEvent(IEvent::EventType::NEXT_LIB);
+};
+
+//clock
+IClock &AGraphicalSDL2::getClock() {
+    return graphicalInfo.clock;
 };

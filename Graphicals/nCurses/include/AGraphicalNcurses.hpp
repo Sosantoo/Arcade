@@ -26,17 +26,25 @@ struct GraphicalInfo {
 };
 
 class AGraphicalNcurses: public AGraphical<GraphicalInfo> {
-private:
-    void EventPool(int key);
-
 public:
     AGraphicalNcurses(): AGraphical<GraphicalInfo>() {};
     ~AGraphicalNcurses() {};
 
+    //base
+    virtual void loadResource() final;
+    virtual void destroyRessource() final;
+
+    //Iwindow
     virtual void openWindow() final;
     virtual void initWindow(std::string name, std::pair<size_t, size_t> size) final;
     virtual void closeWindow() final;
     virtual bool windowIsOpen() final;
     virtual void clear() final;
     virtual void display() final;
+
+    //IEvent
+    virtual void eventPollEvent() final;
+
+    //Clock
+    virtual IClock &getClock() final;
 };

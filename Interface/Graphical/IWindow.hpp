@@ -12,11 +12,9 @@ class IWindow {
 public:
     ~IWindow() = default;
 
-    virtual void openWindow() = 0;
+    virtual void initWindow(std::string, std::pair<size_t, size_t>) = 0;
 
     virtual void closeWindow() = 0;
-
-    virtual void initWindow(std::string, std::pair<size_t, size_t>) = 0;
 
     virtual bool windowIsOpen() = 0;
 
