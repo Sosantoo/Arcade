@@ -30,6 +30,7 @@ void Core::Core::launchGame() {
     while(graphicalInterface->windowIsOpen()) {
         graphicalInterface->eventPollEvent();
         graphicalInterface = _graphical.getInterface();
+        gameInterface = _game.getInterface();
 
         graphicalInterface->clear();
         gameInterface->processGameTick(graphicalInterface->getClock());
