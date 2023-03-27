@@ -7,19 +7,19 @@
 
 #include "ncurses.hpp"
 
-void AGraphical::openWindow()
+void AGraphicalNcurses::openWindow()
 {
     std::cout << "[nCurses] openWindow" << std::endl;
 };
 
-void AGraphical::closeWindow()
+void AGraphicalNcurses::closeWindow()
 {
     std::cout << "[nCurses] closeWindow" << std::endl;
     graphicalInfo.isOpen = false;
     endwin();
 };
 
-void AGraphical::initWindow(std::string, std::pair<size_t, size_t>)
+void AGraphicalNcurses::initWindow(std::string, std::pair<size_t, size_t>)
 {
     std::cout << "[nCurses] initWindow" << std::endl;
     initscr();
@@ -35,18 +35,18 @@ void AGraphical::initWindow(std::string, std::pair<size_t, size_t>)
     graphicalInfo.isOpen = true;
 };
 
-bool AGraphical::windowIsOpen()
+bool AGraphicalNcurses::windowIsOpen()
 {
     return graphicalInfo.isOpen;
 };
 
-void AGraphical::clear()
+void AGraphicalNcurses::clear()
 {
     std::cout << "[nCurses] clear" << std::endl;
 };
 
 
-void AGraphical::display()
+void AGraphicalNcurses::display()
 {
     mvwprintw(graphicalInfo.win, 1, graphicalInfo.xMax / 3 - 15, "Arcade");
     EventPool(getch());

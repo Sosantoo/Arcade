@@ -10,7 +10,7 @@
 int main(const int ac, const char **av)
 {
     try {
-        if (ac != 2) throw std::runtime_error("invalid arguments");
+        if (ac != 2) throw std::invalid_argument("invalid arguments");
         coreEntryPoint(av[1]);
     }
     catch (const std::exception &e) {

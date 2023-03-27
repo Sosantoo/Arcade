@@ -22,6 +22,7 @@ public:
         NEXT_GAME,
         NEXT_LIB,
         RESTART,
+        GO_TO_MENU,
     };
 
     ~IEvent() = default;

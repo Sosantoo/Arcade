@@ -2,18 +2,18 @@
 ** EPITECH PROJECT, 2023
 ** arcade
 ** File description:
-** AGraphicalWindow
+** AGraphicalSDL2Window
 */
 
 #include "sdl2.hpp"
 
 
-void AGraphical::openWindow()
+void AGraphicalSDL2::openWindow()
 {
     return;
 }
 
-void AGraphical::initWindow(std::string name, std::pair<size_t, size_t> size)
+void AGraphicalSDL2::initWindow(std::string name, std::pair<size_t, size_t> size)
 {
     SDL_Init(SDL_INIT_VIDEO);
 
@@ -25,25 +25,25 @@ void AGraphical::initWindow(std::string name, std::pair<size_t, size_t> size)
                                           SDL_WINDOW_SHOWN);
 };
 
-void AGraphical::closeWindow()
+void AGraphicalSDL2::closeWindow()
 {
     graphicalInfo.isOpen = false;
     SDL_DestroyWindow(graphicalInfo.window);
     SDL_Quit();
 };
 
-bool AGraphical::windowIsOpen()
+bool AGraphicalSDL2::windowIsOpen()
 {
     return graphicalInfo.isOpen;
 };
 
-void AGraphical::clear()
+void AGraphicalSDL2::clear()
 {
     // SDL_SetRenderDrawColor(graphicalInfo.window, 0, 0, 0, 255);
     // SDL_RenderClear(graphicalInfo.window);
 };
 
-void AGraphical::display()
+void AGraphicalSDL2::display()
 {
     while (SDL_PollEvent(&graphicalInfo.event)) {
         switch (graphicalInfo.event.type )
@@ -71,4 +71,5 @@ void AGraphical::display()
             return;
         }
     }
+    // callEvent(IEvent::EventType::NEXT_LIB);
 };

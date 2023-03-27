@@ -7,19 +7,19 @@
 
 #include "nibbler.hpp"
 
-// void __attribute__((constructor)) calledFirst();
-// void __attribute__((destructor)) calledLast();
+void __attribute__((constructor)) calledFirst();
+void __attribute__((destructor)) calledLast();
 
-// void calledFirst() {
-//     std::cout << "[GAME test] Loading" << '\n';
-// }
+void calledFirst() {
+    std::cout << "[GAME nibbler] Loading" << '\n';
+}
 
-// void calledLast() {
-//     std::cout << "[GAME test] UnLoading" << '\n';
-// }
+void calledLast() {
+    std::cout << "[GAME nibbler] UnLoading" << '\n';
+}
 
-// extern "C" {
-//     IGame *create() {
-//         return new AGame;
-//     }
-// }
+extern "C" {
+    IGame *create() {
+        return new AGameNibller;
+    }
+}

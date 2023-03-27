@@ -15,31 +15,34 @@ namespace Core
 {
 
     class Core {
-        public:
-            Core(libWrapper &);
-            ~Core();
+    private:
+        InterfaceWrapper<IGraphical> _graphical;
+        InterfaceWrapper<IGame> _game;
+        IEvent::EventHandler event;
+        Lib::lib_t _graphical_details;
+        Lib::lib_t _game_details;
+        libWrapper &_libs;
 
-            void start(const std::string, const std::string);
-            void launch();
+        //actions
+        void nextGraphicsLibrary();
+        void nextGameLibrary();
+        void restartGame();
+        void goToMenu();
+        void exit();
 
-            //actions
-            void nextGraphicsLibrary();
-            void nextGame();
-            void restartGame();
-            void goToMenu();
-            void exit();
+    public:
+        Core(libWrapper &);
+        ~Core();
 
-        protected:
-            InterfaceWrapper<IGraphical> _graphical;
-            InterfaceWrapper<IGame> _game;
-            Lib::lib_t _graphical_details;
-            Lib::lib_t _game_details;
-            libWrapper &_libs;
+        void start(const std::string, const std::string);
 
+        void launch();
+    protected:
+        IEvent::EventHandler &getCoreEventBind();
     };
 };
 
 // entrypoint core
-int coreEntryPoint(const std::string &baseGraphicalsLibsName = "arcade_sdl2.so");
+int coreEntryPoint(const std::string &baseGraphicalsLibsName);
 
 #endif /* !CORE_H_ */

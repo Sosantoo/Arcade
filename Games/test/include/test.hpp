@@ -6,4 +6,5 @@
 */
 
 #pragma once
-#include "../../Interface/include/AGame.hpp"
+#include "AGameTest.hpp"
+#include "GameEngine.hpp"
