@@ -19,7 +19,7 @@ void calledLast() {
 }
 
 extern "C" {
-    IGame *create() {
-        return new AGameTest;
+    std::unique_ptr<IGame> create() {
+        return std::make_unique<AGameTest>();
     }
 }

@@ -19,7 +19,7 @@ void calledLast() {
 }
 
 extern "C" {
-    IGraphical *create() {
-        return new AGraphicalSDL2;
+    std::unique_ptr<IGraphicalFactory> create() {
+        return std::make_unique<AGraphicalSDL2>();
     }
 }
