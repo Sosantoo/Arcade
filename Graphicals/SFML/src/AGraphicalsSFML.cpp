@@ -14,7 +14,7 @@ std::unordered_map<int, bool> keyState;
 
 void AGraphicalSFML::initWindow(std::string name, std::pair<size_t, size_t> size)
 {
-    // graphicalInfo.setFramerateLimit(60);
+    graphicalInfo.window.setFramerateLimit(FRAME_RATE);
     graphicalInfo.window.create(sf::VideoMode(size.first, size.second), name);
 };
 
@@ -71,5 +71,5 @@ void AGraphicalSFML::loadResource(){
 };
 
 void AGraphicalSFML::destroyRessource(){
-    // graphicalInfo._window.close();
+    graphicalInfo.window.close();
 };

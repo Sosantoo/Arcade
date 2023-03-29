@@ -48,4 +48,7 @@ class AGraphicalSFML : public AGraphical<GraphicalInfo>
         void setPosition(){};
         void destroy(){};
         void displayEntity(std::vector<IEntity>) override{};
+
+    private:
+        const int FRAME_RATE = 60;
 };

@@ -10,12 +10,8 @@
 #include "../../Interface/Graphical/IGraphicals.hpp"
 #include <stdexcept>
 
-template <typename GameEngine> class AGame : public IGame
+class AGame : public IGame
 {
-    protected:
-        IGraphical *_graphical;
-        GameEngine gameEngine;
-
     public:
         AGame() = default;
         AGame(const AGame &) = delete;

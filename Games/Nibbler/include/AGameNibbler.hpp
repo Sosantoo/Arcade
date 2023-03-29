@@ -7,9 +7,8 @@
 
 #pragma once
 #include "../../Interface/AGame.hpp"
-#include "GameEngine.hpp"
 
-class AGameNibller : public AGame<GameEngine>
+class AGameNibller : public AGame
 {
     private:
     public:

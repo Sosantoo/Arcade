@@ -97,12 +97,8 @@ template <typename GraphicalInfo> class AGraphical : public IGraphical
 
         // IClock
         void startClock() override { _clock.startClock(); };
-
         time_t getTimeElapsed() override { return _clock.getTimeElapsed(); };
-
         void resetClock() override { _clock.resetClock(); };
-
         void initClock() override { _clock.initClock(); };
-
         IClock &getClock() override { return _clock.getClock(); };
 };

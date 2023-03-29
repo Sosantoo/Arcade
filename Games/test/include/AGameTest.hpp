@@ -7,11 +7,16 @@
 
 #pragma once
 #include "../../Interface/AGame.hpp"
-#include "GameEngine.hpp"
 
-class AGameTest : public AGame<GameEngine>
+class AGameTest : public AGame
 {
     private:
+        void upKeyPress();
+        void downKeyPress();
+        void leftKeyPress();
+        void rightKeyPress();
+        IEvent::EventHandler gameEvent;
+
     public:
         AGameTest() = default;
         ~AGameTest() = default;

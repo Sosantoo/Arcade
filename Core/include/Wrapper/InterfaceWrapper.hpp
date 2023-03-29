@@ -15,10 +15,10 @@ template <typename Interface_t> class InterfaceWrapper : public DlfcnWrapper
         using create_interface_t = Interface_t *(*)();
 
         InterfaceWrapper();
-        InterfaceWrapper(const Lib::lib_t &, const Lib::lib_type);
+        InterfaceWrapper(const Lib::lib_t &, Lib::lib_type);
         ~InterfaceWrapper();
 
-        void load(const Lib::lib_t &, const Lib::lib_type);
+        void load(const Lib::lib_t &, Lib::lib_type);
 
         std::shared_ptr<Interface_t> &getInterface();
 

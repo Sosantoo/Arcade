@@ -36,7 +36,7 @@ namespace Core
 
         public:
             Core(libWrapper &);
-            ~Core();
+            ~Core() = default;
 
             void init(std::string, std::string);
 

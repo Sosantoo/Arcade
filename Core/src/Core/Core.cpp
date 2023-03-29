@@ -12,10 +12,6 @@ Core::Core::Core(libWrapper &libs)
 {
 }
 
-Core::Core::~Core()
-{
-}
-
 void Core::Core::init(const std::string GraphicalsLibPath, const std::string GameLibPath) {
     _graphical_details = _libs.getLibBypath(GraphicalsLibPath);
     _game_details = _libs.getLibBypath(GameLibPath);

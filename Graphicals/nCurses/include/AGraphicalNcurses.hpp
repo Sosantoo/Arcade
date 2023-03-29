@@ -12,8 +12,10 @@
 #include <ostream>
 
 struct GraphicalInfo {
-        WINDOW *win{};
+        WINDOW *window{};
         bool isOpen{false};
+        int x{0};
+        int y{0};
         int xMax{0};
         int yMax{0};
 };
@@ -25,22 +27,20 @@ class AGraphicalNcurses : public AGraphical<GraphicalInfo>
         ~AGraphicalNcurses();
 
         // base
-        void loadResource() final;
-        void destroyRessource() final;
+        void loadResource() override;
+        void destroyRessource() override;
 
         // Iwindow
         void openWindow();
-        void initWindow(std::string name, std::pair<size_t, size_t> size) final;
-        void closeWindow() final;
-        bool windowIsOpen() final;
-        void clear() final;
-        void display() final;
+        void initWindow(std::string name, std::pair<size_t, size_t> size) override;
+        void closeWindow() override;
+        bool windowIsOpen() override;
+        void clear() override;
+        void display() override;
 
         // IEvent
-        void eventPollEvent() final;
+        void eventPollEvent() override;
 
         // Clock
-        IClock &getClock() final;
-
-    private:
+        IClock &getClock() override;
 };
