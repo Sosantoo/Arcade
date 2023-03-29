@@ -6,13 +6,13 @@
 */
 
 #pragma once
-#include "../../Interface/Game/IGames.hpp"
-#include "../../Interface/Graphical/IGraphicals.hpp"
+#include "../../Interface/Game/IGame.hpp"
+#include "../../Interface/Graphical/IGraphicalFactory.hpp"
 
 template<typename GameEngine>
 class AGame: public IGame {
 protected:
-    IGraphical *_graphical;
+    IGraphicalFactory *_graphical;
     GameEngine gameEngine;
 
 public:
@@ -23,7 +23,7 @@ public:
     AGame& operator=(AGame&&) = delete;
     ~AGame() {};
 
-    virtual IEvent::EventHandler &getEventBinding() override { throw std::runtime_error("method not implemented: stop"); };
+    virtual IWindow::EventHandler &getEventBinding() override { throw std::runtime_error("method not implemented: stop"); };
 
     virtual void processGameTick(IClock &clock) override { (void)clock; throw std::runtime_error("method not implemented: stop"); };
 

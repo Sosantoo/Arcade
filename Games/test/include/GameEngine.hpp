@@ -9,7 +9,7 @@
 
 class GameEngine {
     private:
-        IEvent::EventHandler gameEvent;
+        IWindow::EventHandler gameEvent;
 
         void upKeyPress();
         void downKeyPress();
@@ -22,5 +22,5 @@ class GameEngine {
 
         void processGameTick(IClock &clock);
 
-        IEvent::EventHandler &getEventBindings();
+        IWindow::EventHandler &getEventBindings();
 };

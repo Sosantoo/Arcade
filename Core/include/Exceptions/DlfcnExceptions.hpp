@@ -7,7 +7,7 @@
 
 #ifndef DLFCNEXCEPTIONS_HPP_
     #define DLFCNEXCEPTIONS_HPP_
-    #include "BasicExceptions.hpp"
+    #include "Exceptions/BasicExceptions.hpp"
 
 namespace DlfcnExceptions
 {

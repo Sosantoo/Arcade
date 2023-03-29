@@ -14,6 +14,6 @@ private:
 
 public:
     AGameMenu(): AGame<GameEngine>() {};
-    AGameMenu(IGraphical &, IEvent::EventHandler &) {};
+    AGameMenu(IGraphicalFactory &, IWindow::EventHandler &) {};
     ~AGameMenu() {};
 };

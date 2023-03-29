@@ -2,22 +2,22 @@
 ** EPITECH PROJECT, 2023
 ** arcade
 ** File description:
-** DlfcnWrapper
+** SharedLibLoader
 */
 
 #ifndef DLFCNWRAPPER_HPP_
     #define DLFCNWRAPPER_HPP_
     #include "../various.hpp"
 
-class DlfcnWrapper {
+class SharedLibLoader {
     protected:
         using CloseFunc = int (*)(void*);
         std::unique_ptr<void, CloseFunc> _Handle;
 
     public:
-        DlfcnWrapper();
-        DlfcnWrapper(const std::string &, int = RTLD_LAZY);
-        ~DlfcnWrapper();
+        SharedLibLoader();
+        SharedLibLoader(const std::string &, int = RTLD_LAZY);
+        ~SharedLibLoader();
 
         void open(const std::string &, int = RTLD_LAZY);
         void close();

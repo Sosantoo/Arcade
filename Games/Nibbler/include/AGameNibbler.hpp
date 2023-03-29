@@ -14,6 +14,6 @@ private:
 
 public:
     AGameNibller(): AGame<GameEngine>() {};
-    AGameNibller(IGraphical &, IEvent::EventHandler &) {};
+    AGameNibller(IGraphicalFactory &, IWindow::EventHandler &) {};
     ~AGameNibller() {};
 };

@@ -5,7 +5,7 @@
 ** CoreExceptions
 */
 
-#include "arcade.hpp"
+#include "Exceptions/CoreExceptions.hpp"
 
 CoreExceptions::RuntimeExceptions::RuntimeExceptions(const std::string& errorMsgDetails)
     : BasicExceptionWithMessage("[Core]", "Cannot Open: " + errorMsgDetails)

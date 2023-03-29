@@ -2,13 +2,15 @@
 ** EPITECH PROJECT, 2023
 ** arcade
 ** File description:
-** libWrapper
+** LibFileManager
 */
 
-#include "arcade.hpp"
+#include "lib/LibFileManager.hpp"
+#include "Exceptions/CoreExceptions.hpp"
 #include <filesystem>
+#include <map>
 
-std::map<std::string, Lib::lib_type> libs_register {
+std::map<std::string, Lib::libType> libs_register {
     {"arcade_sdl2.so",      Lib::_GRAPHICALS_},
     {"arcade_ncurses.so",   Lib::_GRAPHICALS_},
     {"arcade_ndk++.so",     Lib::_GRAPHICALS_},
@@ -32,25 +34,25 @@ std::map<std::string, Lib::lib_type> libs_register {
     {"testGame.so",         Lib::_GAMES_},
 };
 
-libWrapper::libWrapper(const std::string &path):
+LibFileManager::LibFileManager(const std::string &path):
     _pathLib{path}
 {
     refreshAvailableLib();
 }
 
-libWrapper::~libWrapper()
+LibFileManager::~LibFileManager()
 {
 
 }
 
-Lib::lib_type libWrapper::getLibType(const std::string &filename) {
+Lib::libType LibFileManager::getLibType(const std::string &filename) {
     if (libs_register.count(filename) == 0)
         throw CoreExceptions::LibUnknowExceptions(filename);
     else
         return libs_register[filename];
 }
 
-void libWrapper::refreshAvailableLib() {
+void LibFileManager::refreshAvailableLib() {
     for (const auto& entry : std::filesystem::directory_iterator(_pathLib)) {
         if (!std::filesystem::is_regular_file(entry))
             continue;
@@ -63,64 +65,62 @@ void libWrapper::refreshAvailableLib() {
     }
 }
 
-std::vector<Lib::lib_t> libWrapper::availableLib() {
+std::vector<Lib::lib> LibFileManager::availableLib() {
     return _availableLibs;
 }
 
-bool libWrapper::isAvailable(const std::string &path)
+bool LibFileManager::isAvailable(const std::string &path)
 {
     auto iter = std::find_if(
         _availableLibs.begin(),
         _availableLibs.end(),
-        [&path](const Lib::lib_t& m) -> bool { return m.path == path; }
+        [&path](const Lib::lib& m) -> bool { return m.path == path; }
     );
     return iter != _availableLibs.end();
 }
 
-void libWrapper::displayavailableLib() {
+void LibFileManager::displayavailableLib() {
     for (const auto &lib : _availableLibs)
         std::cout << lib.name << ": " << lib.path << std::endl;
 }
 
-Lib::lib_t libWrapper::getLibByName(const std::string &name) {
-    Lib::lib_t find;
+Lib::lib LibFileManager::getLibByName(const std::string &name) {
+    Lib::lib find;
      auto iter = std::find_if(
         _availableLibs.begin(),
         _availableLibs.end(),
-        [&name, &find](const Lib::lib_t& m) {  return (find = m).name == name; }
+        [&name, &find](const Lib::lib& m) {  return (find = m).name == name; }
     );
-    return (iter != _availableLibs.end()) ? find : Lib::lib_t();
+    return (iter != _availableLibs.end()) ? find : Lib::lib();
 }
 
-Lib::lib_t libWrapper::getLibBypath(const std::string &path) {
+Lib::lib LibFileManager::getLibBypath(const std::string &path) {
      auto iter = std::find_if(
         _availableLibs.begin(),
         _availableLibs.end(),
-        [&path](const Lib::lib_t& m) -> bool { return m.path == path; }
+        [&path](const Lib::lib& m) -> bool { return m.path == path; }
     );
-    return (iter != _availableLibs.end()) ? *iter : Lib::lib_t();
+    return (iter != _availableLibs.end()) ? *iter : Lib::lib();
 }
 
-bool operator==(const Lib::lib_t& a, const Lib::lib_t& b) {
+bool operator==(const Lib::lib& a, const Lib::lib& b) {
     return a.name == b.name && a.path == b.path && a.type == b.type;
 }
 
-Lib::lib_t libWrapper::getNextGraphicalsLib(const Lib::lib_t &loaded) {
+Lib::lib LibFileManager::getNextGraphicalsLib(const Lib::lib &loaded) {
     auto iter = std::find_if(
         _availableLibs.begin(),
         _availableLibs.end(),
-        [loaded](const Lib::lib_t& m) -> bool { return m.type == Lib::_GRAPHICALS_ && !(m == loaded); }
+        [loaded](const Lib::lib& m) -> bool { return m.type == Lib::_GRAPHICALS_ && !(m == loaded); }
     );
-
-    // If a library was found, return it and mark it as loaded
-    return iter != _availableLibs.end() ? *iter : Lib::lib_t{};
+    return iter != _availableLibs.end() ? *iter : Lib::lib{};
 }
 
-Lib::lib_t libWrapper::getNextGameLib(const Lib::lib_t &loaded) {
+Lib::lib LibFileManager::getNextGameLib(const Lib::lib &loaded) {
     auto iter = std::find_if(
         _availableLibs.begin(),
         _availableLibs.end(),
-        [loaded](const Lib::lib_t& m) -> bool { return m.type == Lib::_GAMES_ && !(m == loaded); }
+        [loaded](const Lib::lib& m) -> bool { return m.type == Lib::_GAMES_ && !(m == loaded); }
     );
-    return iter != _availableLibs.end() ? *iter : Lib::lib_t{};
+    return iter != _availableLibs.end() ? *iter : Lib::lib{};
 }

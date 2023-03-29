@@ -16,7 +16,7 @@ public:
     AGameTest(): AGame<GameEngine>() {};
     ~AGameTest() {};
 
-    virtual IEvent::EventHandler &getEventBinding() final;
+    virtual IWindow::EventHandler &getEventBinding() final;
 
     virtual void processGameTick(IClock &clock) final;
 

@@ -24,6 +24,7 @@ target_include_directories(arcade_sdl2
         include
         ${SDL2_INCLUDE_DIRS}
 )
+target_compile_options(arcade_sdl2 PRIVATE -ggdb3)
 
 target_link_libraries(arcade_sdl2 ${SDL2_LIBRARIES})
 

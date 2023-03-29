@@ -2,49 +2,47 @@
 ** EPITECH PROJECT, 2023
 ** arcade
 ** File description:
-** DlfcnWrapper
+** SharedLibLoader
 */
 
-#include "arcade.hpp"
+#include "lib/SharedLibLoader.hpp"
+#include "Exceptions/DlfcnExceptions.hpp"
 
-DlfcnWrapper::DlfcnWrapper()
+SharedLibLoader::SharedLibLoader()
     : _Handle(nullptr, dlclose)
 {
 }
 
-DlfcnWrapper::DlfcnWrapper(const std::string& libName, int flags)
+SharedLibLoader::SharedLibLoader(const std::string& libName, int flags)
     : _Handle(nullptr, dlclose)
 {
-    open(libName, flags);
+    this->open(libName, flags);
 }
 
-DlfcnWrapper::~DlfcnWrapper()
+SharedLibLoader::~SharedLibLoader()
 {
 }
 
-void DlfcnWrapper::open(const std::string &libName, int flags) {
+void SharedLibLoader::open(const std::string &libName, int flags) {
    if (isLibLoaded())
-        close();
+        this->close();
 
     _Handle.reset(dlopen(libName.c_str(), flags));
     if (!isLibLoaded())
         throw DlfcnExceptions::CannotOpenExceptions(dlerror());
 }
 
-void DlfcnWrapper::close() {
-    if (isLibLoaded()) {
-        dlclose(_Handle.get());
-        _Handle.release();
-    }
+void SharedLibLoader::close() {
+    _Handle.reset();
 }
 
-std::string DlfcnWrapper::error() const {
+std::string SharedLibLoader::error() const {
     char *dl_error = dlerror();
 
     return (dl_error != nullptr) ? std::string{dl_error} : "";
 }
 
-void *DlfcnWrapper::sym(const std::string &symbol) {
+void *SharedLibLoader::sym(const std::string &symbol) {
     void *out;
 
     dlerror();
@@ -56,6 +54,6 @@ void *DlfcnWrapper::sym(const std::string &symbol) {
     return out;
 }
 
-bool DlfcnWrapper::isLibLoaded() const {
+bool SharedLibLoader::isLibLoaded() const {
     return _Handle.operator bool();
 }

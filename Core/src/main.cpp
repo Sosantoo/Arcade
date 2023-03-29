@@ -5,7 +5,7 @@
 ** main
 */
 
-#include "arcade.hpp"
+#include "Core/Core.hpp"
 
 int main(const int ac, const char **av)
 {

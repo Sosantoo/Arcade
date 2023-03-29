@@ -16,12 +16,11 @@ GameEngine::~GameEngine()
 }
 
 void GameEngine::processGameTick(IClock &clock) {
-    std::cout << clock.getTimeElapsed() << " ";
+    // std::cout << clock.getTimeElapsed() << " ";
 };
 
 void GameEngine::upKeyPress() {
     std::cout << "[Game Engine] upKeyPress process" << std::endl;
-
 };
 
 void GameEngine::downKeyPress() {
@@ -36,11 +35,11 @@ void GameEngine::rightKeyPress() {
     std::cout << "[Game Engine] rightKeyPress process" << std::endl;
 };
 
-IEvent::EventHandler &GameEngine::getEventBindings() {
+IWindow::EventHandler &GameEngine::getEventBindings() {
     return (gameEvent = {
-        {IEvent::EventType::UP_pressed, [this](){this->upKeyPress(); }},
-        {IEvent::EventType::DOWN_pressed, [this](){this->downKeyPress(); }},
-        {IEvent::EventType::LEFT_pressed, [this](){this->leftKeyPress(); }},
-        {IEvent::EventType::RIGHT_pressed, [this](){this->rightKeyPress(); }},
+        {IWindow::EventType::UP_pressed, [this](){this->upKeyPress(); }},
+        {IWindow::EventType::DOWN_pressed, [this](){this->downKeyPress(); }},
+        {IWindow::EventType::LEFT_pressed, [this](){this->leftKeyPress(); }},
+        {IWindow::EventType::RIGHT_pressed, [this](){this->rightKeyPress(); }},
     });
 }

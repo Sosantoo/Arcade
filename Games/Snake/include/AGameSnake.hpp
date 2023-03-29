@@ -14,6 +14,6 @@ private:
 
 public:
     AGameSnake(): AGame<GameEngine>() {};
-    AGameSnake(IGraphical &, IEvent::EventHandler &) {};
+    AGameSnake(IGraphicalFactory &, IWindow::EventHandler &) {};
     ~AGameSnake() {};
 };

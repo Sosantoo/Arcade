@@ -7,7 +7,7 @@
 
 #include "test.hpp"
 
-IEvent::EventHandler &AGameTest::getEventBinding() {
+IWindow::EventHandler &AGameTest::getEventBinding() {
     return gameEngine.getEventBindings();
 };
 
