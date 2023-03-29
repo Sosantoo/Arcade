@@ -10,7 +10,7 @@ cmake_minimum_required(VERSION 3.5.1)
 project(arcade-cmake)
 
 set(CMAKE_CXX_STANDARD 17)
-add_compile_options(-Wall -Wextra -fno-gnu-unique)
+#add_compile_options(-Wall -Wextra -fno-gnu-unique)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_BUILD_TYPE Release)
 
@@ -25,6 +25,7 @@ file(GLOB_RECURSE SRC_FILES_CORE ${PROJECT_SOURCE_DIR}/Core/src/*.cpp)
 set(EXEC arcade)
 
 add_executable(${EXEC} ${SRC_FILES_CORE})
+target_compile_options(${EXEC} PRIVATE -Wall -Wextra -fno-gnu-unique -ggdb3)
 
 add_custom_target(core
     COMMAND ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR} --target arcade
@@ -36,9 +37,9 @@ add_custom_target(core
 # Games
 ################################
 
-add_subdirectory(Games/Nibbler)
-add_subdirectory(Games/Snake)
-add_subdirectory(Games/Menu)
+# add_subdirectory(Games/Nibbler)
+# add_subdirectory(Games/Snake)
+# add_subdirectory(Games/Menu)
 add_subdirectory(Games/test)
 
 add_custom_target(games
@@ -53,7 +54,7 @@ add_custom_target(games
 # Graphicals
 ################################
 
-add_subdirectory(Graphicals/SDL2)
+# add_subdirectory(Graphicals/SDL2)
 add_subdirectory(Graphicals/nCurses)
 add_subdirectory(Graphicals/SFML)
 

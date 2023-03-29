@@ -45,9 +45,8 @@ void AGameTest::leftKeyPress()
     std::cout << "[Game Engine] leftKeyPress process" << std::endl;
 };
 
-void AGameTest::rightKeyPress()
-{
-    std::cout << "[Game Engine] rightKeyPress process" << std::endl;
+IEvent::EventHandler &AGameTest::getEventBinding() {
+    return gameEngine.getEventBindings();
 };
 
 void AGameTest::processGameTick(IClock &clock){

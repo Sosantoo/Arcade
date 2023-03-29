@@ -5,6 +5,7 @@
 ** entryPoint
 */
 
+#include <memory>
 #include "AGameNibbler.hpp"
 #include <iostream>
 
@@ -22,8 +23,7 @@ void calledLast()
 }
 
 extern "C" {
-IGame *create()
-{
-    return new AGameNibller;
-}
+    std::unique_ptr<IGame> create() {
+        return std::make_unique<AGameNibller>();
+    }
 }

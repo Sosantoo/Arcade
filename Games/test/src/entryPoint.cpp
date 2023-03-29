@@ -6,6 +6,7 @@
 */
 
 #include "AGameTest.hpp"
+#include <memory>
 #include <iostream>
 
 void __attribute__((constructor)) calledFirst();
@@ -22,8 +23,7 @@ void calledLast()
 }
 
 extern "C" {
-IGame *create()
-{
-    return new AGameTest;
-}
+    std::unique_ptr<IGame> create() {
+        return std::make_unique<AGameTest>();
+    }
 }

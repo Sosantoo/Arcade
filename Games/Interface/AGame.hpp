@@ -6,8 +6,8 @@
 */
 
 #pragma once
-#include "../../Interface/Game/IGames.hpp"
-#include "../../Interface/Graphical/IGraphicals.hpp"
+#include "../../Interface/Graphical/IGraphicalFactory.hpp"
+#include "../../Interface/Game/IGame.hpp"
 #include <stdexcept>
 
 class AGame : public IGame

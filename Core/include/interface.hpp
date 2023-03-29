@@ -7,5 +7,5 @@
 
 #pragma once
 
-#include "../../Interface/Game/IGames.hpp"
-#include "../../Interface/Graphical/IGraphicals.hpp"
+#include "../../Interface/Game/IGame.hpp"
+#include "../../Interface/Graphical/IGraphicalFactory.hpp"

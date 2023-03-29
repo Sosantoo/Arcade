@@ -22,8 +22,7 @@ void calledLast()
 }
 
 extern "C" {
-IGame *create()
-{
-    return new AGameMenu;
-}
+    std::unique_ptr<IGame> create() {
+        return std::make_unique<AGameMenu>();
+    }
 }

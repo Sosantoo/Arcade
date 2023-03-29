@@ -31,7 +31,7 @@ class AGameSnake : public AGame
 
     public:
         AGameSnake() = default;
-        AGameSnake(IGraphical &, IEvent::EventHandler &){};
+        AGameSnake(IGraphicalFactory &, IWindow::EventHandler &){};
         ~AGameSnake() = default;
         IEvent::EventHandler &getEventBinding() override;
         void processGameTick(IClock &clock) override;
