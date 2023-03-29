@@ -16,7 +16,7 @@ GameEngine::~GameEngine()
 }
 
 void GameEngine::processGameTick(IClock &clock) {
-    std::cout << clock.getTimeElapsed() << " ";
+    //std::cout << clock.getTimeElapsed() << " ";
 };
 
 void GameEngine::upKeyPress() {

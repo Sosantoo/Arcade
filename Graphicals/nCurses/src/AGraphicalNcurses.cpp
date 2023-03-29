@@ -5,7 +5,7 @@
 ** AGraphicalNcurses
 */
 
-#include "ncurses.hpp"
+#include "AGraphicalNcurses.hpp"
 
 void AGraphicalNcurses::loadResource()
 {
@@ -37,7 +37,7 @@ void AGraphicalNcurses::initWindow(std::string, std::pair<size_t, size_t>)
     noecho();
 
     getmaxyx(stdscr, graphicalInfo.yMax, graphicalInfo.xMax);
-    graphicalInfo.win = newwin(15, graphicalInfo.xMax -100, graphicalInfo.yMax /2, 30);
+    graphicalInfo.win = newwin(15, graphicalInfo.xMax - 100, graphicalInfo.yMax / 2, 30);
     box(graphicalInfo.win, 0, 0);
     refresh();
     wrefresh(graphicalInfo.win);
@@ -55,7 +55,6 @@ void AGraphicalNcurses::clear()
     std::cout << "[nCurses] clear" << std::endl;
 };
 
-
 void AGraphicalNcurses::display()
 {
     mvwprintw(graphicalInfo.win, 1, graphicalInfo.xMax / 3 - 15, "Arcade");
@@ -66,34 +65,27 @@ void AGraphicalNcurses::eventPollEvent()
     int key = wgetch(graphicalInfo.win);
 
     switch (key) {
-    case KEY_UP:
-    case 'z':
-        return callEvent(IEvent::EventType::UP_pressed);
+        case KEY_UP:
+        case 'z': return callEvent(IEvent::EventType::UP_pressed);
 
-    case KEY_DOWN:
-    case 's':
-        return callEvent(IEvent::EventType::DOWN_pressed);
+        case KEY_DOWN:
+        case 's': return callEvent(IEvent::EventType::DOWN_pressed);
 
-    case KEY_LEFT:
-    case 'q':
-        return callEvent(IEvent::EventType::LEFT_pressed);
+        case KEY_LEFT:
+        case 'q': return callEvent(IEvent::EventType::LEFT_pressed);
 
-    case KEY_RIGHT:
-    case 'd':
-        return callEvent(IEvent::EventType::RIGHT_pressed);
+        case KEY_RIGHT:
+        case 'd': return callEvent(IEvent::EventType::RIGHT_pressed);
 
-    case 'n':
-        return callEvent(IEvent::EventType::NEXT_LIB);
+        case 'n': return callEvent(IEvent::EventType::NEXT_LIB);
 
-    case 27:
-        return callEvent(IEvent::EventType::QUIT);
+        case 27: return callEvent(IEvent::EventType::QUIT);
 
-    default:
-        std::cerr << "--! Event Handler Unknown key: " << key << std::endl;
-        break;
+        default: std::cerr << "--! Event Handler Unknown key: " << key << std::endl; break;
     }
 };
 
-IClock &AGraphicalNcurses::getClock() {
+IClock &AGraphicalNcurses::getClock()
+{
     return _clock;
 };

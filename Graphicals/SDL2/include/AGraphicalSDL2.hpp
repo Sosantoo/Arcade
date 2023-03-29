@@ -7,40 +7,35 @@
 
 #pragma once
 #include "../../Interface/AGraphical.hpp"
-#include "sdl2.hpp"
+#include <SDL2/SDL.h>
 
 struct GraphicalInfo {
-    SDL_Window *window;
-    SDL_Event event;
-    bool isOpen;
-    AClock clock;
-
-    GraphicalInfo()
-        : window(nullptr)
-        , event({})
-        , isOpen(false)
-    {}
+        SDL_Window *window{nullptr};
+        SDL_Event event{};
+        bool isOpen{false};
+        AClock clock;
 };
 
-class AGraphicalSDL2: public AGraphical<GraphicalInfo> {
-public:
-    AGraphicalSDL2(): AGraphical<GraphicalInfo>() {};
-    ~AGraphicalSDL2() {};
+class AGraphicalSDL2 : public AGraphical<GraphicalInfo>
+{
+    public:
+        AGraphicalSDL2() = default;
+        ~AGraphicalSDL2() = default;
 
-    //base
-    virtual void loadResource() final;
-    virtual void destroyRessource() final;
+        // base
+        void loadResource() final;
+        void destroyRessource() final;
 
-    //Iwindow
-    virtual void initWindow(std::string name, std::pair<size_t, size_t> size) final;
-    virtual void closeWindow() final;
-    virtual bool windowIsOpen() final;
-    virtual void clear() final;
-    virtual void display() final;
+        // Iwindow
+        void initWindow(std::string name, std::pair<size_t, size_t> size) final;
+        void closeWindow() final;
+        bool windowIsOpen() final;
+        void clear() final;
+        void display() final;
 
-    //event
-    virtual void eventPollEvent() final;
+        // event
+        void eventPollEvent() final;
 
-    //Clock
-    virtual IClock &getClock() final;
+        // Clock
+        IClock &getClock() final;
 };
