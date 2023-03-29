@@ -6,6 +6,8 @@
 */
 
 #include "Core/Core.hpp"
+#include <iostream>
+#include <exception>
 
 int main(const int ac, const char **av)
 {

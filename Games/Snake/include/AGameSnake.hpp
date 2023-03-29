@@ -12,7 +12,7 @@
 class AGameSnake : public AGame
 {
     private:
-        IEvent::EventHandler gameEvent;
+        IWindow::EventHandler gameEvent;
 
         void upKeyPress();
         void downKeyPress();
@@ -33,7 +33,7 @@ class AGameSnake : public AGame
         AGameSnake() = default;
         AGameSnake(IGraphicalFactory &, IWindow::EventHandler &){};
         ~AGameSnake() = default;
-        IEvent::EventHandler &getEventBinding() override;
+        IWindow::EventHandler &getEventBinding() override;
         void processGameTick(IClock &clock) override;
         std::vector<IEntity> getEntity() override;
 };

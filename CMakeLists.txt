@@ -37,9 +37,9 @@ add_custom_target(core
 # Games
 ################################
 
-# add_subdirectory(Games/Nibbler)
-# add_subdirectory(Games/Snake)
-# add_subdirectory(Games/Menu)
+add_subdirectory(Games/Nibbler)
+add_subdirectory(Games/Snake)
+add_subdirectory(Games/Menu)
 add_subdirectory(Games/test)
 
 add_custom_target(games
@@ -56,7 +56,7 @@ add_custom_target(games
 
 # add_subdirectory(Graphicals/SDL2)
 add_subdirectory(Graphicals/nCurses)
-add_subdirectory(Graphicals/SFML)
+# add_subdirectory(Graphicals/SFML)
 
 add_custom_target(graphicals
     COMMAND ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR} --target arcade_sdl2 arcade_ncurses arcade_sfml

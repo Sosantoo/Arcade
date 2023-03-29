@@ -2,7 +2,7 @@
 ** EPITECH PROJECT, 2023
 ** arcade
 ** File description:
-** GraphicalFactory
+** GraphicalFactorySDL2
 */
 
 #pragma once
@@ -26,7 +26,7 @@ public:
     IClock &getClock()override {};
 };
 
-class WindowNcurses: public IWindow {
+class WindowSDL2: public IWindow {
 private:
     IWindow::EventHandler _eventBinding;
     WINDOW *window;
@@ -52,7 +52,7 @@ public:
     void eventPollEvent() final;
 };
 
-class GridNcurses
+class GridSDL2
     : public IGrid
 {
 public:
@@ -71,7 +71,7 @@ public:
     virtual void updateCell(int x, int y, Color) final {};
 };
 
-class TextNcurses
+class TextSDL2
     : public IText
 {
 public:
@@ -89,7 +89,7 @@ public:
     virtual void changeString(std::string str) final {};
 };
 
-class GraphicalFactoryNcurses: public IGraphicalFactory {
+class GraphicalFactorySDL2: public IGraphicalFactory {
 public:
     void loadResource() final;
 

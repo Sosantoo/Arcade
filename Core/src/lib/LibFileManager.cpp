@@ -8,6 +8,8 @@
 #include "lib/LibFileManager.hpp"
 #include "Exceptions/CoreExceptions.hpp"
 #include <filesystem>
+#include <iostream>
+#include <algorithm>
 #include <map>
 
 std::map<std::string, Lib::libType> libs_register {

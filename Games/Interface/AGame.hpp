@@ -20,7 +20,7 @@ class AGame : public IGame
         AGame &operator=(AGame &&) = delete;
         ~AGame() = default;
 
-        IEvent::EventHandler &getEventBinding() override
+        IWindow::EventHandler &getEventBinding() override
         {
             throw std::runtime_error("method not implemented: stop");
         };

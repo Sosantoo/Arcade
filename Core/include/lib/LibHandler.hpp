@@ -6,6 +6,7 @@
 */
 
 #pragma once
+#include <memory>
 #include "lib/SharedLibLoader.hpp"
 #include "lib/LibFileManager.hpp"
 

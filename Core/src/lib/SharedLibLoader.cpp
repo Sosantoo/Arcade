@@ -7,6 +7,9 @@
 
 #include "lib/SharedLibLoader.hpp"
 #include "Exceptions/DlfcnExceptions.hpp"
+#include <memory>
+#include <dlfcn.h>
+#include <string>
 
 SharedLibLoader::SharedLibLoader()
     : _Handle(nullptr, dlclose)

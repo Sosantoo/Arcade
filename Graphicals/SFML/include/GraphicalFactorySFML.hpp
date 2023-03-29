@@ -2,7 +2,7 @@
 ** EPITECH PROJECT, 2023
 ** arcade
 ** File description:
-** GraphicalFactory
+** GraphicalFactorySFML
 */
 
 #pragma once
@@ -10,7 +10,7 @@
 #include <iostream>
 #include <curses.h>
 
-class ClockNcurses: public IClock {
+class ClockSFML: public IClock {
 private:
         time_t time;
 
@@ -26,7 +26,7 @@ public:
     IClock &getClock()override {};
 };
 
-class WindowNcurses: public IWindow {
+class WindowSFML: public IWindow {
 private:
     IWindow::EventHandler _eventBinding;
     WINDOW *window;
@@ -52,7 +52,7 @@ public:
     void eventPollEvent() final;
 };
 
-class GridNcurses
+class GridSFML
     : public IGrid
 {
 public:
@@ -71,7 +71,7 @@ public:
     virtual void updateCell(int x, int y, Color) final {};
 };
 
-class TextNcurses
+class TextSFML
     : public IText
 {
 public:
@@ -89,7 +89,7 @@ public:
     virtual void changeString(std::string str) final {};
 };
 
-class GraphicalFactoryNcurses: public IGraphicalFactory {
+class GraphicalFactorySFML: public IGraphicalFactory {
 public:
     void loadResource() final;
 

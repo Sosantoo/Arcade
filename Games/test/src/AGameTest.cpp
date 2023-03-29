@@ -8,22 +8,22 @@
 #include "AGameTest.hpp"
 #include <iostream>
 
-IEvent::EventHandler &AGameTest::getEventBinding()
+IWindow::EventHandler &AGameTest::getEventBinding()
 {
     return (gameEvent = {
-                {IEvent::EventType::UP_pressed,
+                {IWindow::EventType::UP_pressed,
                  [this]() {
                      this->upKeyPress();
                  }},
-                {IEvent::EventType::DOWN_pressed,
+                {IWindow::EventType::DOWN_pressed,
                  [this]() {
                      this->downKeyPress();
                  }},
-                {IEvent::EventType::LEFT_pressed,
+                {IWindow::EventType::LEFT_pressed,
                  [this]() {
                      this->leftKeyPress();
                  }},
-                {IEvent::EventType::RIGHT_pressed,
+                {IWindow::EventType::RIGHT_pressed,
                  [this]() {
                      this->rightKeyPress();
                  }},

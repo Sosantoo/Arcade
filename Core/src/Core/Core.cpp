@@ -13,6 +13,10 @@ Core::Core::Core(const std::string &SharedLibPath)
 {
 }
 
+Core::Core::~Core()
+{
+}
+
 void Core::Core::init(const std::string GraphicalsLibPath, const std::string GameLibPath) {
     if (!_LibFileManager.isAvailable(GraphicalsLibPath) ||
     !_LibFileManager.isAvailable(GameLibPath))

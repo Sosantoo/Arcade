@@ -15,21 +15,13 @@ class AGameTest : public AGame
         void downKeyPress();
         void leftKeyPress();
         void rightKeyPress();
-        IEvent::EventHandler gameEvent;
+        IWindow::EventHandler gameEvent;
 
     public:
         AGameTest() = default;
         ~AGameTest() = default;
 
-<<<<<<< HEAD
-        IEvent::EventHandler &getEventBinding() final;
+        IWindow::EventHandler &getEventBinding() final;
         void processGameTick(IClock &clock) final;
         std::vector<IEntity> getEntity() final;
-=======
-    virtual IWindow::EventHandler &getEventBinding() final;
-
-    virtual void processGameTick(IClock &clock) final;
-
-    virtual std::vector<IEntity> getEntity() final;
->>>>>>> origin/refacto/GraphicalInterface
 };

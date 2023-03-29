@@ -6,6 +6,7 @@
 */
 
 #pragma once
+#include <memory>
 #include "IClock.hpp"
 #include "IEntity.hpp"
 #include "IWindow.hpp"

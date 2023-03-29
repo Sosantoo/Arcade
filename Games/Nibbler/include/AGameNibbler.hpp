@@ -13,6 +13,5 @@ class AGameNibller : public AGame
     private:
     public:
         AGameNibller() = default;
-        AGameNibller(IGraphical &, IEvent::EventHandler &){};
         ~AGameNibller() = default;
 };

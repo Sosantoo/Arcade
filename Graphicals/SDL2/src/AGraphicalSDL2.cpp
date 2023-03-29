@@ -71,16 +71,16 @@ void AGraphicalSDL2::eventPollEvent()
     while (SDL_PollEvent(&graphicalInfo.event)) {
 <<<<<<< HEAD:Graphicals/SDL2/src/AGraphical.cpp
         switch (graphicalInfo.event.type) {
-            case SDL_QUIT: callEvent(IEvent::EventType::QUIT); break;
+            case SDL_QUIT: callEvent(IWindow::EventType::QUIT); break;
             case SDLK_DOWN:
-            case SDLK_s: callEvent(IEvent::EventType::DOWN_pressed); break;
+            case SDLK_s: callEvent(IWindow::EventType::DOWN_pressed); break;
             case SDLK_UP:
-            case SDLK_z: callEvent(IEvent::EventType::UP_pressed); break;
+            case SDLK_z: callEvent(IWindow::EventType::UP_pressed); break;
             case SDLK_LEFT:
-            case SDLK_q: callEvent(IEvent::EventType::LEFT_pressed); break;
+            case SDLK_q: callEvent(IWindow::EventType::LEFT_pressed); break;
             case SDLK_RIGHT:
-            case SDLK_d: callEvent(IEvent::EventType::RIGHT_pressed); break;
-            case SDLK_n: callEvent(IEvent::EventType::NEXT_LIB); break;
+            case SDLK_d: callEvent(IWindow::EventType::RIGHT_pressed); break;
+            case SDLK_n: callEvent(IWindow::EventType::NEXT_LIB); break;
             default: return;
 =======
         switch (graphicalInfo.event.type )

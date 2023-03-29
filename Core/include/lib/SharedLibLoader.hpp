@@ -6,6 +6,8 @@
 */
 
 #pragma once
+#include <dlfcn.h>
+#include <memory>
 
 class SharedLibLoader {
     protected:

@@ -6,6 +6,7 @@
 */
 
 #include "Core/GraphicalLib.hpp"
+#include <iostream>
 
 GraphicalLib::GraphicalLib()
     : _previousLib{nullptr}

@@ -5,7 +5,6 @@
 ** AGraphicals
 */
 
-#include "../include/AGraphicalSFML.hpp"
 #include <SFML/Graphics.hpp>
 #include <SFML/Window/Keyboard.hpp>
 #include <unordered_map>

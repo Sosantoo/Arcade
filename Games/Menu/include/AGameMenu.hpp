@@ -13,6 +13,5 @@ class AGameMenu : public AGame
     private:
     public:
         AGameMenu() = default;
-        AGameMenu(IGraphical &, IEvent::EventHandler &){};
         ~AGameMenu() = default;
 };

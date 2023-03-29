@@ -6,10 +6,9 @@
 */
 
 #pragma once
-#include "interface.hpp"
 #include "lib/LibFileManager.hpp"
-#include "GraphicalLib.hpp"
-#include "GameLib.hpp"
+#include "Core/GameLib.hpp"
+#include "Core/GraphicalLib.hpp"
 
 namespace Core
 {
