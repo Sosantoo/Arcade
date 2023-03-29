@@ -58,7 +58,7 @@ add_subdirectory(Graphicals/nCurses)
 # add_subdirectory(Graphicals/OpenGL)
 
 add_custom_target(graphicals
-    COMMAND ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR} --target arcade_sdl2 arcade_ncurses arcade_opengl
+    COMMAND ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR} --target arcade_sdl2 arcade_ncurses arcade_sfml
     DEPENDS arcade_nibbler arcade_snake arcade_menu
     COMMENT "Build the graphicals libraries"
     VERBATIM
