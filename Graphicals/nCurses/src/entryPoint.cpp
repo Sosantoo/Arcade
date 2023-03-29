@@ -6,6 +6,7 @@
 */
 
 #include "AGraphicalNcurses.hpp"
+#include <iostream>
 
 void __attribute__((constructor)) calledFirst();
 void __attribute__((destructor)) calledLast();

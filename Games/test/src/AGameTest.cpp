@@ -5,16 +5,19 @@
 ** AGameTest
 */
 
-#include "test.hpp"
+#include "AGameTest.hpp"
 
-IEvent::EventHandler &AGameTest::getEventBinding() {
+IEvent::EventHandler &AGameTest::getEventBinding()
+{
     return gameEngine.getEventBindings();
 };
 
-void AGameTest::processGameTick(IClock &clock) {
+void AGameTest::processGameTick(IClock &clock)
+{
     gameEngine.processGameTick(clock);
 };
 
-std::vector<IEntity> AGameTest::getEntity() {
+std::vector<IEntity> AGameTest::getEntity()
+{
     return {};
 };

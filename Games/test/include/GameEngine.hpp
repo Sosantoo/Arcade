@@ -6,8 +6,10 @@
 */
 
 #pragma once
+#include "../../Interface/Game/IGames.hpp"
 
-class GameEngine {
+class GameEngine
+{
     private:
         IEvent::EventHandler gameEvent;
 

@@ -6,6 +6,7 @@
 */
 
 #include "arcade.hpp"
+#include <iostream>
 
 int main(const int ac, const char **av)
 {

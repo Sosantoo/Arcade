@@ -6,6 +6,7 @@
 */
 
 #include "AGraphicalSDL2.hpp"
+#include <iostream>
 
 void __attribute__((constructor)) calledFirst();
 void __attribute__((destructor)) calledLast();

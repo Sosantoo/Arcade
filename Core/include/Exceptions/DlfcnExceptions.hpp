@@ -5,21 +5,20 @@
 ** dlfcnExceptions
 */
 
-#ifndef DLFCNEXCEPTIONS_HPP_
-    #define DLFCNEXCEPTIONS_HPP_
-    #include "BasicExceptions.hpp"
+#pragma once
+#include "BasicExceptions.hpp"
 
 namespace DlfcnExceptions
 {
-    class CannotOpenExceptions: public BasicExceptionWithMessage {
+    class CannotOpenExceptions : public BasicExceptionWithMessage
+    {
         public:
-            CannotOpenExceptions(const std::string&);
+            CannotOpenExceptions(const std::string &);
     };
 
-    class CannotLoadExceptions: public BasicExceptionWithMessage {
+    class CannotLoadExceptions : public BasicExceptionWithMessage
+    {
         public:
-            CannotLoadExceptions(const std::string&);
+            CannotLoadExceptions(const std::string &);
     };
-}
-
-#endif /* !DLFCNEXCEPTIONS_HPP_ */
+} // namespace DlfcnExceptions

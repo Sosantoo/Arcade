@@ -5,25 +5,26 @@
 ** libWrapper
 */
 
-#ifndef LIBWRAPPER_HPP_
-    #define LIBWRAPPER_HPP_
-    #include "../various.hpp"
+#pragma once
+#include <string>
+#include <vector>
 
 namespace Lib
 {
-    enum lib_type{
+    enum lib_type {
         _GRAPHICALS_,
         _GAMES_,
     };
 
     struct lib_t {
-        std::string name;
-        std::string path;
-        lib_type type;
+            std::string name;
+            std::string path;
+            lib_type type;
     };
-};
+}; // namespace Lib
 
-class libWrapper {
+class libWrapper
+{
     public:
         libWrapper(const std::string &path);
         ~libWrapper();
@@ -44,5 +45,3 @@ class libWrapper {
         std::string _pathLib;
         std::vector<Lib::lib_t> _availableLibs;
 };
-
-#endif /* !LIBWRAPPER_HPP_ */

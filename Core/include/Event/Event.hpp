@@ -5,20 +5,13 @@
 ** Event
 */
 
-#ifndef EVENT_HPP_
-    #define EVENT_HPP_
-    #include "../various.hpp"
-    #include "../interface.hpp"
+#pragma once
+#include "../interface.hpp"
 
-class Event {
+class Event
+{
     public:
-        Event() {
-            eventHandler = {
-            };
-        }
-        ~Event() {};
-
-        
+        Event() { eventHandler = {}; }
+        ~Event() = default;
+        ;
 };
-
-#endif /* !EVENT_HPP_ */

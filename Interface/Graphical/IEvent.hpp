@@ -6,32 +6,31 @@
 */
 
 #pragma once
-#include "../../Core/include/various.hpp"
+#include <functional>
+#include <map>
 
-class IEvent {
-public:
+class IEvent
+{
+    public:
+        enum class EventType {
+            UP_pressed,
+            DOWN_pressed,
+            LEFT_pressed,
+            RIGHT_pressed,
+            QUIT,
+            PAUSE,
+            RESUME,
+            NEXT_GAME,
+            NEXT_LIB,
+            RESTART,
+            GO_TO_MENU,
+        };
 
-    enum class EventType {
-        UP_pressed,
-        DOWN_pressed,
-        LEFT_pressed,
-        RIGHT_pressed,
-        QUIT,
-        PAUSE,
-        RESUME,
-        NEXT_GAME,
-        NEXT_LIB,
-        RESTART,
-        GO_TO_MENU,
-    };
+        ~IEvent() = default;
 
-    ~IEvent() = default;
+        using EventCallBack = std::function<void()>;
+        using EventHandler = std::map<IEvent::EventType, EventCallBack>;
 
-    using EventCallBack = std::function<void()>;
-    using EventHandler = std::map<IEvent::EventType, EventCallBack>;
-
-    virtual void loadEventBindings(EventHandler &) = 0;
-
-    virtual void eventPollEvent() = 0;
-
+        virtual void loadEventBindings(EventHandler &) = 0;
+        virtual void eventPollEvent() = 0;
 };

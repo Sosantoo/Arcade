@@ -7,22 +7,16 @@
 
 #pragma once
 #include "IClock.hpp"
-#include "IEvent.hpp"
 #include "IEntity.hpp"
+#include "IEvent.hpp"
 #include "IWindow.hpp"
 
-class IGraphical:
-    public IWindow,
-    public IEvent,
-    public IClock
+class IGraphical : public IWindow, public IEvent, public IClock
 {
-public:
-    ~IGraphical() = default;
+    public:
+        ~IGraphical() = default;
 
-    virtual void loadResource() = 0;
-
-    virtual void destroyRessource() = 0;
-
-    virtual void displayEntity(std::vector<IEntity>) = 0;
-
+        virtual void loadResource() = 0;
+        virtual void destroyRessource() = 0;
+        virtual void displayEntity(std::vector<IEntity>) = 0;
 };

@@ -6,8 +6,8 @@
 */
 
 #pragma once
-#include "../../Core/include/various.hpp"
 #include "../../Interface/Graphical/IGraphicals.hpp"
+#include <stdexcept>
 
 class AClock : public IClock
 {
@@ -18,13 +18,9 @@ class AClock : public IClock
         AClock() = default;
         ~AClock() = default;
         void startClock() override{};
-
         time_t getTimeElapsed() override { return time; };
-
         void resetClock() override{};
-
         void initClock() override{};
-
         IClock &getClock() override { return *this; };
 };
 

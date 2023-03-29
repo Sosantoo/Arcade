@@ -5,7 +5,8 @@
 ** entryPoint
 */
 
-#include "snake.hpp"
+#include "AGameSnake.hpp"
+#include <iostream>
 
 void __attribute__((constructor)) calledFirst();
 void __attribute__((destructor)) calledLast();

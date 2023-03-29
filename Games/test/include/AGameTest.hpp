@@ -9,16 +9,14 @@
 #include "../../Interface/AGame.hpp"
 #include "GameEngine.hpp"
 
-class AGameTest : public AGame<GameEngine> {
-private:
+class AGameTest : public AGame<GameEngine>
+{
+    private:
+    public:
+        AGameTest() = default;
+        ~AGameTest() = default;
 
-public:
-    AGameTest(): AGame<GameEngine>() {};
-    ~AGameTest() {};
-
-    virtual IEvent::EventHandler &getEventBinding() final;
-
-    virtual void processGameTick(IClock &clock) final;
-
-    virtual std::vector<IEntity> getEntity() final;
+        IEvent::EventHandler &getEventBinding() final;
+        void processGameTick(IClock &clock) final;
+        std::vector<IEntity> getEntity() final;
 };

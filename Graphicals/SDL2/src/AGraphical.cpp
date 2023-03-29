@@ -6,6 +6,8 @@
 */
 
 #include "AGraphicalSDL2.hpp"
+#include <SDL2/SDL.h>
+#include <iostream>
 
 void AGraphicalSDL2::loadResource() {}
 

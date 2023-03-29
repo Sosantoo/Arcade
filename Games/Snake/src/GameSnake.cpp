@@ -1,12 +1,16 @@
 /*
 ** EPITECH PROJECT, 2023
-** arcade
+** Arcade
 ** File description:
-** GameEngine
+** Game
 */
 
-#include "AGameTest.hpp"
+#include "AGameSnake.hpp"
 #include <iostream>
+
+void GameEngine::displayGameOver(WINDOW *win, int score) {}
+bool GameEngine::checkGameStatus(const SnakePos &snake, int, int height) {}
+void GameEngine::updateSnakePosition(SnakePos &snake, int &stock_x, int &stock_y, int ch) {}
 
 void GameEngine::processGameTick(IClock &clock){
     // std::cout << clock.getTimeElapsed() << " ";
@@ -53,3 +57,6 @@ IEvent::EventHandler &GameEngine::getEventBindings()
                  }},
             });
 }
+
+// pour game
+// mvwprintw(graphicalInfo.win, 1, graphicalInfo.xMax / 3 - 15, "Arcade");

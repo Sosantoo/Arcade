@@ -9,6 +9,7 @@
 
 #include "../../Interface/AGraphical.hpp"
 #include <ncurses.h>
+#include <ostream>
 
 struct GraphicalInfo {
         WINDOW *win{};
@@ -20,8 +21,8 @@ struct GraphicalInfo {
 class AGraphicalNcurses : public AGraphical<GraphicalInfo>
 {
     public:
-        AGraphicalNcurses() = default;
-        ~AGraphicalNcurses() = default;
+        AGraphicalNcurses();
+        ~AGraphicalNcurses();
 
         // base
         void loadResource() final;
@@ -40,4 +41,6 @@ class AGraphicalNcurses : public AGraphical<GraphicalInfo>
 
         // Clock
         IClock &getClock() final;
+
+    private:
 };

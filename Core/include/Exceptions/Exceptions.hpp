@@ -7,6 +7,6 @@
 
 #pragma once
 
-#include "DlfcnExceptions.hpp"
-#include "CoreExceptions.hpp"
 #include "BasicExceptions.hpp"
+#include "CoreExceptions.hpp"
+#include "DlfcnExceptions.hpp"

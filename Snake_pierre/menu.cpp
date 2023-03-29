@@ -8,10 +8,7 @@
 #include <ncurses.h>
 #include <string>
 
-#include <ncurses.h>
 using namespace std;
-
-
 
 int main(int argc, char **argv)
 {

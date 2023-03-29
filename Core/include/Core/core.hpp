@@ -5,50 +5,47 @@
 ** core
 */
 
-#ifndef CORE_H_
-    #define CORE_H_
-    #include "../various.hpp"
-    #include "../interface.hpp"
-    #include "../Wrapper/Wrapper.hpp"
+#pragma once
+#include "../Wrapper/Wrapper.hpp"
+#include "../interface.hpp"
 
 namespace Core
 {
 
-    class Core {
-    private:
-        InterfaceWrapper<IGraphical> _graphical;
-        InterfaceWrapper<IGame> _game;
-        IEvent::EventHandler event;
-        Lib::lib_t _graphical_details;
-        Lib::lib_t _game_details;
-        libWrapper &_libs;
+    class Core
+    {
+        private:
+            InterfaceWrapper<IGraphical> _graphical;
+            InterfaceWrapper<IGame> _game;
+            IEvent::EventHandler event;
+            Lib::lib_t _graphical_details;
+            Lib::lib_t _game_details;
+            libWrapper &_libs;
 
-        //actions
-        void nextGraphicsLibrary();
-        void nextGameLibrary();
-        void restartGame();
-        void goToMenu();
-        void closeGraphical();
+            // actions
+            void nextGraphicsLibrary();
+            void nextGameLibrary();
+            void restartGame();
+            void goToMenu();
+            void closeGraphical();
 
-        //loadings
-        void loadStack();
-        void loadGraphical();
-        void loadGame();
+            // loadings
+            void loadStack();
+            void loadGraphical();
+            void loadGame();
 
-    public:
-        Core(libWrapper &);
-        ~Core();
+        public:
+            Core(libWrapper &);
+            ~Core();
 
-        void init(const std::string, const std::string);
+            void init(std::string, std::string);
 
-        void launchGame();
+            void launchGame();
 
-    protected:
-        IEvent::EventHandler &getCoreEventBind();
+        protected:
+            IEvent::EventHandler &getCoreEventBind();
     };
-};
+}; // namespace Core
 
 // entrypoint core
 int coreEntryPoint(const std::string &baseGraphicalsLibsName);
-
-#endif /* !CORE_H_ */

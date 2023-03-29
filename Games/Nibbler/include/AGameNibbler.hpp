@@ -9,11 +9,11 @@
 #include "../../Interface/AGame.hpp"
 #include "GameEngine.hpp"
 
-class AGameNibller : public AGame<GameEngine> {
-private:
-
-public:
-    AGameNibller(): AGame<GameEngine>() {};
-    AGameNibller(IGraphical &, IEvent::EventHandler &) {};
-    ~AGameNibller() {};
+class AGameNibller : public AGame<GameEngine>
+{
+    private:
+    public:
+        AGameNibller() = default;
+        AGameNibller(IGraphical &, IEvent::EventHandler &){};
+        ~AGameNibller() = default;
 };

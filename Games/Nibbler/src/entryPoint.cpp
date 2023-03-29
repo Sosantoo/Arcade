@@ -5,21 +5,25 @@
 ** entryPoint
 */
 
-#include "nibbler.hpp"
+#include "AGameNibbler.hpp"
+#include <iostream>
 
 void __attribute__((constructor)) calledFirst();
 void __attribute__((destructor)) calledLast();
 
-void calledFirst() {
+void calledFirst()
+{
     std::cout << "[GAME nibbler] Loading" << '\n';
 }
 
-void calledLast() {
+void calledLast()
+{
     std::cout << "[GAME nibbler] UnLoading" << '\n';
 }
 
 extern "C" {
-    IGame *create() {
-        return new AGameNibller;
-    }
+IGame *create()
+{
+    return new AGameNibller;
+}
 }

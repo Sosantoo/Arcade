@@ -7,10 +7,11 @@
 
 #pragma once
 
-class GameEngine {
+class GameEngine
+{
     public:
-        GameEngine() {};
-        ~GameEngine() {};
+        GameEngine() = default;
+        ~GameEngine() = default;
 
     protected:
     private:

@@ -5,13 +5,15 @@
 ** DlfcnWrapper
 */
 
-#ifndef DLFCNWRAPPER_HPP_
-    #define DLFCNWRAPPER_HPP_
-    #include "../various.hpp"
+#pragma once
+#include <dlfcn.h>
+#include <memory>
+#include <string>
 
-class DlfcnWrapper {
+class DlfcnWrapper
+{
     protected:
-        using CloseFunc = int (*)(void*);
+        using CloseFunc = int (*)(void *);
         std::unique_ptr<void, CloseFunc> _Handle;
 
     public:
@@ -21,9 +23,7 @@ class DlfcnWrapper {
 
         void open(const std::string &, int = RTLD_LAZY);
         void close();
-        std::string error() const;
+        [[nodiscard]] std::string error() const;
         void *sym(const std::string &);
-        bool isLibLoaded() const;
+        [[nodiscard]] bool isLibLoaded() const;
 };
-
-#endif /* !DLFCNWRAPPER_HPP_ */
