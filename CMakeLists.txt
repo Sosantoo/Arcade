@@ -10,7 +10,6 @@ cmake_minimum_required(VERSION 3.5.1)
 project(arcade-cmake)
 
 set(CMAKE_CXX_STANDARD 17)
-#add_compile_options(-Wall -Wextra -fno-gnu-unique)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_BUILD_TYPE Release)
 
@@ -54,9 +53,9 @@ add_custom_target(games
 # Graphicals
 ################################
 
-# add_subdirectory(Graphicals/SDL2)
-add_subdirectory(Graphicals/nCurses)
-# add_subdirectory(Graphicals/SFML)
+add_subdirectory(Graphicals/SDL2)
+# add_subdirectory(Graphicals/nCurses)
+add_subdirectory(Graphicals/SFML)
 
 add_custom_target(graphicals
     COMMAND ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR} --target arcade_sdl2 arcade_ncurses arcade_sfml
