@@ -34,10 +34,10 @@ void LibHandler<Interface_t>::load(const Lib::lib &lib, const Lib::libType expec
         throw DlfcnExceptions::CannotOpenExceptions("wrong lib type: " + lib.name);
     open(lib.path);
 
-    _constructor = (create_interface_t)sym("create");
-    _interface = _constructor();
+    _constructor = reinterpret_cast<create_interface_t>(sym("create"));
+    _interface = _constructor ? _constructor() : nullptr;
 
-    if (_interface == nullptr)
+    if (!_interface)
         throw DlfcnExceptions::CannotOpenExceptions("failed loading lib");
 }
 

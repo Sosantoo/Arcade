@@ -24,9 +24,10 @@ GraphicalLib::~GraphicalLib()
 
 void GraphicalLib::load(Lib::lib libDetails) {
     _previousLib.reset();
-    _previousLib = _currentLib.getInterfacePtr();
+    _previousLib = std::move(_currentLib.getInterfacePtr());
 
-    std::cout << "[CORE] " << libDetails.name << std::endl;
+    std::cout << "[CORE] next graphics: " << libDetails.name << std::endl;
+    _libDetails = libDetails;
     _currentLib.load(libDetails, Lib::_GRAPHICALS_);
 
     _window.reset();
@@ -35,10 +36,32 @@ void GraphicalLib::load(Lib::lib libDetails) {
     _score.reset();
     _time.reset();
 
-    _window = _currentLib.getInterface().createWindow("arcade", 800, 800);
-    _grid = _currentLib.getInterface().createIEntity(IEntity::EntityType::GridEntity);
-    _score = _currentLib.getInterface().createIEntity(IEntity::EntityType::TextEntity);
-    _score = _currentLib.getInterface().createIEntity(IEntity::EntityType::TextEntity);
+    _currentLib.getInterface().loadResource();
+    _window = _currentLib.getInterface().createWindow("arcade" + libDetails.name, 800, 800);
+    _grid = _window->createIGrid();
+    _score = _window->createIText();
+    _time = _window->createIText();
+
+    _grid->create(50, 50);
+    _score->create("test");
+    _time->create("test");
+    std::cout << "loaded " << libDetails.name << std::endl;
+}
+
+void GraphicalLib::display() {
+    _grid->displayEntity();
+    _score->displayEntity();
+    _time->displayEntity();
+}
+
+void GraphicalLib::test() {
+    _grid->updateCell(0, 0, IEntity::Color::Green);
+    _grid->updateCell(19, 19, IEntity::Color::Green);
+}
+
+void GraphicalLib::test2() {
+    _grid->updateCell(0, 0, IEntity::Color::Blue);
+    _grid->updateCell(19, 19, IEntity::Color::Blue);
 }
 
 IGraphicalFactory& GraphicalLib::getInterface() {
@@ -53,6 +76,15 @@ IClock& GraphicalLib::getClockInterface() {
     return *_clock;
 }
 
-IEntity& GraphicalLib::getEntity() {
+
+IGrid& GraphicalLib::getGrid() {
     return *_grid;
+}
+
+IText& GraphicalLib::getScore() {
+    return *_score;
+}
+
+IText& GraphicalLib::getTime() {
+    return *_time;
 }

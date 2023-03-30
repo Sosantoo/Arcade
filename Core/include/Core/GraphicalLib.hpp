@@ -16,9 +16,9 @@ private:
     LibHandler<IGraphicalFactory> _currentLib;
     std::unique_ptr<IWindow> _window;
     std::unique_ptr<IClock> _clock;
-    std::unique_ptr<IEntity> _grid;
-    std::unique_ptr<IEntity> _score;
-    std::unique_ptr<IEntity> _time;
+    std::unique_ptr<IGrid> _grid;
+    std::unique_ptr<IText> _score;
+    std::unique_ptr<IText> _time;
 
 public:
     GraphicalLib();
@@ -26,8 +26,15 @@ public:
 
     Lib::lib _libDetails;
     void load(Lib::lib);
+    void display();
     IGraphicalFactory& getInterface();
     IWindow& getWindowInterface();
     IClock& getClockInterface();
-    IEntity& getEntity();
+    IGrid& getGrid();
+    IText& getScore();
+    IText& getTime();
+
+    void test();
+    void test2();
+
 };

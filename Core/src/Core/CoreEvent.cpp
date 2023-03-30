@@ -7,17 +7,25 @@
 
 #include "Core/Core.hpp"
 #include "Exceptions/Exceptions.hpp"
+#include <iostream>
 
 void Core::Core::nextGraphicsLibrary() {
-    _graphical.getWindowInterface().closeWindow();
-    _graphical.getInterface().destroyRessource();
-    _graphical.load(_LibFileManager.getNextGraphicalsLib(_graphical._libDetails));
-    bindEvents();
+    _graphical.test();
+    // _graphical.getWindowInterface().closeWindow();
+    // _graphical.getInterface().destroyRessource();
+
+    // _graphical._libDetails = _LibFileManager.getNextGraphicalsLib(_graphical._libDetails);
+    // _graphical.load(_graphical._libDetails);
+    // bindEvents();
+    std::cout << "nop" << std::endl;
 }
 
 void Core::Core::nextGameLibrary() {
-    _game.load(_LibFileManager.getNextGraphicalsLib(_game._libDetails));
-    bindEvents();
+    _graphical.test2();
+    // _game._libDetails = _LibFileManager.getNextGameLib(_game._libDetails);
+    // _game.load(_game._libDetails);
+    // bindEvents();
+    std::cout << "nop" << std::endl;
 }
 
 void Core::Core::restartGame() {
@@ -36,4 +44,6 @@ void Core::Core::goToMenu() {
 }
 
 void Core::Core::closeGraphical() {
+    _graphical.getWindowInterface().closeWindow();
+    _graphical.getInterface().destroyRessource();
 }

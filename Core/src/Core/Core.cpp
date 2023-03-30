@@ -7,6 +7,7 @@
 
 #include "Core/Core.hpp"
 #include "Exceptions/Exceptions.hpp"
+#include <iostream>
 
 Core::Core::Core(const std::string &SharedLibPath)
     : _LibFileManager{LibFileManager(SharedLibPath)}
@@ -23,7 +24,6 @@ void Core::Core::init(const std::string GraphicalsLibPath, const std::string Gam
     {
         throw CoreExceptions::LibUnknowExceptions(GraphicalsLibPath + " or " + GameLibPath);
     }
-
     _game.load(_LibFileManager.getLibBypath(GameLibPath));
     _graphical.load(_LibFileManager.getLibBypath(GraphicalsLibPath));
 }
@@ -48,15 +48,19 @@ void Core::Core::bindEvents() {
 }
 
 void Core::Core::launchGame() {
+    bool gameOver = false;
     bindEvents();
 
-    while(_graphical.getWindowInterface().windowIsOpen()) {
+    while(_graphical.getWindowInterface().windowIsOpen() && !gameOver) {
         _graphical.getWindowInterface().eventPollEvent();
         _graphical.getWindowInterface().clear();
-
-        // gameInterface.processGameTick(graphicalInterface.getClock());
-        // graphicalInterface.displayEntity(gameInterface.getEntity());
-
+        _graphical.display();
+        gameOver = _game.getInterface().processGameTick(
+            _graphical.getGrid(),
+            _graphical.getScore(),
+            _graphical.getTime(),
+            _graphical.getClockInterface()
+        );
         _graphical.getWindowInterface().display();
     }
 }
@@ -64,7 +68,7 @@ void Core::Core::launchGame() {
 int coreEntryPoint(const std::string &graphicalPathLib)
 {
     Core::Core core("./lib/");
-    core.init(graphicalPathLib, "./lib/testGame.so");
+    core.init(graphicalPathLib, "./lib/arcade_snake.so");
     core.launchGame();
     return 0;
 }

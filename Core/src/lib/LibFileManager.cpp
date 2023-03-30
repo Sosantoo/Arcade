@@ -105,24 +105,28 @@ Lib::lib LibFileManager::getLibBypath(const std::string &path) {
     return (iter != _availableLibs.end()) ? *iter : Lib::lib();
 }
 
-bool operator==(const Lib::lib& a, const Lib::lib& b) {
-    return a.name == b.name && a.path == b.path && a.type == b.type;
-}
-
 Lib::lib LibFileManager::getNextGraphicalsLib(const Lib::lib &loaded) {
-    auto iter = std::find_if(
-        _availableLibs.begin(),
-        _availableLibs.end(),
-        [loaded](const Lib::lib& m) -> bool { return m.type == Lib::_GRAPHICALS_ && !(m == loaded); }
+    auto loadedIter = std::find(_availableLibs.begin(), _availableLibs.end(), loaded);
+    auto iter = std::find_if(loadedIter + 1, _availableLibs.end(),
+        [](const Lib::lib& m) -> bool { return m.type == Lib::_GRAPHICALS_; }
     );
+    if (iter == _availableLibs.end()) {
+        iter = std::find_if(_availableLibs.begin(), _availableLibs.end(),
+            [](const Lib::lib& m) -> bool { return m.type == Lib::_GRAPHICALS_; }
+        );
+    }
     return iter != _availableLibs.end() ? *iter : Lib::lib{};
 }
 
 Lib::lib LibFileManager::getNextGameLib(const Lib::lib &loaded) {
-    auto iter = std::find_if(
-        _availableLibs.begin(),
-        _availableLibs.end(),
-        [loaded](const Lib::lib& m) -> bool { return m.type == Lib::_GAMES_ && !(m == loaded); }
+    auto loadedIter = std::find(_availableLibs.begin(), _availableLibs.end(), loaded);
+    auto iter = std::find_if(loadedIter + 1, _availableLibs.end(),
+        [](const Lib::lib& m) -> bool { return m.type == Lib::_GAMES_; }
     );
+    if (iter == _availableLibs.end()) {
+        iter = std::find_if(_availableLibs.begin(), _availableLibs.end(),
+            [](const Lib::lib& m) -> bool { return m.type == Lib::_GAMES_; }
+        );
+    }
     return iter != _availableLibs.end() ? *iter : Lib::lib{};
 }
