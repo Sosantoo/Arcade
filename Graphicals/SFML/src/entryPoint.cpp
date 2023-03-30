@@ -5,7 +5,8 @@
 ** entryPoint
 */
 
-#include "../include/AGraphicalSFML.hpp"
+#include "GraphicalFactorySFML.hpp"
+#include <memory>
 #include <iostream>
 
 void __attribute__((constructor)) calledFirst();
@@ -20,7 +21,7 @@ void calledLast() {
 }
 
 extern "C" {
-    IGraphical *create() {
-        return new AGraphicalSFML;
+    std::unique_ptr<IGraphicalFactory> create() {
+        return std::make_unique<GraphicalFactorySFML>();
     }
 }
