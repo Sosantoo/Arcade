@@ -8,31 +8,29 @@
 #pragma once
 #include "../../../Interface/Graphical/IGraphicalFactory.hpp"
 #include <iostream>
-#include <curses.h>
+#include <SDL2/SDL.h>
 
-class ClockNcurses: public IClock {
+class ClockSDL2: public IClock {
 private:
         time_t time;
 
 public:
     void startClock() override {};
 
-    time_t getTimeElapsed() override {};
+    time_t getTimeElapsed() override { return 0;};
 
     void resetClock() override {};
 
     void initClock() override {};
-
-    IClock &getClock()override {};
 };
+
 
 class WindowSDL2: public IWindow {
 private:
     IWindow::EventHandler _eventBinding;
-    WINDOW *window;
+    SDL_Window *_window;
+    SDL_Event event;
     bool isOpen;
-    int xMax;
-    int yMax;
 
 public:
     void initWindow(std::string name, size_t width, size_t height) final;
@@ -50,35 +48,50 @@ public:
     void loadEventBindings(EventHandler &) final;
 
     void eventPollEvent() final;
+
+    std::unique_ptr<IText> createIText() final ;
+
+    std::unique_ptr<IGrid> createIGrid() final ;
 };
 
-class GridSDL2
-    : public IGrid
-{
+
+class GridSDL2 : public IGrid {
+private:
+    SDL_Window *_window;
+    SDL_Renderer *_renderer;
+    int _gridColumn, _gridRow;
+    IEntity::Color colorBackGround = IEntity::Color::Yellow;
+
+    void resetColor();
+    void setColor(int x, int y, SDL_Color color);
+
 public:
-    //Entity
-    virtual void create() final {};
+    GridSDL2(SDL_Window *window) : _window{window} {};
+    ~GridSDL2() {}
 
-    virtual void setSize(int width, int heigth) final {};
+    virtual void create(int gridRow, int gridColumn) final;
 
-    virtual void setPosition(int x, int y) final {};
+    virtual void setPosition(int x, int y) final {}
 
-    virtual void destroy() final {};
+    virtual void destroy() final;
 
-    virtual void displayEntity() final {};
+    virtual void displayEntity() final;
 
-
-    virtual void updateCell(int x, int y, Color) final {};
+    virtual void updateCell(int x, int y, Color color) final;
 };
+
 
 class TextSDL2
     : public IText
 {
-public:
-    //Entity
-    virtual void create() final {};
+private:
+    SDL_Window *_window;
 
-    virtual void setSize(int width, int heigth) final {};
+public:
+    TextSDL2(SDL_Window *window): _window{window} {};
+    ~TextSDL2() {};
+
+    virtual void create(std::string str) final {};
 
     virtual void setPosition(int x, int y) final {};
 
@@ -89,6 +102,7 @@ public:
     virtual void changeString(std::string str) final {};
 };
 
+
 class GraphicalFactorySDL2: public IGraphicalFactory {
 public:
     void loadResource() final;
@@ -98,6 +112,4 @@ public:
     std::unique_ptr<IClock> createIClock() final;
 
     std::unique_ptr<IWindow> createWindow(std::string name, size_t width, size_t height) final;
-
-    std::unique_ptr<IEntity> createIEntity(IEntity::EntityType type) final;
 };

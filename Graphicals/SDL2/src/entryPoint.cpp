@@ -6,7 +6,7 @@
 */
 
 #include <memory>
-#include "AGraphicalSDL2.hpp"
+#include "GraphicalFactorySDL2.hpp"
 #include <iostream>
 
 void __attribute__((constructor)) calledFirst();
@@ -24,6 +24,6 @@ void calledLast()
 
 extern "C" {
     std::unique_ptr<IGraphicalFactory> create() {
-        return std::make_unique<AGraphicalSDL2>();
+        return std::make_unique<GraphicalFactorySDL2>();
     }
 }
