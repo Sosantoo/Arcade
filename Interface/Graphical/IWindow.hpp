@@ -48,4 +48,9 @@ public:
 
     virtual void eventPollEvent() = 0;
 
+    //factory Entity
+    virtual std::unique_ptr<IText> createIText() = 0;
+
+    virtual std::unique_ptr<IGrid> createIGrid() = 0;
+
 };

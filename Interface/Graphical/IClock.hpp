@@ -17,5 +17,4 @@ class IClock
         virtual time_t getTimeElapsed() = 0;
         virtual void resetClock() = 0;
         virtual void initClock() = 0;
-        virtual IClock &getClock() = 0;
 };

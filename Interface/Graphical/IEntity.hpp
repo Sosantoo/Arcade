@@ -19,17 +19,7 @@ public:
         Yellow,
     };
 
-    enum class EntityType {
-        GridEntity,
-        SpriteEntity,
-        TextEntity,
-    };
-
     ~IEntity() = default;
-
-    virtual void create() = 0;
-
-    virtual void setSize(int width, int heigth) = 0;
 
     virtual void setPosition(int x, int y) = 0;
 
@@ -50,6 +40,8 @@ public:
 
     ~IText() = default;
 
+    virtual void create(std::string str) = 0;
+
     virtual void changeString(std::string str) = 0;
 };
 
@@ -64,6 +56,8 @@ public:
     };
 
     ~IGrid() = default;
+
+    virtual void create(int width, int heigth) = 0;
 
     virtual void updateCell(int x, int y, IEntity::Color) = 0;
 };

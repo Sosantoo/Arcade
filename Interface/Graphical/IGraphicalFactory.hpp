@@ -23,6 +23,4 @@ public:
     virtual std::unique_ptr<IWindow> createWindow(std::string name, size_t width, size_t height) = 0;
 
     virtual std::unique_ptr<IClock> createIClock() = 0;
-
-    virtual std::unique_ptr<IEntity> createIEntity(IEntity::EntityType) = 0;
 };
