@@ -54,7 +54,7 @@ add_custom_target(games
 ################################
 
 add_subdirectory(Graphicals/SDL2)
-# add_subdirectory(Graphicals/nCurses)
+add_subdirectory(Graphicals/nCurses)
 add_subdirectory(Graphicals/SFML)
 
 add_custom_target(graphicals
