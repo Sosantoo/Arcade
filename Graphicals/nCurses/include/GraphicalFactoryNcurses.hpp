@@ -17,13 +17,11 @@ private:
 public:
     void startClock() override {};
 
-    time_t getTimeElapsed() override {};
+    time_t getTimeElapsed() override { return 0; };
 
     void resetClock() override {};
 
     void initClock() override {};
-
-    IClock &getClock()override {};
 };
 
 class WindowNcurses: public IWindow {
@@ -57,16 +55,13 @@ class GridNcurses
 {
 public:
     //Entity
-    virtual void create() final {};
-
-    virtual void setSize(int width, int heigth) final {};
+    virtual void create(int width, int heigth) final {};
 
     virtual void setPosition(int x, int y) final {};
 
     virtual void destroy() final {};
 
     virtual void displayEntity() final {};
-
 
     virtual void updateCell(int x, int y, Color) final {};
 };
@@ -77,8 +72,6 @@ class TextNcurses
 public:
     //Entity
     virtual void create() final {};
-
-    virtual void setSize(int width, int heigth) final {};
 
     virtual void setPosition(int x, int y) final {};
 
@@ -99,5 +92,8 @@ public:
 
     std::unique_ptr<IWindow> createWindow(std::string name, size_t width, size_t height) final;
 
-    std::unique_ptr<IEntity> createIEntity(IEntity::EntityType type) final;
+    std::unique_ptr<IText> createIText() final;
+
+    std::unique_ptr<IGrid> createIGrid() final;
 };
+

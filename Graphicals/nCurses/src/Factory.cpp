@@ -25,12 +25,10 @@ std::unique_ptr<IWindow> GraphicalFactoryNcurses::createWindow(std::string name,
     return std::move(window);
 }
 
-std::unique_ptr<IEntity> GraphicalFactoryNcurses::createIEntity(IEntity::EntityType type) {
-    switch (type)
-    {
-    case IEntity::EntityType::GridEntity:
-        return std::make_unique<GridNcurses>();
-    case IEntity::EntityType::TextEntity:
-        return std::make_unique<TextNcurses>();
-    }
-};
+std::unique_ptr<IText> GraphicalFactoryNcurses::createIText() {
+    return std::make_unique<TextNcurses>();
+}
+
+std::unique_ptr<IGrid> GraphicalFactoryNcurses::createIGrid() {
+   return std::make_unique<GridNcurses>();
+}
