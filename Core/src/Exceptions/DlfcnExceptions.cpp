@@ -5,7 +5,7 @@
 ** WrapperExceptions
 */
 
-#include "arcade.hpp"
+#include "Exceptions/DlfcnExceptions.hpp"
 
 DlfcnExceptions::CannotOpenExceptions::CannotOpenExceptions(const std::string& errorMsgDetails)
     : BasicExceptionWithMessage("[dlfcn]", "Cannot Open: " + errorMsgDetails)

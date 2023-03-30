@@ -7,18 +7,21 @@
 
 #pragma once
 #include "../../Interface/AGame.hpp"
-#include "GameEngine.hpp"
 
-class AGameTest : public AGame<GameEngine> {
-private:
+class AGameTest : public AGame
+{
+    private:
+        void upKeyPress();
+        void downKeyPress();
+        void leftKeyPress();
+        void rightKeyPress();
+        IWindow::EventHandler gameEvent;
 
-public:
-    AGameTest(): AGame<GameEngine>() {};
-    ~AGameTest() {};
+    public:
+        AGameTest() = default;
+        ~AGameTest() = default;
 
-    virtual IEvent::EventHandler &getEventBinding() final;
-
-    virtual void processGameTick(IClock &clock) final;
-
-    virtual std::vector<IEntity> getEntity() final;
+        IWindow::EventHandler &getEventBinding() final;
+        bool processGameTick(IGrid &, IText &, IText &, IClock &) final;
+        void restart() final;
 };

@@ -5,21 +5,20 @@
 ** CoreExceptions
 */
 
-#ifndef COREEXCEPTIONS_HPP_
-    #define COREEXCEPTIONS_HPP_
-    #include "BasicExceptions.hpp"
+#pragma once
+#include "BasicExceptions.hpp"
 
 namespace CoreExceptions
 {
-    class RuntimeExceptions: public BasicExceptionWithMessage {
+    class RuntimeExceptions : public BasicExceptionWithMessage
+    {
         public:
-            RuntimeExceptions(const std::string&);
+            RuntimeExceptions(const std::string &);
     };
 
-    class LibUnknowExceptions: public BasicExceptionWithMessage {
+    class LibUnknowExceptions : public BasicExceptionWithMessage
+    {
         public:
-            LibUnknowExceptions(const std::string&);
+            LibUnknowExceptions(const std::string &);
     };
-}
-
-#endif /* !COREEXCEPTIONS_HPP_ */
+} // namespace CoreExceptions

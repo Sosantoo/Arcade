@@ -6,27 +6,33 @@
 */
 
 #pragma once
-#include "../../Interface/Game/IGames.hpp"
-#include "../../Interface/Graphical/IGraphicals.hpp"
+#include "../../Interface/Graphical/IGraphicalFactory.hpp"
+#include "../../Interface/Game/IGame.hpp"
+#include <stdexcept>
 
-template<typename GameEngine>
-class AGame: public IGame {
-protected:
-    IGraphical *_graphical;
-    GameEngine gameEngine;
+class AGame : public IGame
+{
+    public:
+        AGame() = default;
+        AGame(const AGame &) = delete;
+        AGame &operator=(const AGame &) = delete;
+        AGame(AGame &&) = delete;
+        AGame &operator=(AGame &&) = delete;
+        ~AGame() = default;
 
-public:
-    AGame() {};
-    AGame(const AGame&) = delete;
-    AGame& operator=(const AGame&) = delete;
-    AGame(AGame&&) = delete;
-    AGame& operator=(AGame&&) = delete;
-    ~AGame() {};
+        IWindow::EventHandler &getEventBinding() override
+        {
+            throw std::runtime_error("method not implemented: getEventBinding");
+        };
 
-    virtual IEvent::EventHandler &getEventBinding() override { throw std::runtime_error("method not implemented: stop"); };
+        bool processGameTick(IGrid &, IText &, IText &, IClock &) override
+        {
+            throw std::runtime_error("method not implemented: stop");
+            return true;
+        };
 
-    virtual void processGameTick(IClock &clock) override { (void)clock; throw std::runtime_error("method not implemented: stop"); };
-
-    virtual std::vector<IEntity> getEntity() override { throw std::runtime_error("method not implemented: stop"); };
-
+        void restart()
+        {
+            throw std::runtime_error("method not implemented: restart");
+        }
 };

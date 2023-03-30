@@ -5,7 +5,8 @@
 ** entryPoint
 */
 
-#include "snake.hpp"
+#include "AGameSnake.hpp"
+#include <iostream>
 
 void __attribute__((constructor)) calledFirst();
 void __attribute__((destructor)) calledLast();
@@ -19,7 +20,7 @@ void calledLast() {
 }
 
 extern "C" {
-    IGame *create() {
-        return new AGameSnake;
+    std::unique_ptr<IGame> create() {
+        return std::make_unique<AGameSnake>();
     }
 }

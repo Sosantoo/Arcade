@@ -6,9 +6,9 @@
 */
 
 #pragma once
-#include "../../Core/include/various.hpp"
+#include <string>
 
-class IGrid {
+class IEntity {
 public:
     enum class Color {
         Blue,
@@ -19,30 +19,45 @@ public:
         Yellow,
     };
 
-    struct {
-        Color color;
-        size_t x;
-        size_t y;
-    } Cell;
-
-    ~IGrid() = default;
-
-    virtual void createGrid() = 0;
-
-    virtual void updateCell() = 0;
-};
-
-class IEntity {
-public:
     ~IEntity() = default;
 
-    virtual void create() = 0;
-
-    virtual void setSize() = 0;
-
-    virtual void setPosition() = 0;
+    virtual void setPosition(int x, int y) = 0;
 
     virtual void destroy() = 0;
 
     virtual void displayEntity() = 0;
+};
+
+class IText
+    : public IEntity
+{
+public:
+    enum class EntityType {
+        GridEntity,
+        SpriteEntity,
+        TextEntity,
+    };
+
+    ~IText() = default;
+
+    virtual void create(std::string str) = 0;
+
+    virtual void changeString(std::string str) = 0;
+};
+
+class IGrid
+    : public IEntity
+{
+public:
+    struct Cell {
+        Color color;
+        size_t x;
+        size_t y;
+    };
+
+    ~IGrid() = default;
+
+    virtual void create(int width, int heigth) = 0;
+
+    virtual void updateCell(int x, int y, IEntity::Color) = 0;
 };

@@ -7,13 +7,11 @@
 
 #pragma once
 #include "../../Interface/AGame.hpp"
-#include "GameEngine.hpp"
 
-class AGameMenu : public AGame<GameEngine> {
-private:
-
-public:
-    AGameMenu(): AGame<GameEngine>() {};
-    AGameMenu(IGraphical &, IEvent::EventHandler &) {};
-    ~AGameMenu() {};
+class AGameMenu : public AGame
+{
+    private:
+    public:
+        AGameMenu() = default;
+        ~AGameMenu() = default;
 };

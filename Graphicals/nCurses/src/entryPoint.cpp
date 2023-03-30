@@ -5,22 +5,25 @@
 ** entryPoint
 */
 
-#include "ncurses.hpp"
+#include <memory>
+#include <iostream>
+#include "GraphicalFactoryNcurses.hpp"
 
 void __attribute__((constructor)) calledFirst();
 void __attribute__((destructor)) calledLast();
 
-void calledFirst() {
+void calledFirst()
+{
     std::cout << "[Ncurses] Loading" << '\n';
 }
 
-void calledLast() {
+void calledLast()
+{
     std::cout << "[Ncurses] UnLoading" << '\n';
 }
 
 extern "C" {
-    IGraphical *create() {
-        return new AGraphicalNcurses;
+    std::unique_ptr<IGraphicalFactory> create() {
+        return std::make_unique<GraphicalFactoryNcurses>();
     }
 }
-

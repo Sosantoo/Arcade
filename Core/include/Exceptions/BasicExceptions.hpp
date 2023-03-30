@@ -5,22 +5,19 @@
 ** BasicExceptions
 */
 
-#ifndef BASICEXCEPTIONS_HPP_
-    #define BASICEXCEPTIONS_HPP_
-    #include "../various.hpp"
+#pragma once
+#include <string>
 
- class BasicExceptionWithMessage: public std::exception {
+class BasicExceptionWithMessage : public std::exception
+{
     public:
-        BasicExceptionWithMessage(const std::string& errorAuthor, const std::string& errorMsg)
-            : _errorMsg("--!" + errorAuthor + " " + errorMsg) {}
-
-        virtual const char *what() const noexcept override {
-            return _errorMsg.c_str();
+        BasicExceptionWithMessage(const std::string &errorAuthor, const std::string &errorMsg)
+            : _errorMsg("--!" + errorAuthor + " " + errorMsg)
+        {
         }
+
+        [[nodiscard]] const char *what() const noexcept override { return _errorMsg.c_str(); }
 
     private:
         std::string _errorMsg;
 };
-
-
-#endif /* !BASICEXCEPTIONS_HPP_ */

@@ -5,21 +5,25 @@
 ** entryPoint
 */
 
-#include "test.hpp"
+#include "AGameTest.hpp"
+#include <memory>
+#include <iostream>
 
 void __attribute__((constructor)) calledFirst();
 void __attribute__((destructor)) calledLast();
 
-void calledFirst() {
+void calledFirst()
+{
     std::cout << "[GAME test] Loading" << '\n';
 }
 
-void calledLast() {
+void calledLast()
+{
     std::cout << "[GAME test] UnLoading" << '\n';
 }
 
 extern "C" {
-    IGame *create() {
-        return new AGameTest;
+    std::unique_ptr<IGame> create() {
+        return std::make_unique<AGameTest>();
     }
 }

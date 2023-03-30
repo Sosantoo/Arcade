@@ -6,20 +6,15 @@
 */
 
 #pragma once
-#include "../../Core/include/various.hpp"
+#include <bits/types/time_t.h>
 
-class IClock {
-public:
-    ~IClock() = default;
+class IClock
+{
+    public:
+        ~IClock() = default;
 
-    virtual void startClock() = 0;
-
-    virtual time_t getTimeElapsed() = 0;
-
-    virtual void resetClock() = 0;
-
-    virtual void initClock() = 0;
-
-    virtual IClock &getClock() = 0;
+        virtual void startClock() = 0;
+        virtual time_t getTimeElapsed() = 0;
+        virtual void resetClock() = 0;
+        virtual void initClock() = 0;
 };
-

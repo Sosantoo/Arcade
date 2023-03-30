@@ -5,16 +5,55 @@
 ** AGameTest
 */
 
-#include "test.hpp"
+#include "AGameTest.hpp"
+#include <iostream>
 
-IEvent::EventHandler &AGameTest::getEventBinding() {
-    return gameEngine.getEventBindings();
+IWindow::EventHandler &AGameTest::getEventBinding()
+{
+    return (gameEvent = {
+                {IWindow::EventType::UP_pressed,
+                 [this]() {
+                     this->upKeyPress();
+                 }},
+                {IWindow::EventType::DOWN_pressed,
+                 [this]() {
+                     this->downKeyPress();
+                 }},
+                {IWindow::EventType::LEFT_pressed,
+                 [this]() {
+                     this->leftKeyPress();
+                 }},
+                {IWindow::EventType::RIGHT_pressed,
+                 [this]() {
+                     this->rightKeyPress();
+                 }},
+            });
 };
 
-void AGameTest::processGameTick(IClock &clock) {
-    gameEngine.processGameTick(clock);
+void AGameTest::upKeyPress()
+{
+    std::cout << "[Game Engine] upKeyPress process" << std::endl;
 };
 
-std::vector<IEntity> AGameTest::getEntity() {
-    return {};
+void AGameTest::downKeyPress()
+{
+    std::cout << "[Game Engine] downKeyPress process" << std::endl;
+};
+
+void AGameTest::leftKeyPress()
+{
+    std::cout << "[Game Engine] leftKeyPress process" << std::endl;
+};
+
+void AGameTest::rightKeyPress()
+{
+    std::cout << "[Game Engine] rightKeyPress process" << std::endl;
+};
+
+bool AGameTest::processGameTick(IGrid &, IText &, IText &, IClock &) {
+    return true;
+};
+
+void AGameTest::restart()
+{
 };

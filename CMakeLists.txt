@@ -10,7 +10,6 @@ cmake_minimum_required(VERSION 3.5.1)
 project(arcade-cmake)
 
 set(CMAKE_CXX_STANDARD 17)
-add_compile_options(-Wall -Wextra -fno-gnu-unique)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_BUILD_TYPE Release)
 
@@ -25,6 +24,7 @@ file(GLOB_RECURSE SRC_FILES_CORE ${PROJECT_SOURCE_DIR}/Core/src/*.cpp)
 set(EXEC arcade)
 
 add_executable(${EXEC} ${SRC_FILES_CORE})
+target_compile_options(${EXEC} PRIVATE -Wall -Wextra -fno-gnu-unique -ggdb3)
 
 add_custom_target(core
     COMMAND ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR} --target arcade
@@ -55,10 +55,10 @@ add_custom_target(games
 
 add_subdirectory(Graphicals/SDL2)
 add_subdirectory(Graphicals/nCurses)
-# add_subdirectory(Graphicals/OpenGL)
+add_subdirectory(Graphicals/SFML)
 
 add_custom_target(graphicals
-    COMMAND ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR} --target arcade_sdl2 arcade_ncurses arcade_opengl
+    COMMAND ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR} --target arcade_sdl2 arcade_ncurses arcade_sfml
     DEPENDS arcade_nibbler arcade_snake arcade_menu
     COMMENT "Build the graphicals libraries"
     VERBATIM

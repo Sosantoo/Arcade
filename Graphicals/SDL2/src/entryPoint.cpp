@@ -5,21 +5,25 @@
 ** entryPoint
 */
 
-#include "sdl2.hpp"
+#include <memory>
+#include "GraphicalFactorySDL2.hpp"
+#include <iostream>
 
 void __attribute__((constructor)) calledFirst();
 void __attribute__((destructor)) calledLast();
 
-void calledFirst() {
+void calledFirst()
+{
     std::cout << "[sdl2] Loading" << '\n';
 }
 
-void calledLast() {
+void calledLast()
+{
     std::cout << "[sdl2] UnLoading" << '\n';
 }
 
 extern "C" {
-    IGraphical *create() {
-        return new AGraphicalSDL2;
+    std::unique_ptr<IGraphicalFactory> create() {
+        return std::make_unique<GraphicalFactorySDL2>();
     }
 }
