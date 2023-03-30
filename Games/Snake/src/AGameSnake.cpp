@@ -163,14 +163,13 @@ bool AGameSnake::processGameTick(IGrid &grid, IText &score, IText &time, IClock 
     displayBoard(grid);
     moveAllSnake();
 
-    if (gameOver)
-        restart();
+    // if (gameOver)
+    //     restart();
     return gameOver;
 };
 
 void AGameSnake::restart()
 {
-    std::cout << "[SNAKE] GAME OVER" << std::endl;
     width = 50;
     height = 50;
     gameOver = false;
