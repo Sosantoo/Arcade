@@ -22,17 +22,17 @@ class AGame : public IGame
 
         IWindow::EventHandler &getEventBinding() override
         {
-            throw std::runtime_error("method not implemented: stop");
+            throw std::runtime_error("method not implemented: getEventBinding");
         };
 
-        void processGameTick(IClock &clock) override
+        bool processGameTick(IGrid &, IText &, IText &, IClock &) override
         {
-            (void)clock;
             throw std::runtime_error("method not implemented: stop");
+            return true;
         };
 
-        std::vector<IEntity> getEntity() override
+        void restart()
         {
-            throw std::runtime_error("method not implemented: stop");
-        };
+            throw std::runtime_error("method not implemented: restart");
+        }
 };

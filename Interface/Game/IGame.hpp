@@ -14,7 +14,7 @@ class IGame {
 
         virtual IWindow::EventHandler &getEventBinding() = 0;
 
-        virtual void processGameTick(IClock &) = 0;
+        virtual bool processGameTick(IGrid &, IText &, IText &, IClock &) = 0;
 
-        virtual std::vector<IEntity> getEntity() = 0;
+        virtual void restart() = 0;
 };

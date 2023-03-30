@@ -8,32 +8,51 @@
 #pragma once
 #include "../../Interface/AGame.hpp"
 #include <curses.h>
+#define INITIAL_LENGTH 3;
+
+
 
 class AGameSnake : public AGame
 {
     private:
+        int width = 50;
+        int height = 50;
+        const char empty = ' ';
+        const char wall = 'W';
+        const char snake = '#';
+        const char food = '*';
+        const int initialLength = 3;
+        bool gameOver = false;
+        int dx = 1; // horizontal movement direction
+        int dy = 0; // vertical movement direction
+        int score = 0;
+        int foodX = 0;
+        int foodY = 0;
+
+        std::vector<std::vector<char>> _board;
+        std::vector<std::pair<int, int>> _snakeCoords;
+
+        void generateFood();
+        void clearBoard();
+        void drawnSnake();
+        void drawnFood();
+        void displayBoard(IGrid &);
+        void moveAllSnake();
+
         IWindow::EventHandler gameEvent;
 
         void upKeyPress();
         void downKeyPress();
         void leftKeyPress();
         void rightKeyPress();
-        struct SnakePos {
-                std::array<int, 101> x;
-                std::array<int, 101> y;
-                int size;
-        };
-        SnakePos snake_pos = {{0}, {0}, 0};
-        void displaySnake(WINDOW *win, const SnakePos &snake);
-        void displayGameOver(WINDOW *win, int score);
-        bool checkGameStatus(const SnakePos &snake, int, int height);
-        void updateSnakePosition(SnakePos &snake, int &stock_x, int &stock_y, int ch);
+
+
 
     public:
-        AGameSnake() = default;
+        AGameSnake();
         AGameSnake(IGraphicalFactory &, IWindow::EventHandler &){};
         ~AGameSnake() = default;
         IWindow::EventHandler &getEventBinding() override;
-        void processGameTick(IClock &clock) override;
-        std::vector<IEntity> getEntity() override;
+        bool processGameTick(IGrid &, IText &, IText &, IClock &) override;
+        void restart() override;
 };

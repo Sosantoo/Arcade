@@ -22,6 +22,6 @@ class AGameTest : public AGame
         ~AGameTest() = default;
 
         IWindow::EventHandler &getEventBinding() final;
-        void processGameTick(IClock &clock) final;
-        std::vector<IEntity> getEntity() final;
+        bool processGameTick(IGrid &, IText &, IText &, IClock &) final;
+        void restart() final;
 };

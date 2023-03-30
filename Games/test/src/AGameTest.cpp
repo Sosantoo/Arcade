@@ -50,11 +50,10 @@ void AGameTest::rightKeyPress()
     std::cout << "[Game Engine] rightKeyPress process" << std::endl;
 };
 
-void AGameTest::processGameTick(IClock &clock){
+bool AGameTest::processGameTick(IGrid &, IText &, IText &, IClock &) {
+    return true;
 };
 
-std::vector<IEntity> AGameTest::getEntity()
+void AGameTest::restart()
 {
-
-    return {};
 };
