@@ -11,16 +11,17 @@
 void WindowNcurses::initWindow(std::string name, size_t width, size_t height)
 {
     std::cout << "[nCurses] initWindow" << std::endl;
+    std::cout.setstate(std::ios_base::failbit);
     initscr();
     cbreak();
     noecho();
 
     getmaxyx(stdscr, yMax, xMax);
-    window = newwin(15, xMax -100, yMax /2, 30);
-    box(window, 0, 0);
+    _window = newwin(height, width, yMax / 2, xMax / 2);
+    box(_window, 0, 0);
     refresh();
-    wrefresh(window);
-    keypad(window, TRUE);
+    wrefresh(_window);
+    nodelay(_window, TRUE);
     isOpen = true;
 };
 
@@ -43,30 +44,30 @@ void WindowNcurses::clear()
 
 void WindowNcurses::display()
 {
-    mvwprintw(window, 1, xMax / 3 - 15, "Arcade");
+    // mvwprintw(_window, 1, xMax / 3 - 15, "Arcade");
 };
 
 void WindowNcurses::eventPollEvent()
 {
-    int key = wgetch(window);
+    int key = wgetch(_window);
 
     switch (key) {
     case -1:
         return;
-    case KEY_UP:
     case 'z':
+    case KEY_UP:
         return callEvent(IWindow::EventType::UP_pressed);
 
-    case KEY_DOWN:
     case 's':
+    case KEY_DOWN:
         return callEvent(IWindow::EventType::DOWN_pressed);
 
-    case KEY_LEFT:
     case 'q':
+    case KEY_LEFT:
         return callEvent(IWindow::EventType::LEFT_pressed);
 
-    case KEY_RIGHT:
     case 'd':
+    case KEY_RIGHT:
         return callEvent(IWindow::EventType::RIGHT_pressed);
 
     case 'n':
@@ -90,3 +91,11 @@ void WindowNcurses::callEvent(const IWindow::EventType eventType) {
 void WindowNcurses::loadEventBindings(EventHandler &eventBinding) {
     _eventBinding.insert(eventBinding.begin(), eventBinding.end());
 };
+
+std::unique_ptr<IText> WindowNcurses::createIText() {
+    return std::make_unique<TextNcurses>(_window);
+}
+
+std::unique_ptr<IGrid> WindowNcurses::createIGrid() {
+   return std::make_unique<GridNcurses>(_window);
+}

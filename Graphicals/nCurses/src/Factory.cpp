@@ -24,11 +24,3 @@ std::unique_ptr<IWindow> GraphicalFactoryNcurses::createWindow(std::string name,
     window->initWindow(name, width, height);
     return std::move(window);
 }
-
-std::unique_ptr<IText> GraphicalFactoryNcurses::createIText() {
-    return std::make_unique<TextNcurses>();
-}
-
-std::unique_ptr<IGrid> GraphicalFactoryNcurses::createIGrid() {
-   return std::make_unique<GridNcurses>();
-}

@@ -27,7 +27,7 @@ public:
 class WindowNcurses: public IWindow {
 private:
     IWindow::EventHandler _eventBinding;
-    WINDOW *window;
+    WINDOW *_window;
     bool isOpen;
     int xMax;
     int yMax;
@@ -48,30 +48,49 @@ public:
     void loadEventBindings(EventHandler &) final;
 
     void eventPollEvent() final;
+
+    std::unique_ptr<IText> createIText() final;
+
+    std::unique_ptr<IGrid> createIGrid() final;
 };
 
 class GridNcurses
     : public IGrid
 {
+private:
+    WINDOW *_window;
+    int _gridRow;
+    int _gridColumn;
+    int colorBackGround;
+    void setColorPair(int colorPair, int foregroundColor, int backgroundColor);
+    void setColor(int x, int y, int color);
+
 public:
+    GridNcurses(WINDOW *window) : _window{window} {};
+    ~GridNcurses() {};
     //Entity
-    virtual void create(int width, int heigth) final {};
+    virtual void create(int width, int heigth) final;
 
     virtual void setPosition(int x, int y) final {};
 
-    virtual void destroy() final {};
+    virtual void destroy() final;
 
-    virtual void displayEntity() final {};
+    virtual void displayEntity() final;
 
-    virtual void updateCell(int x, int y, Color) final {};
+    virtual void updateCell(int x, int y, Color) final;
 };
 
 class TextNcurses
     : public IText
 {
+private:
+    WINDOW *_window;
+
 public:
+    TextNcurses(WINDOW *window) : _window{window} {};
+    ~TextNcurses() {};
     //Entity
-    virtual void create() final {};
+    virtual void create(std::string) final {};
 
     virtual void setPosition(int x, int y) final {};
 
@@ -79,7 +98,7 @@ public:
 
     virtual void displayEntity() final {};
 
-    virtual void changeString(std::string str) final {};
+    virtual void changeString(std::string) final {};
 };
 
 class GraphicalFactoryNcurses: public IGraphicalFactory {
@@ -91,9 +110,5 @@ public:
     std::unique_ptr<IClock> createIClock() final;
 
     std::unique_ptr<IWindow> createWindow(std::string name, size_t width, size_t height) final;
-
-    std::unique_ptr<IText> createIText() final;
-
-    std::unique_ptr<IGrid> createIGrid() final;
 };
 
