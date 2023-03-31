@@ -13,7 +13,6 @@
 
 class GameLib {
 private:
-    std::unique_ptr<IGame> _previousLib;
     LibHandler<IGame> _currentLib;
 
 public:
