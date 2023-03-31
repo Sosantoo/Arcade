@@ -15,14 +15,14 @@
 class AGameSnake : public AGame
 {
     private:
-        int width = 50;
-        int height = 50;
+        int width;
+        int height;
         const char empty = ' ';
         const char wall = 'W';
         const char snake = '#';
         const char food = '*';
-        const int initialLength = 3;
-        bool gameOver = false;
+        const int initialLength = 10;
+        bool gameOver;
         int dx = 1; // horizontal movement direction
         int dy = 0; // vertical movement direction
         int score = 0;
