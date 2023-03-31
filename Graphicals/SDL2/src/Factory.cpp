@@ -27,5 +27,5 @@ std::unique_ptr<IClock> GraphicalFactorySDL2::createIClock() {
 std::unique_ptr<IWindow> GraphicalFactorySDL2::createWindow(std::string name, size_t width, size_t height) {
     auto window = std::make_unique<WindowSDL2>();
     window->initWindow(name, width, height);
-    return std::move(window);
+    return window;
 }
