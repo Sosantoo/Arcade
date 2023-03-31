@@ -50,7 +50,7 @@ void WindowSDL2::eventPollEvent()
         switch (event.type )
         {
         case SDL_QUIT:
-            callEvent(IWindow::EventType::QUIT);
+            return callEvent(IWindow::EventType::QUIT);
             break;
         case SDL_KEYDOWN:
             switch (event.key.keysym.sym) {

@@ -18,13 +18,15 @@ target_sources(arcade_sdl2
         ${SRC_FILES}
 )
 
+
 # Add the include directories for the library
 target_include_directories(arcade_sdl2
     PUBLIC
         include
         ${SDL2_INCLUDE_DIRS}
 )
-target_compile_options(arcade_sdl2 PRIVATE -ggdb3)
+
+target_compile_options(arcade_sdl2 PRIVATE -Wall -Wextra -fno-gnu-unique -ggdb3)
 
 target_link_libraries(arcade_sdl2 ${SDL2_LIBRARIES})
 

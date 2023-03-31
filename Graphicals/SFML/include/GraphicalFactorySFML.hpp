@@ -104,6 +104,9 @@ public:
 
 class GraphicalFactorySFML: public IGraphicalFactory {
 public:
+    GraphicalFactorySFML() {std::cout << "\tGraphicalFactorySFML instance create;" << std::endl; };
+    ~GraphicalFactorySFML() {std::cout << "\tGraphicalFactorySFML instance destroy;" << std::endl;};
+
     void loadResource() final;
 
     void destroyRessource() final;

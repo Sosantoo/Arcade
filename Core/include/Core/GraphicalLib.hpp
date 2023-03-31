@@ -12,7 +12,6 @@
 
 class GraphicalLib {
 private:
-    std::unique_ptr<IGraphicalFactory> _previousLib;
     LibHandler<IGraphicalFactory> _currentLib;
     std::unique_ptr<IWindow> _window;
     std::unique_ptr<IClock> _clock;
@@ -33,8 +32,5 @@ public:
     IGrid& getGrid();
     IText& getScore();
     IText& getTime();
-
-    void test();
-    void test2();
 
 };
