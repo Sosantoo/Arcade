@@ -37,33 +37,41 @@ void WindowSFML::display()
    _window->display();
 };
 
+bool isPressed(std::vector<sf::Keyboard::Key> keys) {
+    for (auto &key : keys) {
+        if (sf::Keyboard::isKeyPressed(key))
+            return true;
+    }
+    return false;
+}
+
 void WindowSFML::eventPollEvent()
 {
 
     while (_window->pollEvent(event)) {
         switch (event.type) {
             case (sf::Event::Closed):
-                callEvent(EventType::QUIT);
+                return callEvent(EventType::QUIT);
             default: break;
         }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::N))
-            callEvent(EventType::NEXT_LIB);
-        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::F2))
-            callEvent(EventType::NEXT_GAME);
-        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::F3))
-            callEvent(EventType::RESTART);
-        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::F4))
-            callEvent(EventType::GO_TO_MENU);
-        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::F5))
-            callEvent(EventType::QUIT);
-        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-            callEvent(EventType::LEFT_pressed);
-        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-            callEvent(EventType::RIGHT_pressed);
-        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-            callEvent(EventType::UP_pressed);
-         else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-            callEvent(EventType::DOWN_pressed);
+        if (isPressed({sf::Keyboard::N}))
+            return callEvent(EventType::NEXT_LIB);
+        else if (isPressed({sf::Keyboard::F2}))
+            return callEvent(EventType::NEXT_GAME);
+        else if (isPressed({sf::Keyboard::F3}))
+            return callEvent(EventType::RESTART);
+        else if (isPressed({sf::Keyboard::F4}))
+            return callEvent(EventType::GO_TO_MENU);
+        else if (isPressed({sf::Keyboard::F5}))
+            return callEvent(EventType::QUIT);
+        else if (isPressed({sf::Keyboard::Left, sf::Keyboard::Q}))
+            return callEvent(EventType::LEFT_pressed);
+        else if (isPressed({sf::Keyboard::Right, sf::Keyboard::D}))
+            return callEvent(EventType::RIGHT_pressed);
+        else if (isPressed({sf::Keyboard::Up, sf::Keyboard::Z}))
+            return callEvent(EventType::UP_pressed);
+         else if (isPressed({sf::Keyboard::Down, sf::Keyboard::S}))
+            return callEvent(EventType::DOWN_pressed);
     }
 };
 
