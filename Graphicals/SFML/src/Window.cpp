@@ -37,7 +37,7 @@ void WindowSFML::display()
    _window->display();
 };
 
-bool isPressed(std::vector<sf::Keyboard::Key> keys) {
+bool isAnyKeyPressed(std::vector<sf::Keyboard::Key> keys) {
     for (auto &key : keys) {
         if (sf::Keyboard::isKeyPressed(key))
             return true;
@@ -54,24 +54,30 @@ void WindowSFML::eventPollEvent()
                 return callEvent(EventType::QUIT);
             default: break;
         }
-        if (isPressed({sf::Keyboard::N}))
-            return callEvent(EventType::NEXT_LIB);
-        else if (isPressed({sf::Keyboard::F2}))
-            return callEvent(EventType::NEXT_GAME);
-        else if (isPressed({sf::Keyboard::F3}))
-            return callEvent(EventType::RESTART);
-        else if (isPressed({sf::Keyboard::F4}))
-            return callEvent(EventType::GO_TO_MENU);
-        else if (isPressed({sf::Keyboard::F5}))
-            return callEvent(EventType::QUIT);
-        else if (isPressed({sf::Keyboard::Left, sf::Keyboard::Q}))
+
+        if (isAnyKeyPressed({sf::Keyboard::Left, sf::Keyboard::Q}))
             return callEvent(EventType::LEFT_pressed);
-        else if (isPressed({sf::Keyboard::Right, sf::Keyboard::D}))
+        else if (isAnyKeyPressed({sf::Keyboard::Right, sf::Keyboard::D}))
             return callEvent(EventType::RIGHT_pressed);
-        else if (isPressed({sf::Keyboard::Up, sf::Keyboard::Z}))
+        else if (isAnyKeyPressed({sf::Keyboard::Up, sf::Keyboard::Z}))
             return callEvent(EventType::UP_pressed);
-         else if (isPressed({sf::Keyboard::Down, sf::Keyboard::S}))
+        else if (isAnyKeyPressed({sf::Keyboard::Down, sf::Keyboard::S}))
             return callEvent(EventType::DOWN_pressed);
+
+        else if (isAnyKeyPressed({sf::Keyboard::F1}))
+            return callEvent(EventType::NEXT_LIB);
+
+        else if (isAnyKeyPressed({sf::Keyboard::F2}))
+            return callEvent(EventType::NEXT_GAME);
+
+        else if (isAnyKeyPressed({sf::Keyboard::F3}))
+            return callEvent(EventType::RESTART);
+
+        else if (isAnyKeyPressed({sf::Keyboard::F4}))
+            return callEvent(EventType::GO_TO_MENU);
+
+        else if (isAnyKeyPressed({sf::Keyboard::F5}))
+            return callEvent(EventType::QUIT);
     }
 };
 
