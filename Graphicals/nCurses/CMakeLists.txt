@@ -23,6 +23,8 @@ target_include_directories(arcade_ncurses
         include
 )
 
+target_compile_options(arcade_ncurses PRIVATE -Wall -Wextra -fno-gnu-unique -ggdb3)
+
 target_link_libraries(arcade_ncurses ${CURSES_LIBRARIES})
 
 # Set the output directory for the library
