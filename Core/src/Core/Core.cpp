@@ -8,6 +8,7 @@
 #include "Core/Core.hpp"
 #include "Exceptions/Exceptions.hpp"
 #include <iostream>
+#include <unistd.h>
 
 Core::Core::Core(const std::string &SharedLibPath)
     : _LibFileManager{LibFileManager(SharedLibPath)}
@@ -26,6 +27,7 @@ void Core::Core::init(const std::string GraphicalsLibPath, const std::string Gam
     }
     _game.load(_LibFileManager.getLibBypath(GameLibPath));
     _graphical.load(_LibFileManager.getLibBypath(GraphicalsLibPath));
+    bindEvents();
 }
 
 void Core::Core::bindEvents() {
@@ -49,7 +51,6 @@ void Core::Core::bindEvents() {
 
 void Core::Core::launchGame() {
     bool gameOver = false;
-    bindEvents();
 
     while(_graphical.getWindowInterface().windowIsOpen() && !gameOver) {
         _graphical.getWindowInterface().eventPollEvent();

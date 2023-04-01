@@ -10,21 +10,19 @@
 #include <iostream>
 
 void Core::Core::nextGraphicsLibrary() {
-    _graphical.test();
-    // _graphical.getWindowInterface().closeWindow();
-    // _graphical.getInterface().destroyRessource();
+    _graphical.getWindowInterface().closeWindow();
+    _graphical.getInterface().destroyRessource();
 
-    // _graphical._libDetails = _LibFileManager.getNextGraphicalsLib(_graphical._libDetails);
-    // _graphical.load(_graphical._libDetails);
-    // bindEvents();
-    std::cout << "nop" << std::endl;
+    _graphical._libDetails = _LibFileManager.getNextGraphicalsLib(_graphical._libDetails);
+    _graphical.load(_graphical._libDetails);
+    bindEvents();
+    std::cout << "[CORE] " << _graphical._libDetails.name << " lib loaded" << std::endl;
 }
 
 void Core::Core::nextGameLibrary() {
-    _graphical.test2();
-    // _game._libDetails = _LibFileManager.getNextGameLib(_game._libDetails);
-    // _game.load(_game._libDetails);
-    // bindEvents();
+    _game._libDetails = _LibFileManager.getNextGameLib(_game._libDetails);
+    _game.load(_game._libDetails);
+    bindEvents();
     std::cout << "nop" << std::endl;
 }
 

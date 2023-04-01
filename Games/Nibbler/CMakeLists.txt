@@ -20,7 +20,8 @@ target_include_directories(arcade_nibbler
         include
         ${CMAKE_CURRENT_SOURCE_DIR}/../Interface/include
 )
-target_compile_options(arcade_nibbler PRIVATE -ggdb3)
+
+target_compile_options(arcade_nibbler PRIVATE -Wall -Wextra -fno-gnu-unique -ggdb3)
 
 # target_link_libraries(arcade_nibbler AGameLib)
 

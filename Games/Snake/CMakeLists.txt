@@ -22,6 +22,7 @@ target_include_directories(arcade_snake
 )
 
 # target_link_libraries(arcade_snake AGameLib)
+target_compile_options(arcade_snake PRIVATE -Wall -Wextra -fno-gnu-unique -ggdb3)
 
 # Set the output directory for the library
 set_target_properties(arcade_snake

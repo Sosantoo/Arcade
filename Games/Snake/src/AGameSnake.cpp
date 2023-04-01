@@ -17,21 +17,19 @@ int random(int min, int max) {
 }
 
 AGameSnake::AGameSnake()
-    : _board(height, std::vector<char>(width, empty))
+    : width{50}
+    , height{50}
+    , gameOver{false}
+    , score{0}
+    , foodX{0}
+    , foodY{0}
+    , _board(height, std::vector<char>(width, empty))
 {
     srand(time(nullptr));
     for (int i = 0; i < initialLength; i++) {
         _snakeCoords.push_back(std::make_pair(width / 2 + i, height / 2));
     }
     generateFood();
-    width = 50;
-    height = 50;
-    gameOver = false;
-    dx = 1;
-    dy = 0;
-    score = 0;
-    foodX = 0;
-    foodY = 0;
 }
 
 void AGameSnake::upKeyPress()
@@ -83,12 +81,16 @@ IWindow::EventHandler &AGameSnake::getEventBinding()
                  [this]() {
                      this->rightKeyPress();
                  }},
+                 {IWindow::EventType::RESTART,
+                 [this]() {
+                    this->restart();
+                 }},
             });
 }
 
 void AGameSnake::generateFood() {
-    foodX = random(1, width - 1);
-    foodY = random(1, height - 1);
+    foodX = random(1, width - 2);
+    foodY = random(1, height - 2);
 }
 
 void AGameSnake::clearBoard() {
@@ -109,17 +111,12 @@ void AGameSnake::drawnSnake() {
         if (x - 1 < 0 || x >= width - 1 || y - 1 < 0 || y >= height - 1) {
             // snake has gone out of bounds, game over
             gameOver = true;
-        // } else if (_board[y][x] == snake) {
-        //     // snake has collided with itself, game over
-        //     std::cout << " snake collided with itself" << std::endl;
-        //     gameOver = true;
         } else if (x == foodX && y == foodY) {
-            // snake has eaten the food
             score++;
             _snakeCoords.push_back(_snakeCoords.back());
-            foodX = random(0, width - 1);
-            foodY = random(0, height - 1);
+
             generateFood();
+            return;
         } else {
             _board[y][x] = snake;
         }
@@ -131,8 +128,6 @@ void AGameSnake::drawnFood() {
 }
 
 void AGameSnake::displayBoard(IGrid &grid) {
-    IEntity::Color color;
-
     for (int y = 0; y < height; y++) {
         for (int x = 0; x < width; x++) {
             if (_board[y][x] == empty)
@@ -152,6 +147,11 @@ void AGameSnake::moveAllSnake() {
     int headY = _snakeCoords.back().second;
     headX += dx;
     headY += dy;
+
+    if (_board[headY][headX] == snake) {
+        printf("%d %d %d %d\n", headY, headX, foodX, foodY);
+        gameOver = true;
+    } 
     _snakeCoords.erase(_snakeCoords.begin());// remove the tail segment
     _snakeCoords.push_back(std::make_pair(headX, headY)); // add the new head segment
 }
@@ -163,19 +163,20 @@ bool AGameSnake::processGameTick(IGrid &grid, IText &score, IText &time, IClock 
     displayBoard(grid);
     moveAllSnake();
 
-    // if (gameOver)
-    //     restart();
-    return gameOver;
+    if (gameOver)
+        restart();
+    return false;
 };
 
 void AGameSnake::restart()
 {
-    width = 50;
-    height = 50;
     gameOver = false;
     dx = 1;
     dy = 0;
     score = 0;
-    foodX = 0;
-    foodY = 0;
+    _snakeCoords.clear();
+    for (int i = 0; i < initialLength; i++) {
+        _snakeCoords.push_back(std::make_pair(width / 2 + i, height / 2));
+    }
+    generateFood();
 }

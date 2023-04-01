@@ -105,6 +105,9 @@ public:
 
 class GraphicalFactorySDL2: public IGraphicalFactory {
 public:
+    GraphicalFactorySDL2() {std::cout << "\tGraphicalFactorySDL2 instance create;" << std::endl; };
+    ~GraphicalFactorySDL2() {std::cout << "\tGraphicalFactorySDL2 instance destroy;" << std::endl;};
+
     void loadResource() final;
 
     void destroyRessource() final;

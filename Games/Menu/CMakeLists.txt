@@ -22,7 +22,7 @@ target_include_directories(arcade_menu
         ${CMAKE_CURRENT_SOURCE_DIR}/../Interface/include
 )
 
-# target_link_libraries(arcade_menu AGameLib)
+target_compile_options(arcade_menu PRIVATE -Wall -Wextra -fno-gnu-unique -ggdb3)
 
 # Set the output directory for the library
 set_target_properties(arcade_menu

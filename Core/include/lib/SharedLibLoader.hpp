@@ -8,21 +8,22 @@
 #pragma once
 #include <dlfcn.h>
 #include <memory>
+#include <vector>
 
 class SharedLibLoader {
-    protected:
+    private:
         using CloseFunc = int (*)(void*);
         std::unique_ptr<void, CloseFunc> _Handle;
+        std::vector<std::unique_ptr<void, CloseFunc>> _Handles;
 
     public:
         SharedLibLoader();
-        SharedLibLoader(const std::string &, int = RTLD_LAZY);
+        SharedLibLoader(const std::string &, int = RTLD_NOW);
         ~SharedLibLoader();
 
-        void open(const std::string &, int = RTLD_LAZY);
+        void open(const std::string &, int = RTLD_NOW);
         void close();
         std::string error() const;
         void *sym(const std::string &);
         bool isLibLoaded() const;
 };
-

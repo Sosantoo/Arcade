@@ -25,6 +25,8 @@ target_include_directories(arcade_sfml
         ${SFML_INCLUDE_DIRS}
 )
 
+target_compile_options(arcade_sfml PRIVATE -Wall -Wextra -fno-gnu-unique -ggdb3)
+
 target_link_libraries(arcade_sfml
     PRIVATE
         ${SFML_LIBRARIES}
