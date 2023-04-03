@@ -70,8 +70,16 @@ void WindowNcurses::eventPollEvent()
     case KEY_RIGHT:
         return callEvent(IWindow::EventType::RIGHT_pressed);
 
-    case 'n':
-    return callEvent(IWindow::EventType::NEXT_LIB);
+    case 'y':
+        return callEvent(IWindow::EventType::NEXT_LIB);
+    case 'u':
+        return callEvent(IWindow::EventType::NEXT_GAME);
+    case 'i':
+        return callEvent(IWindow::EventType::RESTART);
+    case 'o':
+        return callEvent(IWindow::EventType::GO_TO_MENU);
+    case 'p':
+        return callEvent(IWindow::EventType::QUIT);
 
     case 27:
         return callEvent(IWindow::IWindow::EventType::QUIT);

@@ -38,19 +38,17 @@ void GraphicalLib::load(Lib::lib libDetails) {
 
     _currentLib.getInterface().loadResource();
     _window = _currentLib.getInterface().createWindow("arcade" + libDetails.name, 800, 800);
+    _clock = _currentLib.getInterface().createIClock();
     _grid = _window->createIGrid();
     _score = _window->createIText();
     _time = _window->createIText();
 
     _grid->create(50, 50);
-    _score->create("test");
-    _time->create("test");
-}
+    _score->create("Score: ");
+    _score->setPosition(30, 90);
 
-void GraphicalLib::display() {
-    _grid->displayEntity();
-    _score->displayEntity();
-    _time->displayEntity();
+    _time->create("Time: ");
+    _score->setPosition(30, 30);
 }
 
 IGraphicalFactory& GraphicalLib::getInterface() {

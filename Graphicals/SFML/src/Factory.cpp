@@ -26,5 +26,5 @@ std::unique_ptr<IClock> GraphicalFactorySFML::createIClock() {
 std::unique_ptr<IWindow> GraphicalFactorySFML::createWindow(std::string name, size_t width, size_t height) {
     auto window = std::make_unique<WindowSFML>();
     window->initWindow(name, width, height);
-    return std::move(window);
+    return window;
 }

@@ -53,9 +53,8 @@ void Core::Core::launchGame() {
     bool gameOver = false;
 
     while(_graphical.getWindowInterface().windowIsOpen() && !gameOver) {
-        _graphical.getWindowInterface().eventPollEvent();
         _graphical.getWindowInterface().clear();
-        _graphical.display();
+        _graphical.getWindowInterface().eventPollEvent();
         gameOver = _game.getInterface().processGameTick(
             _graphical.getGrid(),
             _graphical.getScore(),

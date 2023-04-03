@@ -5,18 +5,17 @@
 ** Game
 */
 
-#include "AGameSnake.hpp"
+#include "AGameNibbler.hpp"
 #include <iostream>
 #include <vector>
 #include <cstdlib>
 #include <bits/stdc++.h>
 
-// function to generate a random integer within a given range
 int random(int min, int max) {
     return min + (rand() % (max - min + 1));
 }
 
-AGameSnake::AGameSnake()
+AGameNibbler::AGameNibbler()
     : width{50}
     , height{50}
     , gameOver{false}
@@ -34,7 +33,7 @@ AGameSnake::AGameSnake()
     generateFood();
 }
 
-void AGameSnake::upKeyPress()
+void AGameNibbler::upKeyPress()
 {
     std::cout << "[Game Engine] upKeyPress process" << std::endl;
     if (dy == -1)
@@ -43,28 +42,28 @@ void AGameSnake::upKeyPress()
     dx = 0;
 };
 
-void AGameSnake::downKeyPress()
+void AGameNibbler::downKeyPress()
 {
     std::cout << "[Game Engine] downKeyPress process" << std::endl;
     dy = dy != 0 ? dy : 1;
     dx = 0;
 };
 
-void AGameSnake::leftKeyPress()
+void AGameNibbler::leftKeyPress()
 {
     std::cout << "[Game Engine] leftKeyPress process" << std::endl;
     dx = dx != 0 ? dx : -1;
     dy = 0;
 };
 
-void AGameSnake::rightKeyPress()
+void AGameNibbler::rightKeyPress()
 {
     std::cout << "[Game Engine] rightKeyPress process" << std::endl;
     dx = dx != 0 ? dx : 1;
     dy = 0;
 };
 
-IWindow::EventHandler &AGameSnake::getEventBinding()
+IWindow::EventHandler &AGameNibbler::getEventBinding()
 {
     return (gameEvent = {
                 {IWindow::EventType::UP_pressed,
@@ -90,12 +89,12 @@ IWindow::EventHandler &AGameSnake::getEventBinding()
             });
 }
 
-void AGameSnake::generateFood() {
+void AGameNibbler::generateFood() {
     foodX = random(1, width - 2);
     foodY = random(1, height - 2);
 }
 
-void AGameSnake::clearBoard() {
+void AGameNibbler::clearBoard() {
     for (int y = 0; y < height; y++) {
         for (int x = 0; x < width; x++) {
             if (y == 0 || x == 0 || y == width - 1 || x == width - 1)
@@ -106,7 +105,7 @@ void AGameSnake::clearBoard() {
     }
 }
 
-void AGameSnake::drawnSnake() {
+void AGameNibbler::drawnSnake() {
     for (auto& coord : _snakeCoords) {
         auto [x, y] = coord;
 
@@ -125,11 +124,11 @@ void AGameSnake::drawnSnake() {
     }
 }
 
-void AGameSnake::drawnFood() {
+void AGameNibbler::drawnFood() {
     _board[foodY][foodX] = food;
 }
 
-void AGameSnake::displayBoard(IGrid &grid) {
+void AGameNibbler::displayBoard(IGrid &grid) {
     for (int y = 0; y < height; y++) {
         for (int x = 0; x < width; x++) {
             if (_board[y][x] == empty)
@@ -144,7 +143,7 @@ void AGameSnake::displayBoard(IGrid &grid) {
     }
 }
 
-void AGameSnake::moveAllSnake() {
+void AGameNibbler::moveAllSnake() {
     if (gameOver)
         return;
     int headX = _snakeCoords.back().first;
@@ -158,17 +157,16 @@ void AGameSnake::moveAllSnake() {
     _snakeCoords.push_back(std::make_pair(headX, headY)); // add the new head segment
 }
 
-void AGameSnake::displayGraphicalInfo(IText& scoreText, IText& timeText) {
+void AGameNibbler::displayGraphicalInfo(IText &scoreText, IText &timeText) {
     scoreText.changeString("Score: " + std::to_string(_score));
     scoreText.displayEntity();
 
-    int duration = std::floor((std::clock() - _clock) / static_cast<int>(CLOCKS_PER_SEC));
-    timeText.changeString("Time: " + std::to_string(duration));
+    double duration = ( std::clock() - _clock ) / (double) CLOCKS_PER_SEC;
+    timeText.changeString("Time: " + std::to_string(std::floor(duration)));
     timeText.displayEntity();
 }
 
-
-bool AGameSnake::processGameTick(IGrid &grid, IText &scoreText, IText &timeText, IClock &clock) {
+bool AGameNibbler::processGameTick(IGrid &grid, IText &scoreText, IText &timeText, IClock &clock) {
     clearBoard();
     drawnSnake();
     drawnFood();
@@ -185,7 +183,7 @@ bool AGameSnake::processGameTick(IGrid &grid, IText &scoreText, IText &timeText,
     return false;
 };
 
-void AGameSnake::restart()
+void AGameNibbler::restart()
 {
     gameOver = false;
     dx = 1;
