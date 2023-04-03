@@ -15,12 +15,34 @@ class IGraphicalFactory {
 public:
     ~IGraphicalFactory() = default;
 
+    /**
+     * @brief
+     *
+     */
     virtual void loadResource() = 0;
 
+    /**
+     * @brief
+     *
+     */
     virtual void destroyRessource() = 0;
 
-    //factory
+    /**
+     * @brief Create a Window object
+     *
+     * @param name
+     * @param width
+     * @param height
+     * @return std::unique_ptr<IWindow>
+     */
     virtual std::unique_ptr<IWindow> createWindow(std::string name, size_t width, size_t height) = 0;
 
+    /**
+     * @brief Create a Grid object
+     *
+     * @param width
+     * @param height
+     * @return std::unique_ptr<IGrid>
+     */
     virtual std::unique_ptr<IClock> createIClock() = 0;
 };

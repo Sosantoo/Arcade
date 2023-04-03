@@ -21,10 +21,24 @@ public:
 
     ~IEntity() = default;
 
+    /**
+     * @brief Set the Position object
+     *
+     * @param x
+     * @param y
+     */
     virtual void setPosition(int x, int y) = 0;
 
+    /**
+     * @brief
+     *
+     */
     virtual void destroy() = 0;
 
+    /**
+     * @brief
+     *
+     */
     virtual void displayEntity() = 0;
 };
 
@@ -40,8 +54,18 @@ public:
 
     ~IText() = default;
 
+    /**
+     * @brief
+     *
+     * @param str
+     */
     virtual void create(std::string str) = 0;
 
+    /**
+     * @brief
+     *
+     * @param str
+     */
     virtual void changeString(std::string str) = 0;
 };
 
@@ -57,7 +81,19 @@ public:
 
     ~IGrid() = default;
 
+    /**
+     * @brief
+     *
+     * @param width
+     * @param heigth
+     */
     virtual void create(int width, int heigth) = 0;
 
+    /**
+     * @brief
+     *
+     * @param x
+     * @param y
+     */
     virtual void updateCell(int x, int y, IEntity::Color) = 0;
 };

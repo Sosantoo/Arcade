@@ -12,8 +12,27 @@ class IClock
     public:
         ~IClock() = default;
 
+        /**
+         * @brief
+         *
+         */
         virtual void startClock() = 0;
+
+        /**
+         * @brief
+         *
+         */
         virtual double getTimeElapsed() = 0;
+
+        /**
+         * @brief
+         *
+         */
         virtual void resetClock() = 0;
+
+        /**
+         * @brief
+         *
+         */
         virtual void initClock() = 0;
 };

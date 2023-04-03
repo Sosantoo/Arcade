@@ -6,51 +6,101 @@
 */
 
 #pragma once
+#include "IEntity.hpp"
 #include <functional>
 #include <map>
 #include <memory>
 
-class IWindow {
-public:
-    ~IWindow() = default;
+class IWindow
+{
+    public:
+        ~IWindow() = default;
 
-    virtual void initWindow(std::string name, size_t width, size_t height) = 0;
+        /**
+         * @brief
+         *
+         * @param name
+         * @param width
+         * @param height
+         */
+        virtual void initWindow(std::string name, size_t width, size_t height) = 0;
 
-    virtual void closeWindow() = 0;
+        /**
+         * @brief
+         *
+         */
+        virtual void closeWindow() = 0;
 
-    virtual bool windowIsOpen() = 0;
+        /**
+         * @brief
+         *
+         * @return true
+         * @return false
+         */
+        virtual bool windowIsOpen() = 0;
 
-    virtual void clear() = 0;
+        /**
+         * @brief
+         *
+         */
+        virtual void clear() = 0;
 
-    virtual void display() = 0;
+        /**
+         * @brief
+         *
+         */
+        virtual void display() = 0;
 
-    //event
-    enum class EventType {
-        UP_pressed,
-        DOWN_pressed,
-        LEFT_pressed,
-        RIGHT_pressed,
-        QUIT,
-        PAUSE,
-        RESUME,
-        NEXT_GAME,
-        NEXT_LIB,
-        RESTART,
-        GO_TO_MENU,
-    };
+        /**
+         * @brief
+         *
+         */
+        enum class EventType {
+            UP_pressed,
+            DOWN_pressed,
+            LEFT_pressed,
+            RIGHT_pressed,
+            QUIT,
+            PAUSE,
+            RESUME,
+            NEXT_GAME,
+            NEXT_LIB,
+            RESTART,
+            GO_TO_MENU,
+        };
 
-    using EventCallBack = std::function<void()>;
-    using EventHandler = std::map<IWindow::EventType, EventCallBack>;
+        using EventCallBack = std::function<void()>;
+        using EventHandler = std::map<IWindow::EventType, EventCallBack>;
 
-    virtual void callEvent(const IWindow::EventType) = 0;
+        /**
+         * @brief
+         *
+         */
+        virtual void callEvent(const IWindow::EventType) = 0;
 
-    virtual void loadEventBindings(EventHandler &) = 0;
+        /**
+         * @brief
+         *
+         */
+        virtual void loadEventBindings(EventHandler &) = 0;
 
-    virtual void eventPollEvent() = 0;
+        /**
+         * @brief
+         *
+         */
+        virtual void eventPollEvent() = 0;
 
-    //factory Entity
-    virtual std::unique_ptr<IText> createIText() = 0;
+        /**
+         * @brief
+         *
+         * @return std::unique_ptr<IText>
+         */
+        virtual std::unique_ptr<IText> createIText() = 0;
 
-    virtual std::unique_ptr<IGrid> createIGrid() = 0;
-
+        /**
+         * @brief
+         *
+         * @return std::unique_ptr<IGrid>
+         */
+        virtual std::unique_ptr<IGrid> createIGrid() = 0;
 };
