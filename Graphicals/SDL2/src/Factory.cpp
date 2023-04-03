@@ -8,10 +8,13 @@
 #include "GraphicalFactorySDL2.hpp"
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include <SDL_ttf.h>
 
 void GraphicalFactorySDL2::loadResource()
 {
     std::cout << "[SDL2] loadResource" << std::endl;
+    if (SDL_Init(SDL_INIT_VIDEO) < 0 ||  TTF_Init() < 0)
+        throw std::runtime_error("SDL could not initialize!");
 }
 
 void GraphicalFactorySDL2::destroyRessource()

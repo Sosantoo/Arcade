@@ -14,9 +14,6 @@ void WindowSDL2::initWindow(std::string name, size_t width, size_t height)
     std::cout << "[SDL2] initWindow" << std::endl;
 
     isOpen = true;
-    SDL_Init(SDL_INIT_VIDEO);
-    if (SDL_Init(SDL_INIT_VIDEO) < 0)
-        throw std::runtime_error("SDL could not initialize!");
 
     _window = SDL_CreateWindow(name.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width,
                         height, SDL_WINDOW_SHOWN);
@@ -90,6 +87,7 @@ void WindowSDL2::callEvent(const IWindow::EventType eventType) {
     if (_eventBinding.count(eventType) <= 0)
         throw std::runtime_error("--! [GAME Logic] no event binded");
     _eventBinding[eventType]();
+    std::cout << "bind event " << _eventBinding.size() << std::endl;
 }
 
 void WindowSDL2::loadEventBindings(EventHandler &eventBinding) {

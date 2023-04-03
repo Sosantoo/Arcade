@@ -7,6 +7,7 @@
 
 #include "GraphicalFactorySDL2.hpp"
 #include <SDL2/SDL.h>
+#include <SDL_ttf.h>
 #include <iostream>
 #include <map>
 
@@ -72,4 +73,68 @@ void GridSDL2::updateCell(int x, int y, Color color) {
 
 void GridSDL2::destroy() {
     SDL_DestroyRenderer(_renderer);
+}
+
+
+//Clock
+void ClockSDL2::startClock() {
+    startTime = SDL_GetTicks();
+};
+
+double ClockSDL2::getTimeElapsed() {
+    // return (SDL_GetTicks() - startTime) / 1000.0; milliseconds
+    return SDL_GetTicks() - startTime;
+}
+
+void ClockSDL2::resetClock() {
+    startTime = SDL_GetTicks();
+};
+
+void ClockSDL2::initClock() {
+    startTime = SDL_GetTicks();
+};
+
+
+//text
+void TextSDL2::create(std::string str) {
+    // TTF_Font* Sans = TTF_OpenFont("Sans.ttf", 24);
+    // SDL_Color White = {255, 255, 255, 0};
+
+    // _surfaceMessage = TTF_RenderText_Solid(Sans, str.c_str(), White);
+    // _message = SDL_CreateTextureFromSurface(renderer, _surfaceMessage);
+
+    // SDL_Rect Message_rect = {10, 10, 100, 100};
+
+    // SDL_RenderCopy(renderer, _message, NULL, &Message_rect);
+
+    // // Create a new SDL_Surface from the text string
+    // _textSurface = TTF_RenderText_Solid(font, str.c_str(), color);
+
+    // // Create an SDL_Texture from the SDL_Surface
+    // _texture = SDL_CreateTextureFromSurface(renderer, _textSurface);
+
+    // // Get the dimensions of the SDL_Texture
+    // int width, height;
+    // SDL_QueryTexture(_texture, NULL, NULL, &width, &height);
+
+    // // Create an SDL_Rect to position the texture
+    // SDL_Rect rect = { 15, 15, width, height };
+
+    // // Render the SDL_Texture to the screen
+    // SDL_RenderCopy(renderer, _texture, NULL, &rect);
+}
+
+void TextSDL2::setPosition(int x, int y) {
+
+}
+
+void TextSDL2::destroy() {
+}
+
+void TextSDL2::displayEntity() {
+    // SDL_RenderCopy(renderer, _message, NULL, &Message_rect);
+}
+
+void TextSDL2::changeString(std::string str) {
+    // _textSurface = TTF_RenderText_Solid(font, str.c_str(), color);
 }
