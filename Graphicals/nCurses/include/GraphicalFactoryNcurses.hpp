@@ -12,12 +12,12 @@
 
 class ClockNcurses: public IClock {
 private:
-        time_t time;
+        double time;
 
 public:
     void startClock() override {};
 
-    time_t getTimeElapsed() override { return 0; };
+    double getTimeElapsed() override { return 0; };
 
     void resetClock() override {};
 
