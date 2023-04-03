@@ -8,9 +8,8 @@
 #pragma once
 #include "../../Interface/AGame.hpp"
 #include <curses.h>
+#include <ctime>
 #define INITIAL_LENGTH 3;
-
-
 
 class AGameSnake : public AGame
 {
@@ -23,11 +22,13 @@ class AGameSnake : public AGame
         const char food = '*';
         const int initialLength = 10;
         bool gameOver;
-        int dx = 1; // horizontal movement direction
-        int dy = 0; // vertical movement direction
-        int score = 0;
-        int foodX = 0;
-        int foodY = 0;
+        int dx; // horizontal movement direction
+        int dy; // vertical movement direction
+        int _score;
+        int foodX ;
+        int foodY ;
+        double speepFactor;
+        std::clock_t _clock;
 
         std::vector<std::vector<char>> _board;
         std::vector<std::pair<int, int>> _snakeCoords;
@@ -38,6 +39,7 @@ class AGameSnake : public AGame
         void drawnFood();
         void displayBoard(IGrid &);
         void moveAllSnake();
+        void displayGraphicalInfo(IText &, IText &);
 
         IWindow::EventHandler gameEvent;
 

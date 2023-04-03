@@ -9,7 +9,7 @@
 #include <iostream>
 #include <vector>
 #include <cstdlib>
-#include <ctime>
+#include <bits/stdc++.h>
 
 // function to generate a random integer within a given range
 int random(int min, int max) {
@@ -20,9 +20,11 @@ AGameSnake::AGameSnake()
     : width{50}
     , height{50}
     , gameOver{false}
-    , score{0}
+    , _score{0}
     , foodX{0}
     , foodY{0}
+    , speepFactor{5.0}
+    , _clock{std::clock()}
     , _board(height, std::vector<char>(width, empty))
 {
     srand(time(nullptr));
@@ -108,13 +110,13 @@ void AGameSnake::drawnSnake() {
     for (auto& coord : _snakeCoords) {
         auto [x, y] = coord;
 
-        if (x - 1 < 0 || x >= width - 1 || y - 1 < 0 || y >= height - 1) {
+        if (x < 1 || x >= width - 1 || y < 1 || y >= height - 1) {
             // snake has gone out of bounds, game over
             gameOver = true;
         } else if (x == foodX && y == foodY) {
-            score++;
+            _score++;
+            speepFactor += 0.1 * speepFactor;
             _snakeCoords.push_back(_snakeCoords.back());
-
             generateFood();
             return;
         } else {
@@ -143,24 +145,39 @@ void AGameSnake::displayBoard(IGrid &grid) {
 }
 
 void AGameSnake::moveAllSnake() {
+    if (gameOver)
+        return;
     int headX = _snakeCoords.back().first;
     int headY = _snakeCoords.back().second;
     headX += dx;
     headY += dy;
 
-    if (_board[headY][headX] == snake) {
-        printf("%d %d %d %d\n", headY, headX, foodX, foodY);
+    if (_board[headY][headX] == snake)
         gameOver = true;
-    } 
     _snakeCoords.erase(_snakeCoords.begin());// remove the tail segment
     _snakeCoords.push_back(std::make_pair(headX, headY)); // add the new head segment
 }
 
-bool AGameSnake::processGameTick(IGrid &grid, IText &score, IText &time, IClock &clock) {
+void AGameSnake::displayGraphicalInfo(IText& scoreText, IText& timeText) {
+    scoreText.changeString("Score: " + std::to_string(_score));
+    scoreText.displayEntity();
+
+    int duration = std::floor((std::clock() - _clock) / static_cast<int>(CLOCKS_PER_SEC));
+    timeText.changeString("Time: " + std::to_string(duration));
+    timeText.displayEntity();
+}
+
+
+bool AGameSnake::processGameTick(IGrid &grid, IText &scoreText, IText &timeText, IClock &clock) {
     clearBoard();
     drawnSnake();
     drawnFood();
     displayBoard(grid);
+    displayGraphicalInfo(scoreText, timeText);
+
+    if (clock.getTimeElapsed() <= 50 )
+        return false;
+    clock.resetClock();
     moveAllSnake();
 
     if (gameOver)
@@ -173,7 +190,8 @@ void AGameSnake::restart()
     gameOver = false;
     dx = 1;
     dy = 0;
-    score = 0;
+    _score = 0;
+    speepFactor = 0;
     _snakeCoords.clear();
     for (int i = 0; i < initialLength; i++) {
         _snakeCoords.push_back(std::make_pair(width / 2 + i, height / 2));
