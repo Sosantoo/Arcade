@@ -1,17 +1,34 @@
 <p align="center">
   <a>
-    <img alt="Arcade Logo" src="./arcade_logo.jpg"/>
+    <img alt="Arcade Logo" src="./arcade.webp"/>
   </a>
   <p align="center">A gaming platform.</p>
 </p>
 
 # Arcade
 
-This project is ...
+Arcade is a gaming platform, a program that lets the user choose a game to play and keeps a register of player scores.
+
+## Subject
+
+[![sub](https://img.shields.io/badge/Subject-pdf-red.svg)](./B-OOP-400_arcade.pdf)
 
 ## Build
 
-The CMakeLists.txt build the program. The project is composed with three graphics dynamic libraries and two game dynamic libraries at the root of the repository.
+`Requirements`
+
+- C++20 COMPILER
+- cmake VERSION 3.5.1
+
+`Libraries`
+
+- SFML
+- SDL2
+- SDL2_TTF
+- NCURSES
+
+`CMake`
+
 Simple guide to setup the project via CMake as follows:
 
 ```
@@ -33,11 +50,61 @@ arcade_solarfox.so
 [. . .]
 ```
 
-Enjoy the game !
+## Documentation
+
+This project is documented with Doxygen, which is the de facto standard tool for generating documentation from annotated C++ sources. <br>
+There is also a ./doc directory, explaining how to implement new graphics libraries or game libraries compatible with
+the system.
+
+## Librairies
+
+`Graphicals libraries`
+
+The nCurses, SDL2 and SFML graphical libraries have been implemented.
+
+```
+• nCurses (arcade_ncurses.so)
+• SDL2 (arcade_sdl2.so)
+• SFML (arcade_sfml.so)
+```
+
+`Game libraries`
+
+The Snake and Nibbler game libraries have been implemented.
+
+```
+• Snake (arcade_snake.so)
+• Nibbler (arcade_nibbler.so)
+```
+
+## Usage
+
+```
+USAGE:
+  ./arcade path_to_graphical_lib
+
+DESCRIPTION:
+  lib         path to the initial graphical library to load (./lib/arcade_lib_name.so)
+
+COMMANDS (azerty layout):
+  Y           Next graphics lib.
+  U           Next game.
+  I           Restart the game.
+  O           Go back to the menu.
+  P           Exit.
+
+  D           Move right.
+  Q           Move left.
+  Z           Move up.
+  S           Move down.
+```
 
 ## Documentation
 
-The code is documented, using the Doxygen standard.
-Wiki documentation is available.
+[![doc](https://img.shields.io/badge/Documentation-pdf-red.svg)](./doc/documentation.pdf)
 
-## Authors
+## Contributors
+
+- [Raphael Camblong](https://github.com/raphaelCamblong)
+- [Leopold Sallan Gemard](https://github.com/sosantoo/)
+- [Pierre Bouillard](https://github.com/pierrrebouillard)
