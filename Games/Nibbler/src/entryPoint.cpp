@@ -24,6 +24,6 @@ void calledLast()
 
 extern "C" {
     std::unique_ptr<IGame> create() {
-        return std::make_unique<AGameNibller>();
+        return std::make_unique<AGameNibbler>();
     }
 }
