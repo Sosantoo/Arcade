@@ -65,15 +65,15 @@ void WindowSDL2::eventPollEvent()
                 case SDLK_d:
                     return callEvent(IWindow::EventType::RIGHT_pressed);
                     break;
-                case SDLK_F1:
+                case SDLK_y:
                     return callEvent(IWindow::EventType::NEXT_LIB);
-                case SDLK_F2:
+                case SDLK_u:
                     return callEvent(IWindow::EventType::NEXT_GAME);
-                case SDLK_F3:
+                case SDLK_i:
                     return callEvent(IWindow::EventType::RESTART);
-                case SDLK_F4:
+                case SDLK_o:
                     return callEvent(IWindow::EventType::GO_TO_MENU);
-                case SDLK_F5:
+                case SDLK_p:
                     return callEvent(IWindow::EventType::QUIT);
             }
             break;

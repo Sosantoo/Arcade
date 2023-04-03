@@ -64,19 +64,19 @@ void WindowSFML::eventPollEvent()
         else if (isAnyKeyPressed({sf::Keyboard::Down, sf::Keyboard::S}))
             return callEvent(EventType::DOWN_pressed);
 
-        else if (isAnyKeyPressed({sf::Keyboard::F1}))
+        else if (isAnyKeyPressed({sf::Keyboard::Y}))
             return callEvent(EventType::NEXT_LIB);
 
-        else if (isAnyKeyPressed({sf::Keyboard::F2}))
+        else if (isAnyKeyPressed({sf::Keyboard::U}))
             return callEvent(EventType::NEXT_GAME);
 
-        else if (isAnyKeyPressed({sf::Keyboard::F3}))
+        else if (isAnyKeyPressed({sf::Keyboard::I}))
             return callEvent(EventType::RESTART);
 
-        else if (isAnyKeyPressed({sf::Keyboard::F4}))
+        else if (isAnyKeyPressed({sf::Keyboard::O}))
             return callEvent(EventType::GO_TO_MENU);
 
-        else if (isAnyKeyPressed({sf::Keyboard::F5}))
+        else if (isAnyKeyPressed({sf::Keyboard::P}))
             return callEvent(EventType::QUIT);
     }
 };
