@@ -12,6 +12,8 @@ project(arcade-cmake)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_BUILD_TYPE Release)
+##get assets
+file(COPY ./assets DESTINATION ${CMAKE_BINARY_DIR})
 
 ################################
 # Core src
@@ -38,8 +40,7 @@ add_custom_target(core
 
 add_subdirectory(Games/Nibbler)
 add_subdirectory(Games/Snake)
-add_subdirectory(Games/Menu)
-add_subdirectory(Games/test)
+# add_subdirectory(Games/Menu)
 
 add_custom_target(games
     COMMAND ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR} --target arcade_nibbler arcade_snake arcade_menu
