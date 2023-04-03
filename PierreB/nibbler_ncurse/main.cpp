@@ -66,26 +66,43 @@ void displaynibbler(WINDOW* win, const nibbler& nibbler) {
     }
 }
 
+void lookAroundHead(nibbler& nibbler, int& stockx, int& stocky, int ch,
+std::vector<std::pair<int, int>>& coords_w, std::vector<std::pair <int, int> >& coords_t) {
+    int safe = 0;
+}
+
 void updatenibblerPosition1(nibbler& nibbler, int& stockx, int& stocky, int ch,
 std::vector<std::pair<int, int>>& coords_o, std::vector<std::pair<int, int>>& coords_w, std::vector<std::pair <int, int> >& coords_t) {
     int newx = nibbler.x[0] + stockx;
     int newy = nibbler.y[0] + stocky;
+    if (stockx == 0 && stocky == 0) {
+        lookAroundHead(nibbler, stockx, stocky, ch, coords_w, coords_t);
+        return;
+    }
     //Vérifier si la nouvelle position est valide (pas de collision avec les murs)
     bool valid_position = true;
     for (auto coord : coords_w) {
          if (newx == coord.second && newy == coord.first) {
              valid_position = false;
+             nibbler.blocked = true;
              break;
          }
     }
     for (auto coord : coords_t) {
          if (newx == coord.second && newy == coord.first) {
-             valid_position = false;
-             break;
+            valid_position = false;
+            nibbler.blocked = true;
+            break;
          }
     }
     if (valid_position == true) {
         //Vérifier si la nouvelle position contient de la nourriture
+        for (int i = nibbler.size - 1; i > 0; i--) {
+            if (nibbler.blocked == false) {
+                nibbler.x[i] = nibbler.x[i - 1];
+                nibbler.y[i] = nibbler.y[i - 1];
+            }
+        }
         bool contains_food = false;
         for (auto coord : coords_o) {
             if (newx == coord.second && newy == coord.first) {
@@ -103,46 +120,48 @@ std::vector<std::pair<int, int>>& coords_o, std::vector<std::pair<int, int>>& co
     }
 }
 
-void updatenibblerPosition(nibbler& nibbler, int& stockx, int& stocky, int ch, std::vector<std::pair<int, int>>& coords_o, std::vector<std::pair<int, int>>& coords_w, std::vector<std::pair <int, int> >& coords_t) {
-        for (int i = nibbler.size - 1; i > 0; i--) {
-            if (nibbler.blocked == false) {
-                nibbler.x[i] = nibbler.x[i - 1];
-                nibbler.y[i] = nibbler.y[i - 1];
-            }
-        }
+void updatenibblerPosition(nibbler& nibbler, int& stockx, int& stocky, int ch,
+ std::vector<std::pair<int, int>>& coords_o,
+  std::vector<std::pair<int, int>>& coords_w,
+   std::vector<std::pair <int, int> >& coords_t) {
     switch (ch) {
         case KEY_UP:
-            nibbler.blocked = false;
             stockx = 0;
             stocky = -1;
-            updatenibblerPosition1(nibbler, stockx, stocky, ch, coords_o, coords_w, coords_t);
+            updatenibblerPosition1(nibbler, stockx, stocky, ch, coords_o,
+             coords_w, coords_t);
+             nibbler.blocked = false;
             break;
         case KEY_DOWN:
             nibbler.blocked = false;
             stockx = 0;
             stocky = 1;
-            updatenibblerPosition1(nibbler, stockx, stocky, ch, coords_o, coords_w, coords_t);
+            updatenibblerPosition1(nibbler, stockx, stocky, ch, coords_o,
+             coords_w, coords_t);
+             nibbler.blocked = false;
             break;
         case KEY_LEFT:
-            nibbler.blocked = false;
             stockx = -1;
             stocky = 0;
-            updatenibblerPosition1(nibbler, stockx, stocky, ch, coords_o, coords_w, coords_t);
+            updatenibblerPosition1(nibbler, stockx, stocky, ch, coords_o,
+             coords_w, coords_t);
+             nibbler.blocked = false;
             break;
         case KEY_RIGHT:
             nibbler.blocked = false;
             stockx = 1;
             stocky = 0;
-            updatenibblerPosition1(nibbler, stockx, stocky, ch, coords_o, coords_w, coords_t);
+            updatenibblerPosition1(nibbler, stockx, stocky, ch, coords_o,
+            coords_w, coords_t);
+            nibbler.blocked = false;
             break;
         case ERR:
             if (nibbler.blocked == true) {
                 stockx = 0;
                 stocky = 0;
-            } else {
-                nibbler.blocked = false;
             }
-            updatenibblerPosition1(nibbler, stockx, stocky, ch, coords_o, coords_w, coords_t);
+            updatenibblerPosition1(nibbler, stockx, stocky, ch, coords_o,
+            coords_w, coords_t);
             break;
     }
 }
@@ -173,10 +192,13 @@ void get_map(WINDOW *win, std::vector<std::pair <int, int> >& coords_o)
         }
 }
 
-bool checkGameStatus(const nibbler& nibbler, int width, int height, std::vector<std::pair<int, int>>& coord, WINDOW* win) {
-    for (int i = 1; i < nibbler.size; i++) {
-        if (nibbler.x[0] == nibbler.x[i] && nibbler.y[0] == nibbler.y[i]) {
-            return true;
+bool checkGameStatus(const nibbler& nibbler, int width, int height,
+ std::vector<std::pair<int, int>>& coord, WINDOW* win) {
+    if (nibbler.blocked != true) {
+        for (int i = 1; i < nibbler.size; i++) {
+            if (nibbler.x[0] == nibbler.x[i] && nibbler.y[0] == nibbler.y[i]) {
+                return true;
+            }
         }
     }
     if (coord.empty() == true) {
@@ -227,6 +249,7 @@ int& score, int& stockx, int& stocky)
         if (nibbler.x[0] + stockx == coords_o[i].second + stocky && nibbler.y[0] == coords_o[i].first) {
             score++;
             coords_o.erase(coords_o.begin() + i);
+            nibbler.size++;
         }
     }
     for (int i = 0; i < coords_w.size(); i++) {
@@ -258,12 +281,11 @@ int nibblergame() {
     while (!gameOver) {
         wclear(win);
         ch = getch();
-        updatenibblerPosition(nibbler, stockx, stocky, ch, coords_o, coords_w, coords_t);
         mvwprintw(win, nibbler.y[nibbler.size - 1], nibbler.x[nibbler.size - 1], " ");
         displaynibbler(win, nibbler);
-        gameOver = checkGameStatus(nibbler, width, height, coords_o, win);
-        mvwprintw(win, 0, 0, "Score: %d", score);
+        mvprintw(30, 50, "Score: %d", score);
         checkcollision(nibbler, coords_o, coords_w, coords_t, score, stockx, stocky);
+        updatenibblerPosition(nibbler, stockx, stocky, ch, coords_o, coords_w, coords_t);
         for(auto &coord : coords_o) {
             mvwprintw(win, coord.first, coord.second, "o");
         }
@@ -273,6 +295,7 @@ int nibblergame() {
         for(auto &coord2 : coords_t) {
             mvwprintw(win, coord2.first, coord2.second, "|");
         }
+        gameOver = checkGameStatus(nibbler, width, height, coords_o, win);
         wrefresh(win);
     }
     wclear(win);
