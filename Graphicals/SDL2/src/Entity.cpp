@@ -7,7 +7,7 @@
 
 #include "GraphicalFactorySDL2.hpp"
 #include <SDL2/SDL.h>
-#include <SDL_ttf.h>
+#include <SDL2/SDL_ttf.h>
 #include <iostream>
 #include <map>
 
@@ -25,6 +25,7 @@ void GridSDL2::setColor(int x, int y, SDL_Color color) {
     SDL_Rect rect = {x * cellWidth, y * cellHeight, cellWidth, cellHeight};
     SDL_SetRenderDrawColor(_renderer, color.r, color.g, color.b, color.a);
     SDL_RenderFillRect(_renderer, &rect);
+    SDL_RenderDrawRect(_renderer, &rect);
     resetColor();
 }
 
@@ -32,26 +33,7 @@ void GridSDL2::create(int gridRow, int gridColumn) {
     // Initialize variables
     _gridRow = gridRow;
     _gridColumn = gridColumn;
-
-    // Create a renderer
-    _renderer = SDL_CreateRenderer(_window, -1, 0);
-    if (_renderer == NULL)
-        throw std::runtime_error(SDL_GetError());
-
    resetColor();
-
-    // Draw the grid
-    for (int row = 0; row < gridRow; row++) {
-        for (int col = 0; col < gridColumn; col++) {
-                if (row == 0 || col == 0 || _gridRow - 1 == row || _gridColumn - 1 == col)
-                    updateCell(col, row, IEntity::Color::Orange);
-                else
-                    updateCell(col, row, colorBackGround);
-        }
-    }
-
-    // Render the screen
-    SDL_RenderPresent(_renderer);
 }
 
 void GridSDL2::displayEntity() {
@@ -72,7 +54,6 @@ void GridSDL2::updateCell(int x, int y, Color color) {
 };
 
 void GridSDL2::destroy() {
-    SDL_DestroyRenderer(_renderer);
 }
 
 
@@ -82,7 +63,7 @@ void ClockSDL2::startClock() {
 };
 
 double ClockSDL2::getTimeElapsed() {
-    // return (SDL_GetTicks() - startTime) / 1000.0; milliseconds
+    // return (SDL_GetTicks() - startTime) / 1000.0; //milliseconds
     return SDL_GetTicks() - startTime;
 }
 
@@ -96,45 +77,60 @@ void ClockSDL2::initClock() {
 
 
 //text
+TextSDL2::TextSDL2(SDL_Renderer *renderer) : _renderer(renderer) {
+    if (TTF_Init() < 0) {
+        throw std::runtime_error("Failed to initialize SDL_ttf");
+    }
+    _font = TTF_OpenFont(PATH_FONT, 30);
+    if (!_font) {
+        throw std::runtime_error("Failed to load font");
+    }
+}
+
+TextSDL2::~TextSDL2() {
+    if (_text_texture) {
+        SDL_DestroyTexture(_text_texture);
+    }
+    if (_font) {
+        TTF_CloseFont(_font);
+    }
+    TTF_Quit();
+}
+
 void TextSDL2::create(std::string str) {
-    // TTF_Font* Sans = TTF_OpenFont("Sans.ttf", 24);
-    // SDL_Color White = {255, 255, 255, 0};
+    SDL_Color color = {255, 192, 203, 255};
+    _surface = TTF_RenderText_Solid(_font, str.c_str(), color);
+    _text_texture = SDL_CreateTextureFromSurface(_renderer, _surface);
 
-    // _surfaceMessage = TTF_RenderText_Solid(Sans, str.c_str(), White);
-    // _message = SDL_CreateTextureFromSurface(renderer, _surfaceMessage);
-
-    // SDL_Rect Message_rect = {10, 10, 100, 100};
-
-    // SDL_RenderCopy(renderer, _message, NULL, &Message_rect);
-
-    // // Create a new SDL_Surface from the text string
-    // _textSurface = TTF_RenderText_Solid(font, str.c_str(), color);
-
-    // // Create an SDL_Texture from the SDL_Surface
-    // _texture = SDL_CreateTextureFromSurface(renderer, _textSurface);
-
-    // // Get the dimensions of the SDL_Texture
-    // int width, height;
-    // SDL_QueryTexture(_texture, NULL, NULL, &width, &height);
-
-    // // Create an SDL_Rect to position the texture
-    // SDL_Rect rect = { 15, 15, width, height };
-
-    // // Render the SDL_Texture to the screen
-    // SDL_RenderCopy(renderer, _texture, NULL, &rect);
+    int texW = 0;
+    int texH = 0;
+    SDL_QueryTexture(_text_texture, NULL, NULL, &texW, &texH);
+    _rect = { 0, 0, texW, texH };
 }
 
 void TextSDL2::setPosition(int x, int y) {
-
+    _rect.x = x;
+    _rect.y = y;
 }
 
 void TextSDL2::destroy() {
+    SDL_DestroyTexture(_text_texture);
+    SDL_FreeSurface(_surface);
+    TTF_CloseFont(_font);
 }
 
 void TextSDL2::displayEntity() {
-    // SDL_RenderCopy(renderer, _message, NULL, &Message_rect);
+    SDL_RenderCopy(_renderer, _text_texture, NULL, &_rect);
 }
 
 void TextSDL2::changeString(std::string str) {
-    // _textSurface = TTF_RenderText_Solid(font, str.c_str(), color);
+    SDL_Color color = {255, 218, 185, 255};
+    _surface = TTF_RenderText_Solid(_font, str.c_str(), color);
+    _text_texture = SDL_CreateTextureFromSurface(_renderer, _surface);
+
+    int texW = 0;
+    int texH = 0;
+    SDL_QueryTexture(_text_texture, NULL, NULL, &texW, &texH);
+    _rect.w = texW;
+    _rect.h = texH;
 }

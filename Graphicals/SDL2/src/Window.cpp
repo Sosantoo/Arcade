@@ -6,7 +6,7 @@
 */
 
 #include "GraphicalFactorySDL2.hpp"
-#include <SDL2/SDL.h>
+#include <SDL2/SDL_ttf.h>
 #include <iostream>
 
 void WindowSDL2::initWindow(std::string name, size_t width, size_t height)
@@ -19,6 +19,11 @@ void WindowSDL2::initWindow(std::string name, size_t width, size_t height)
                         height, SDL_WINDOW_SHOWN);
     if (!_window)
         throw std::runtime_error("Window could not be created!!");
+
+    _renderer = SDL_CreateRenderer(_window, -1, 0);
+    if (!_renderer) {
+        throw std::runtime_error("Renderer could not be created!!");
+}
 };
 
 void WindowSDL2::closeWindow()
@@ -34,11 +39,12 @@ bool WindowSDL2::windowIsOpen()
 
 void WindowSDL2::clear()
 {
-
+    SDL_RenderClear(_renderer);
 };
 
 void WindowSDL2::display()
 {
+    SDL_RenderPresent(_renderer);
 };
 
 void WindowSDL2::eventPollEvent()
@@ -75,6 +81,8 @@ void WindowSDL2::eventPollEvent()
                     return callEvent(IWindow::EventType::GO_TO_MENU);
                 case SDLK_p:
                     return callEvent(IWindow::EventType::QUIT);
+                case SDLK_RETURN:
+                    return callEvent(IWindow::EventType::ENTER_pressed);
             }
             break;
         default:
@@ -86,8 +94,7 @@ void WindowSDL2::eventPollEvent()
 void WindowSDL2::callEvent(const IWindow::EventType eventType) {
     if (_eventBinding.count(eventType) <= 0)
         throw std::runtime_error("--! [GAME Logic] no event binded");
-    _eventBinding[eventType]();
-    std::cout << "bind event " << _eventBinding.size() << std::endl;
+    return _eventBinding[eventType]();
 }
 
 void WindowSDL2::loadEventBindings(EventHandler &eventBinding) {
@@ -101,9 +108,9 @@ void WindowSDL2::loadEventBindings(EventHandler &eventBinding) {
 };
 
 std::unique_ptr<IText> WindowSDL2::createIText() {
-    return std::make_unique<TextSDL2>(_window);
+    return std::make_unique<TextSDL2>(_renderer);
 }
 
 std::unique_ptr<IGrid> WindowSDL2::createIGrid() {
-    return std::make_unique<GridSDL2>(_window);
+    return std::make_unique<GridSDL2>(_window, _renderer);
 }
