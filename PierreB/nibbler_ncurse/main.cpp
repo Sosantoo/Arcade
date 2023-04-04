@@ -17,6 +17,8 @@ struct nibbler {
     int x[101];
     int y[101];
     int size;
+    int stockx;
+    int stocky;
     bool blocked;
 };
 
@@ -51,6 +53,8 @@ void initializenibbler(nibbler& nibbler, int width, int height) {
     nibbler.x[0] = 25;
     nibbler.y[0] = 10;
     nibbler.size = 4;
+    nibbler.stockx = 1;
+    nibbler.stocky = 0;
     nibbler.blocked = false;
     for (int i = 1; i < nibbler.size; i++)
     {
@@ -66,17 +70,34 @@ void displaynibbler(WINDOW* win, const nibbler& nibbler) {
     }
 }
 
-void lookAroundHead(nibbler& nibbler, int& stockx, int& stocky, int ch,
-std::vector<std::pair<int, int>>& coords_w, std::vector<std::pair <int, int> >& coords_t) {
-    int safe = 0;
+void lookAroundHead(nibbler& nibbler, int ch, std::vector<std::pair<int, int>>& coords_w, 
+std::vector<std::pair <int, int> >& coords_t) {
+    int safe = 4;
+    for (auto coord : coords_t) {
+        if (coord.first == nibbler.x[0] + 1 && coord.second == nibbler.y[0] ||
+        coord.first == nibbler.x[0] - 1 && coord.second == nibbler.y[0] ||
+        coord.first == nibbler.x[0] && coord.second == nibbler.y[0]  + 1 ||
+        coord.first == nibbler.x[0] && coord.second == nibbler.y[0] - 1)
+        safe -= 1;
+    }
+    for (auto coord : coords_w) {
+        if (coord.first == nibbler.x[0] + 1 && coord.second == nibbler.y[0] ||
+        coord.first == nibbler.x[0] - 1 && coord.second == nibbler.y[0] ||
+        coord.first == nibbler.x[0] && coord.second == nibbler.y[0]  + 1 ||
+        coord.first == nibbler.x[0] && coord.second == nibbler.y[0] - 1)
+        safe -= 1;
+    }
+    safe -=1;
+    mvprintw(31, 50, "Safe = %d", safe);
 }
 
-void updatenibblerPosition1(nibbler& nibbler, int& stockx, int& stocky, int ch,
+void updatenibblerPosition1(nibbler& nibbler, int ch,
 std::vector<std::pair<int, int>>& coords_o, std::vector<std::pair<int, int>>& coords_w, std::vector<std::pair <int, int> >& coords_t) {
-    int newx = nibbler.x[0] + stockx;
-    int newy = nibbler.y[0] + stocky;
-    if (stockx == 0 && stocky == 0) {
-        lookAroundHead(nibbler, stockx, stocky, ch, coords_w, coords_t);
+    int newx = nibbler.x[0] + nibbler.stockx;
+    int newy = nibbler.y[0] + nibbler.stocky;
+    mvprintw(33, 50, "newy = %d = %d + %d",newy, nibbler.y[0] + nibbler.stocky);
+    if (nibbler.stockx == 0 && nibbler.stocky == 0) {
+        lookAroundHead(nibbler, ch, coords_w, coords_t);
         return;
     }
     //Vérifier si la nouvelle position est valide (pas de collision avec les murs)
@@ -120,48 +141,43 @@ std::vector<std::pair<int, int>>& coords_o, std::vector<std::pair<int, int>>& co
     }
 }
 
-void updatenibblerPosition(nibbler& nibbler, int& stockx, int& stocky, int ch,
+void updatenibblerPosition(nibbler& nibbler, int ch,
  std::vector<std::pair<int, int>>& coords_o,
   std::vector<std::pair<int, int>>& coords_w,
    std::vector<std::pair <int, int> >& coords_t) {
     switch (ch) {
         case KEY_UP:
-            stockx = 0;
-            stocky = -1;
-            updatenibblerPosition1(nibbler, stockx, stocky, ch, coords_o,
-             coords_w, coords_t);
+            nibbler.stockx = 0;
+            nibbler.stocky = -1;
+            updatenibblerPosition1(nibbler, ch, coords_o, coords_w, coords_t);
              nibbler.blocked = false;
             break;
         case KEY_DOWN:
             nibbler.blocked = false;
-            stockx = 0;
-            stocky = 1;
-            updatenibblerPosition1(nibbler, stockx, stocky, ch, coords_o,
-             coords_w, coords_t);
+            nibbler.stockx = 0;
+            nibbler.stocky = 1;
+            updatenibblerPosition1(nibbler, ch, coords_o, coords_w, coords_t);
              nibbler.blocked = false;
             break;
         case KEY_LEFT:
-            stockx = -1;
-            stocky = 0;
-            updatenibblerPosition1(nibbler, stockx, stocky, ch, coords_o,
-             coords_w, coords_t);
+            nibbler.stockx = -1;
+            nibbler.stocky = 0;
+            updatenibblerPosition1(nibbler, ch, coords_o, coords_w, coords_t);
              nibbler.blocked = false;
             break;
         case KEY_RIGHT:
             nibbler.blocked = false;
-            stockx = 1;
-            stocky = 0;
-            updatenibblerPosition1(nibbler, stockx, stocky, ch, coords_o,
-            coords_w, coords_t);
+            nibbler.stockx = 1;
+            nibbler.stocky = 0;
+            updatenibblerPosition1(nibbler, ch, coords_o, coords_w, coords_t);
             nibbler.blocked = false;
             break;
         case ERR:
             if (nibbler.blocked == true) {
-                stockx = 0;
-                stocky = 0;
+                nibbler.stockx = 0;
+                nibbler.stocky = 0;
             }
-            updatenibblerPosition1(nibbler, stockx, stocky, ch, coords_o,
-            coords_w, coords_t);
+            updatenibblerPosition1(nibbler, ch, coords_o, coords_w, coords_t);
             break;
     }
 }
@@ -243,30 +259,29 @@ void getWallT(std::vector<std::pair <int, int> >& coords_t, WINDOW *win)
 
 void checkcollision(nibbler& nibbler, std::vector<std::pair <int, int> >& coords_o,
 std::vector<std::pair <int, int> >& coords_w, std::vector<std::pair <int, int> >& coords_t, 
-int& score, int& stockx, int& stocky)
+int& score)
 {
     for (int i = 0; i < coords_o.size(); i++) {
-        if (nibbler.x[0] + stockx == coords_o[i].second + stocky && nibbler.y[0] == coords_o[i].first) {
+        if (nibbler.x[0] + nibbler.stockx == coords_o[i].second + nibbler.stocky && nibbler.y[0] == coords_o[i].first) {
             score++;
             coords_o.erase(coords_o.begin() + i);
             nibbler.size++;
         }
     }
     for (int i = 0; i < coords_w.size(); i++) {
-        if (nibbler.x[0] + stockx == coords_w[i].second && nibbler.y[0] + stocky == coords_w[i].first) {
+        if (nibbler.x[0] + nibbler.stockx == coords_w[i].second && nibbler.y[0] + nibbler.stocky == coords_w[i].first) {
             nibbler.blocked = true;
         }
     }
     for (int i = 0; i < coords_t.size(); i++) {
-        if (nibbler.x[0] + stockx == coords_t[i].second && nibbler.y[0] + stocky == coords_t[i].first) {
+        if (nibbler.x[0] + nibbler.stockx == coords_t[i].second && nibbler.y[0] + nibbler.stocky == coords_t[i].first) {
             nibbler.blocked = true;
         }
     }
 }
 
 int nibblergame() {
-    int width = 50; int height = 20; int score = 0;
-    int stockx = 1; int stocky = 0; int ch;
+    int width = 50; int height = 20; int score = 0; int ch;
     bool gameOver = false;
     nibbler nibbler;
     initializeNcurses();
@@ -284,8 +299,9 @@ int nibblergame() {
         mvwprintw(win, nibbler.y[nibbler.size - 1], nibbler.x[nibbler.size - 1], " ");
         displaynibbler(win, nibbler);
         mvprintw(30, 50, "Score: %d", score);
-        checkcollision(nibbler, coords_o, coords_w, coords_t, score, stockx, stocky);
-        updatenibblerPosition(nibbler, stockx, stocky, ch, coords_o, coords_w, coords_t);
+        mvprintw(32, 50, "coord x = %d, y = %d", nibbler.x[0], nibbler.y[0]);
+        checkcollision(nibbler, coords_o, coords_w, coords_t, score);
+        updatenibblerPosition(nibbler, ch, coords_o, coords_w, coords_t);
         for(auto &coord : coords_o) {
             mvwprintw(win, coord.first, coord.second, "o");
         }
