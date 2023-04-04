@@ -57,10 +57,13 @@ void WindowSFML::eventPollEvent()
 
         if (isAnyKeyPressed({sf::Keyboard::Left, sf::Keyboard::Q}))
             return callEvent(EventType::LEFT_pressed);
+
         else if (isAnyKeyPressed({sf::Keyboard::Right, sf::Keyboard::D}))
             return callEvent(EventType::RIGHT_pressed);
+
         else if (isAnyKeyPressed({sf::Keyboard::Up, sf::Keyboard::Z}))
             return callEvent(EventType::UP_pressed);
+
         else if (isAnyKeyPressed({sf::Keyboard::Down, sf::Keyboard::S}))
             return callEvent(EventType::DOWN_pressed);
 
@@ -78,6 +81,9 @@ void WindowSFML::eventPollEvent()
 
         else if (isAnyKeyPressed({sf::Keyboard::P}))
             return callEvent(EventType::QUIT);
+
+        else if (isAnyKeyPressed({sf::Keyboard::Enter}))
+            return callEvent(EventType::ENTER_pressed);
     }
 };
 
@@ -88,7 +94,13 @@ void WindowSFML::callEvent(const IWindow::EventType eventType) {
 }
 
 void WindowSFML::loadEventBindings(EventHandler &eventBinding) {
-    _eventBinding.insert(eventBinding.begin(), eventBinding.end());
+    for (auto const& binding : eventBinding) {
+        auto it = _eventBinding.find(binding.first);
+        if (it != _eventBinding.end())
+            it->second = binding.second;
+        else
+            _eventBinding.insert(binding);
+    }
 };
 
 //Entity

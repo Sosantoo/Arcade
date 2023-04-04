@@ -97,7 +97,13 @@ void WindowNcurses::callEvent(const IWindow::EventType eventType) {
 }
 
 void WindowNcurses::loadEventBindings(EventHandler &eventBinding) {
-    _eventBinding.insert(eventBinding.begin(), eventBinding.end());
+    for (auto const& binding : eventBinding) {
+        auto it = _eventBinding.find(binding.first);
+        if (it != _eventBinding.end())
+            it->second = binding.second;
+        else
+            _eventBinding.insert(binding);
+    }
 };
 
 std::unique_ptr<IText> WindowNcurses::createIText() {
