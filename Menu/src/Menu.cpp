@@ -45,6 +45,9 @@ void Menu::rightKeyPress() {
         _graphicsLibsSelected--;
 }
 
+void Menu::enterKeyPress() {
+    return _lambdaCoreLoading(_gameLibs[_gameLibsSelected].name, _graphicLibs[_graphicsLibsSelected].name);
+}
 
 IWindow::EventHandler &Menu::getEventBinding() {
     return (_gameEvent = {
@@ -52,12 +55,13 @@ IWindow::EventHandler &Menu::getEventBinding() {
         {IWindow::EventType::DOWN_pressed, [this]() { this->downKeyPress(); }},
         {IWindow::EventType::LEFT_pressed, [this]() { this->leftKeyPress(); }},
         {IWindow::EventType::RIGHT_pressed, [this]() { this->rightKeyPress(); }},
+        {IWindow::EventType::ENTER_pressed, [this]() { this->enterKeyPress(); }},
         {IWindow::EventType::RESTART, [this]() { this->restart(); }},
     });
 }
 
-void Menu::loadCoreActions(LambdaLoadingGraphicsByName, LambdaLoadingGameByName) {
-
+void Menu::loadCoreActions(LambdaCoreLoading lambdaCoreLoading) {
+    _lambdaCoreLoading = lambdaCoreLoading;
 }
 
 std::string Menu::getLibGameName(size_t index) {

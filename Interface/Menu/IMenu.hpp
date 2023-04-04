@@ -11,14 +11,13 @@
 class IMenu {
 
     public:
-        using LambdaLoadingGraphicsByName =  std::function<void(std::string libName)>;
-        using LambdaLoadingGameByName =  std::function<void(std::string libName)>;
+        using LambdaCoreLoading =  std::function<void(std::string, std::string)>;
 
         ~IMenu() = default;
 
         virtual IWindow::EventHandler &getEventBinding() = 0;
 
-        virtual void loadCoreActions(LambdaLoadingGraphicsByName, LambdaLoadingGameByName) = 0;
+        virtual void loadCoreActions(LambdaCoreLoading) = 0;
 
         virtual bool processMenuTick(IText &, IText &, std::array<std::reference_wrapper<IText>, 3>, std::array<std::reference_wrapper<IText>, 3>) = 0;
 

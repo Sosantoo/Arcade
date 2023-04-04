@@ -26,19 +26,19 @@ class Menu: public IMenu
         void displayTexts(IText &, IText &, std::array<std::reference_wrapper<IText>, 3>, std::array<std::reference_wrapper<IText>, 3>);
 
         //event
-        LambdaLoadingGraphicsByName _loadGraphics;
-        LambdaLoadingGameByName _LoadGame;
+        LambdaCoreLoading _lambdaCoreLoading;
         IWindow::EventHandler _gameEvent;
         void upKeyPress();
         void downKeyPress();
         void leftKeyPress();
         void rightKeyPress();
+        void enterKeyPress();
 
     public:
         Menu();
         ~Menu() = default;
         IWindow::EventHandler &getEventBinding() final;
-        void loadCoreActions(LambdaLoadingGraphicsByName, LambdaLoadingGameByName) final;
+        void loadCoreActions(LambdaCoreLoading) final;
         bool processMenuTick(IText &, IText &, std::array<std::reference_wrapper<IText>, 3>, std::array<std::reference_wrapper<IText>, 3>) final;
         void restart() final;
 };
