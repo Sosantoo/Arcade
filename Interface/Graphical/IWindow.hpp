@@ -30,6 +30,7 @@ public:
         DOWN_pressed,
         LEFT_pressed,
         RIGHT_pressed,
+        ENTER_pressed,
         QUIT,
         PAUSE,
         RESUME,
