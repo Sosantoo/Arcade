@@ -9,9 +9,8 @@
 #include "../../../Interface/Graphical/IGraphicalFactory.hpp"
 #include <iostream>
 #include <SDL2/SDL.h>
-#include <SDL_ttf.h>
-#define PATH_FONT "./assets/fonts/PressStart2P"
-
+#include <SDL2/SDL_ttf.h>
+#define PATH_FONT "./assets/PressStart2P.ttf"
 class ClockSDL2 : public IClock {
 private:
     Uint32 startTime;
@@ -31,6 +30,7 @@ class WindowSDL2: public IWindow {
 private:
     IWindow::EventHandler _eventBinding;
     SDL_Window *_window;
+    SDL_Renderer *_renderer;
     SDL_Event event;
     bool isOpen;
 
@@ -68,12 +68,12 @@ private:
     void setColor(int x, int y, SDL_Color color);
 
 public:
-    GridSDL2(SDL_Window *window) : _window{window} {};
+    GridSDL2(SDL_Window *window, SDL_Renderer *renderer) : _window{window}, _renderer{renderer} {};
     ~GridSDL2() {}
 
     virtual void create(int gridRow, int gridColumn) final;
 
-    virtual void setPosition(int x, int y) final {}
+    virtual void setPosition(int x, int y) final { (void)x; (void)y; };
 
     virtual void destroy() final;
 
@@ -87,13 +87,15 @@ class TextSDL2
     : public IText
 {
 private:
-    SDL_Window *_window;
-    // SDL_Surface* _surfaceMessage;
-    // SDL_Texture* _message;
+    SDL_Renderer *_renderer;
+    SDL_Surface * _surface;
+    SDL_Texture *_text_texture;
+    TTF_Font *_font;
+    SDL_Rect _rect;
 
 public:
-    TextSDL2(SDL_Window *window): _window{window} {};
-    ~TextSDL2() {};
+    TextSDL2(SDL_Renderer *renderer);
+    ~TextSDL2();
 
     virtual void create(std::string str) final;
 

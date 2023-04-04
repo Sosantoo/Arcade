@@ -9,3 +9,4 @@
 
 #include "../../Interface/Game/IGame.hpp"
 #include "../../Interface/Graphical/IGraphicalFactory.hpp"
+#include "../../Interface/Menu/IMenu.hpp"

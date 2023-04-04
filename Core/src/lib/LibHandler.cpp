@@ -53,3 +53,4 @@ Interface_t& LibHandler<Interface_t>::getInterface() {
 
 template class LibHandler<IGame>;
 template class LibHandler<IGraphicalFactory>;
+template class LibHandler<IMenu>;

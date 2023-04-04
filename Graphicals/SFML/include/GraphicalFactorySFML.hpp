@@ -97,7 +97,7 @@ private:
 
 public:
     TextSFML(sf::RenderWindow *window);
-    ~TextSFML();
+    ~TextSFML() {};
 
     //Entity
     virtual void create(std::string) final;

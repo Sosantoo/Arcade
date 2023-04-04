@@ -53,4 +53,8 @@ class LibFileManager {
 
         Lib::lib getNextGraphicalsLib(const Lib::lib &loaded);
         Lib::lib getNextGameLib(const Lib::lib &loaded);
+
+        std::vector<Lib::lib> getGameLibs();
+        std::vector<Lib::lib> getGraphicsLibs();
 };
+

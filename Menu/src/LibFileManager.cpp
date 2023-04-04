@@ -5,8 +5,7 @@
 ** LibFileManager
 */
 
-#include "lib/LibFileManager.hpp"
-#include "Exceptions/CoreExceptions.hpp"
+#include "LibFileManager.hpp"
 #include <filesystem>
 #include <iostream>
 #include <algorithm>
@@ -48,7 +47,7 @@ LibFileManager::~LibFileManager()
 
 Lib::libType LibFileManager::getLibType(const std::string &filename) {
     if (libs_register.count(filename) == 0)
-        throw CoreExceptions::LibUnknowExceptions(filename);
+        throw std::runtime_error("Unknown lib : " + filename);
     else
         return libs_register[filename];
 }
@@ -127,4 +126,24 @@ Lib::lib LibFileManager::getNextGameLib(const Lib::lib &loaded) {
         );
     }
     return iter != _availableLibs.end() ? *iter : Lib::lib{};
+}
+
+std::vector<Lib::lib> LibFileManager::getGameLibs() {
+    std::vector<Lib::lib> gameLibs;
+    for (const auto &lib : _availableLibs) {
+        if (lib.type == Lib::_GAMES_) {
+            gameLibs.push_back(lib);
+        }
+    }
+    return gameLibs;
+}
+
+std::vector<Lib::lib> LibFileManager::getGraphicsLibs() {
+    std::vector<Lib::lib> graphicsLibs;
+    for (const auto &lib : _availableLibs) {
+        if (lib.type == Lib::_GRAPHICALS_) {
+            graphicsLibs.push_back(lib);
+        }
+    }
+    return graphicsLibs;
 }

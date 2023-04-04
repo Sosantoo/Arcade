@@ -8,7 +8,7 @@
 #include "GraphicalFactorySDL2.hpp"
 #include <SFML/Graphics.hpp>
 #include <iostream>
-#include <SDL_ttf.h>
+#include <SDL2/SDL_ttf.h>
 
 void GraphicalFactorySDL2::loadResource()
 {

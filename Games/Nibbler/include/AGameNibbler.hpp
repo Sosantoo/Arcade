@@ -50,7 +50,6 @@ class AGameNibbler : public AGame
 
     public:
         AGameNibbler();
-        AGameNibbler(IGraphicalFactory &, IWindow::EventHandler &){};
         ~AGameNibbler() = default;
         IWindow::EventHandler &getEventBinding() override;
         bool processGameTick(IGrid &, IText &, IText &, IClock &) override;

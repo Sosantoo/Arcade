@@ -11,7 +11,8 @@
 #include <unistd.h>
 
 Core::Core::Core(const std::string &SharedLibPath)
-    : _LibFileManager{LibFileManager(SharedLibPath)}
+    : _libFileManager{LibFileManager(SharedLibPath)}
+    , gameState{Core::GameState::MENU_LOOP}
 {
 }
 
@@ -20,13 +21,12 @@ Core::Core::~Core()
 }
 
 void Core::Core::init(const std::string GraphicalsLibPath, const std::string GameLibPath) {
-    if (!_LibFileManager.isAvailable(GraphicalsLibPath) ||
-    !_LibFileManager.isAvailable(GameLibPath))
-    {
+    if (!_libFileManager.isAvailable(GraphicalsLibPath) || !_libFileManager.isAvailable(GameLibPath)) {
         throw CoreExceptions::LibUnknowExceptions(GraphicalsLibPath + " or " + GameLibPath);
     }
-    _game.load(_LibFileManager.getLibBypath(GameLibPath));
-    _graphical.load(_LibFileManager.getLibBypath(GraphicalsLibPath));
+    _game.load(_libFileManager.getLibBypath(GameLibPath));
+    _graphical.load(_libFileManager.getLibBypath(GraphicalsLibPath));
+    _menu.load(_libFileManager.getLibByName("arcade_menu.so"));
     bindEvents();
 }
 
@@ -43,25 +43,49 @@ void Core::Core::bindEvents() {
     _graphical.getWindowInterface().loadEventBindings(
         coreEventBindings
     );
+
     //Game Event bindings
     _graphical.getWindowInterface().loadEventBindings(
-        _game.getInterface().getEventBinding()
+        gameState == Core::GameState::GAME_LOOP
+            ? _game.getInterface().getEventBinding()
+            : _menu.getInterface().getEventBinding()
+    );
+
+    // Menu Event bindings
+    _menu.getInterface().loadCoreActions(
+        [this](std::string gameLibName, std::string graphicLibName) { this->launchFromMenu(gameLibName, graphicLibName);}
     );
 }
 
-void Core::Core::launchGame() {
-    bool gameOver = false;
+void Core::Core::loopMenu() {
+    _menu.getInterface().processMenuTick(
+        _graphical.getTitleGame(),
+        _graphical.titleGraphic(),
+        _graphical.getGameSelector(),
+        _graphical.getGraphicSelector()
+    );
+}
 
-    while(_graphical.getWindowInterface().windowIsOpen() && !gameOver) {
+void Core::Core::loopGame() {
+    _game.getInterface().processGameTick(
+        _graphical.getGrid(),
+        _graphical.getScore(),
+        _graphical.getTime(),
+        _graphical.getClockInterface()
+    );
+}
+
+void Core::Core::launch() {
+    while(_graphical.getWindowInterface().windowIsOpen()) {
         _graphical.getWindowInterface().clear();
         _graphical.getWindowInterface().eventPollEvent();
-        gameOver = _game.getInterface().processGameTick(
-            _graphical.getGrid(),
-            _graphical.getScore(),
-            _graphical.getTime(),
-            _graphical.getClockInterface()
-        );
-        _graphical.getWindowInterface().display();
+
+        switch (gameState) {
+            case Core::GameState::MENU_LOOP: loopMenu(); break;
+            case Core::GameState::GAME_LOOP: loopGame(); break;
+        }
+
+         _graphical.getWindowInterface().display();
     }
 }
 
@@ -69,6 +93,6 @@ int coreEntryPoint(const std::string &graphicalPathLib)
 {
     Core::Core core("./lib/");
     core.init(graphicalPathLib, "./lib/arcade_snake.so");
-    core.launchGame();
+    core.launch();
     return 0;
 }

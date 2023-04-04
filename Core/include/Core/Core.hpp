@@ -9,21 +9,31 @@
 #include "lib/LibFileManager.hpp"
 #include "Core/GameLib.hpp"
 #include "Core/GraphicalLib.hpp"
+#include "Core/MenuLib.hpp"
 
 namespace Core
 {
     class Core {
     private:
-        LibFileManager _LibFileManager;
+        enum GameState {
+            GAME_LOOP,
+            MENU_LOOP,
+        };
+
+        LibFileManager _libFileManager;
         IWindow::EventHandler coreEventBindings;
         GraphicalLib _graphical;
         GameLib _game;
+        MenuLib _menu;
+        GameState gameState;
 
         //actions
+        void tearDownGraphics();
         void nextGraphicsLibrary();
         void nextGameLibrary();
         void restartGame();
         void goToMenu();
+        void launchFromMenu(std::string, std::string);
         void closeGraphical();
 
         //loadings
@@ -34,7 +44,9 @@ namespace Core
         ~Core();
 
         void init(const std::string, const std::string);
-        void launchGame();
+        void launch();
+        void loopMenu();
+        void loopGame();
     };
 };
 
