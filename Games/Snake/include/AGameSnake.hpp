@@ -52,7 +52,6 @@ class AGameSnake : public AGame
 
     public:
         AGameSnake();
-        AGameSnake(IGraphicalFactory &, IWindow::EventHandler &){};
         ~AGameSnake() = default;
         IWindow::EventHandler &getEventBinding() override;
         bool processGameTick(IGrid &, IText &, IText &, IClock &) override;
