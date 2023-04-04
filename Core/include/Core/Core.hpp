@@ -20,7 +20,7 @@ namespace Core
             MENU_LOOP,
         };
 
-        LibFileManager _LibFileManager;
+        LibFileManager _libFileManager;
         IWindow::EventHandler coreEventBindings;
         GraphicalLib _graphical;
         GameLib _game;
@@ -28,15 +28,16 @@ namespace Core
         GameState gameState;
 
         //actions
+        void tearDownGraphics();
         void nextGraphicsLibrary();
         void nextGameLibrary();
         void restartGame();
         void goToMenu();
+        void launchFromMenu(std::string, std::string);
         void closeGraphical();
 
         //loadings
         void bindEvents();
-
 
     public:
         Core(const std::string &);

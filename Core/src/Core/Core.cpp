@@ -11,7 +11,7 @@
 #include <unistd.h>
 
 Core::Core::Core(const std::string &SharedLibPath)
-    : _LibFileManager{LibFileManager(SharedLibPath)}
+    : _libFileManager{LibFileManager(SharedLibPath)}
     , gameState{Core::GameState::MENU_LOOP}
 {
 }
@@ -21,15 +21,12 @@ Core::Core::~Core()
 }
 
 void Core::Core::init(const std::string GraphicalsLibPath, const std::string GameLibPath) {
-    if (!_LibFileManager.isAvailable(GraphicalsLibPath) || !_LibFileManager.isAvailable(GameLibPath)) {
+    if (!_libFileManager.isAvailable(GraphicalsLibPath) || !_libFileManager.isAvailable(GameLibPath)) {
         throw CoreExceptions::LibUnknowExceptions(GraphicalsLibPath + " or " + GameLibPath);
     }
-
-    _LibFileManager.displayavailableLib();
-
-    _game.load(_LibFileManager.getLibBypath(GameLibPath));
-    _graphical.load(_LibFileManager.getLibBypath(GraphicalsLibPath));
-    _menu.load(_LibFileManager.getLibByName("arcade_menu.so"));
+    _game.load(_libFileManager.getLibBypath(GameLibPath));
+    _graphical.load(_libFileManager.getLibBypath(GraphicalsLibPath));
+    _menu.load(_libFileManager.getLibByName("arcade_menu.so"));
     bindEvents();
 }
 
@@ -46,11 +43,17 @@ void Core::Core::bindEvents() {
     _graphical.getWindowInterface().loadEventBindings(
         coreEventBindings
     );
+
     //Game Event bindings
     _graphical.getWindowInterface().loadEventBindings(
         gameState == Core::GameState::GAME_LOOP
             ? _game.getInterface().getEventBinding()
             : _menu.getInterface().getEventBinding()
+    );
+
+    // Menu Event bindings
+    _menu.getInterface().loadCoreActions(
+        [this](std::string gameLibName, std::string graphicLibName) { this->launchFromMenu(gameLibName, graphicLibName);}
     );
 }
 
