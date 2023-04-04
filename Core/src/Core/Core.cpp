@@ -55,22 +55,11 @@ void Core::Core::bindEvents() {
 }
 
 void Core::Core::loopMenu() {
-    std::array<std::reference_wrapper<IText>, 3> graphicalLib = {
-        std::ref(_graphical.getScore()),
-        std::ref(_graphical.getScore()),
-        std::ref(_graphical.getScore())
-    };
-    std::array<std::reference_wrapper<IText>, 3> gameLib = {
-        std::ref(_graphical.getScore()),
-        std::ref(_graphical.getScore()),
-        std::ref(_graphical.getScore())
-    };
-
     _menu.getInterface().processMenuTick(
-        _graphical.getScore(),
-        _graphical.getScore(),
-        graphicalLib,
-        gameLib
+        _graphical.getTitleGame(),
+        _graphical.titleGraphic(),
+        _graphical.getGameSelector(),
+        _graphical.getGraphicSelector()
     );
 }
 

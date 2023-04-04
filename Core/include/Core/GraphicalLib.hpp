@@ -27,14 +27,14 @@ private:
     // Menu
     void loadMenu();
     void UnloadMenu();
+    std::unique_ptr<IText> _titleGame;
+    std::unique_ptr<IText> _TextFirstGame;
+    std::unique_ptr<IText> _TextSecondGame;
+    std::unique_ptr<IText> _TextThirdGame;
     std::unique_ptr<IText> _TitleGraphic;
     std::unique_ptr<IText> _TextFirstGraphic;
     std::unique_ptr<IText> _TextSecondGraphic;
     std::unique_ptr<IText> _TextThirdGraphic;
-    std::unique_ptr<IText> _TitleGame;
-    std::unique_ptr<IText> _TextFirstGame;
-    std::unique_ptr<IText> _TextSecondGame;
-    std::unique_ptr<IText> _TextThirdGame;
 
 
 public:
@@ -46,9 +46,16 @@ public:
     void load(Lib::lib);
     IGraphicalFactory& getInterface();
     IWindow& getWindowInterface();
+
+    // Game getter
     IClock& getClockInterface();
     IGrid& getGrid();
     IText& getScore();
     IText& getTime();
 
+    // Menu getter
+    IText& getTitleGame();
+    std::array<std::reference_wrapper<IText>, 3> getGameSelector();
+    IText& titleGraphic();
+    std::array<std::reference_wrapper<IText>, 3> getGraphicSelector();
 };
