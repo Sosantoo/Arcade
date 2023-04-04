@@ -101,7 +101,7 @@ COMMANDS (azerty layout):
 
 ## Documentation
 
-[![doc](https://img.shields.io/badge/Documentation-pdf-red.svg)](./doc/documentation.pdf)
+[![doc](https://img.shields.io/badge/Documentation-pdf-red.svg)](./doc/arcade_doc.pdf)
 
 ## Contributors
 
