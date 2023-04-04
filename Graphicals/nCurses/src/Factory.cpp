@@ -22,5 +22,5 @@ std::unique_ptr<IClock> GraphicalFactoryNcurses::createIClock() {
 std::unique_ptr<IWindow> GraphicalFactoryNcurses::createWindow(std::string name, size_t width, size_t height) {
     auto window = std::make_unique<WindowNcurses>();
     window->initWindow(name, width, height);
-    return std::move(window);
+    return window;
 }

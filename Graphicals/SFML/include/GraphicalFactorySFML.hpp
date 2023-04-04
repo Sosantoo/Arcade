@@ -9,19 +9,25 @@
 #include "../../../Interface/Graphical/IGraphicalFactory.hpp"
 #include <iostream>
 #include <SFML/Graphics.hpp>
+#define PATH_FONT "./assets/PressStart2P.ttf"
+
 
 class ClockSFML: public IClock {
 private:
-        time_t time;
+    sf::Clock clock;
+    double time;
 
 public:
-    void startClock() override {};
+    ClockSFML(): clock{sf::Clock()} {};
+    ~ClockSFML() {};
 
-    time_t getTimeElapsed() override { return 0; };
+    void startClock() override;
 
-    void resetClock() override {};
+    double getTimeElapsed() override;
 
-    void initClock() override {};
+    void resetClock() override;
+
+    void initClock() override;
 };
 
 class WindowSFML: public IWindow {
@@ -72,7 +78,7 @@ public:
     //Entity
     virtual void create(int width, int heigth) final;
 
-    virtual void setPosition(int x, int y) final {};
+    virtual void setPosition(int x, int y) final {(void)x;(void)y;};
 
     virtual void destroy() final;
 
@@ -86,20 +92,23 @@ class TextSFML
 {
 private:
     sf::RenderWindow *_window;
+    sf::Text _text;
+    sf::Font _font;
 
 public:
-    TextSFML(sf::RenderWindow *window) : _window{window} {};
-    ~TextSFML() {}
+    TextSFML(sf::RenderWindow *window);
+    ~TextSFML();
+
     //Entity
-    virtual void create(std::string) final {};
+    virtual void create(std::string) final;
 
-    virtual void setPosition(int x, int y) final {};
+    virtual void setPosition(int x, int y) final;
 
-    virtual void destroy() final {};
+    virtual void destroy() final;
 
-    virtual void displayEntity() final {};
+    virtual void displayEntity() final;
 
-    virtual void changeString(std::string) final {};
+    virtual void changeString(std::string) final;
 };
 
 class GraphicalFactorySFML: public IGraphicalFactory {

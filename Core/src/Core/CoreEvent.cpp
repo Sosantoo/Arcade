@@ -23,11 +23,11 @@ void Core::Core::nextGameLibrary() {
     _game._libDetails = _LibFileManager.getNextGameLib(_game._libDetails);
     _game.load(_game._libDetails);
     bindEvents();
-    std::cout << "nop" << std::endl;
+    std::cout << "[CORE] " << _graphical._libDetails.name << " lib loaded" << std::endl;
 }
 
 void Core::Core::restartGame() {
-    _game.load(_game._libDetails);
+    _game.getInterface().restart();
     bindEvents();
 }
 

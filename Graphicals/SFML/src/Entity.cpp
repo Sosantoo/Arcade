@@ -26,8 +26,6 @@ void GridSFML::setColor(int x, int y, sf::Color color) {
 void GridSFML::create(int gridRow, int gridColumn) {
     _gridRow = gridRow;
     _gridColumn = gridColumn;
-    sf::Vector2u sizeWindow = _window->getSize();
-
     _renderer = new sf::RenderTexture();
 
     // Draw the grid
@@ -58,4 +56,51 @@ void GridSFML::updateCell(int x, int y, Color color) {
 };
 
 void GridSFML::destroy() {
+}
+
+//Clock
+void ClockSFML::startClock() {
+    clock.restart();
+};
+
+double ClockSFML::getTimeElapsed() {
+    sf::Time elapsed = clock.getElapsedTime();
+    double ti = elapsed.asMilliseconds();
+    return ti;
+}
+
+void ClockSFML::resetClock() {
+    clock.restart();
+};
+
+void ClockSFML::initClock() {
+    clock.restart();
+};
+
+//Text
+TextSFML::TextSFML(sf::RenderWindow* window) : _window(window)
+{
+    if (!_font.loadFromFile(PATH_FONT))
+        throw std::runtime_error("Failed to load font");
+}
+
+void TextSFML::create(std::string str) {
+    _text = sf::Text(str, _font);
+    _text.setFillColor(sf::Color::Magenta);
+    _text.setCharacterSize(30);
+}
+
+void TextSFML::setPosition(int x, int y) {
+    _text.setPosition({(float)x, (float)y});
+}
+
+void TextSFML::destroy() {
+}
+
+void TextSFML::displayEntity() {
+    _window->draw(_text);
+}
+
+void TextSFML::changeString(std::string str) {
+    _text.setString(str);
 }

@@ -13,6 +13,11 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_BUILD_TYPE Release)
 
+#set output directory
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
+#get assets
+file(COPY ./assets DESTINATION ${CMAKE_BINARY_DIR})
+
 ################################
 # Core src
 ################################
@@ -38,8 +43,6 @@ add_custom_target(core
 
 add_subdirectory(Games/Nibbler)
 add_subdirectory(Games/Snake)
-add_subdirectory(Games/Menu)
-add_subdirectory(Games/test)
 
 add_custom_target(games
     COMMAND ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR} --target arcade_nibbler arcade_snake arcade_menu
@@ -48,6 +51,9 @@ add_custom_target(games
     VERBATIM
 )
 
+# Set output directory for game libraries
+set_target_properties(arcade_nibbler PROPERTIES LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/lib)
+set_target_properties(arcade_snake PROPERTIES LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/lib)
 
 ################################
 # Graphicals
@@ -63,6 +69,11 @@ add_custom_target(graphicals
     COMMENT "Build the graphicals libraries"
     VERBATIM
 )
+
+# Set output directory for graphical libraries
+set_target_properties(arcade_sdl2 PROPERTIES LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/lib)
+set_target_properties(arcade_ncurses PROPERTIES LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/lib)
+set_target_properties(arcade_sfml PROPERTIES LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/lib)
 
 ################################
 # Tests

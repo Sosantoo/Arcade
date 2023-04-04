@@ -25,7 +25,6 @@ public:
 
     Lib::lib _libDetails;
     void load(Lib::lib);
-    void display();
     IGraphicalFactory& getInterface();
     IWindow& getWindowInterface();
     IClock& getClockInterface();

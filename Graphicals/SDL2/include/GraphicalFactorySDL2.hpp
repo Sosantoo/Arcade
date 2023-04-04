@@ -9,19 +9,21 @@
 #include "../../../Interface/Graphical/IGraphicalFactory.hpp"
 #include <iostream>
 #include <SDL2/SDL.h>
+#include <SDL_ttf.h>
+#define PATH_FONT "./assets/fonts/PressStart2P"
 
-class ClockSDL2: public IClock {
+class ClockSDL2 : public IClock {
 private:
-        time_t time;
+    Uint32 startTime;
 
 public:
-    void startClock() override {};
+    void startClock() override;
 
-    time_t getTimeElapsed() override { return 0;};
+    double getTimeElapsed() override;
 
-    void resetClock() override {};
+    void resetClock() override;
 
-    void initClock() override {};
+    void initClock() override;
 };
 
 
@@ -86,20 +88,22 @@ class TextSDL2
 {
 private:
     SDL_Window *_window;
+    // SDL_Surface* _surfaceMessage;
+    // SDL_Texture* _message;
 
 public:
     TextSDL2(SDL_Window *window): _window{window} {};
     ~TextSDL2() {};
 
-    virtual void create(std::string str) final {};
+    virtual void create(std::string str) final;
 
-    virtual void setPosition(int x, int y) final {};
+    virtual void setPosition(int x, int y) final;
 
-    virtual void destroy() final {};
+    virtual void destroy() final;
 
-    virtual void displayEntity() final {};
+    virtual void displayEntity() final;
 
-    virtual void changeString(std::string str) final {};
+    virtual void changeString(std::string str) final;
 };
 
 
