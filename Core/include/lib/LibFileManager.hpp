@@ -14,6 +14,7 @@ namespace Lib
     enum libType{
         _GRAPHICALS_,
         _GAMES_,
+        _MENU_,
     };
 
     struct lib {

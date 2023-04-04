@@ -32,8 +32,7 @@ std::map<std::string, Lib::libType> libs_register {
     {"arcade_qix.so",       Lib::_GAMES_},
     {"arcade_centipede.so", Lib::_GAMES_},
     {"arcade_solarfox.so",  Lib::_GAMES_},
-    {"arcade_menu.so",      Lib::_GAMES_},
-    {"testGame.so",         Lib::_GAMES_},
+    {"arcade_menu.so",      Lib::_MENU_},
 };
 
 LibFileManager::LibFileManager(const std::string &path):
@@ -87,17 +86,16 @@ void LibFileManager::displayavailableLib() {
 }
 
 Lib::lib LibFileManager::getLibByName(const std::string &name) {
-    Lib::lib find;
-     auto iter = std::find_if(
+    auto iter = std::find_if(
         _availableLibs.begin(),
         _availableLibs.end(),
-        [&name, &find](const Lib::lib& m) {  return (find = m).name == name; }
+        [&name](const Lib::lib& m) -> bool { return m.name == name; }
     );
-    return (iter != _availableLibs.end()) ? find : Lib::lib();
+    return (iter != _availableLibs.end()) ? *iter : Lib::lib();
 }
 
 Lib::lib LibFileManager::getLibBypath(const std::string &path) {
-     auto iter = std::find_if(
+    auto iter = std::find_if(
         _availableLibs.begin(),
         _availableLibs.end(),
         [&path](const Lib::lib& m) -> bool { return m.path == path; }

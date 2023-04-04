@@ -22,22 +22,19 @@ void Core::Core::nextGraphicsLibrary() {
 void Core::Core::nextGameLibrary() {
     _game._libDetails = _LibFileManager.getNextGameLib(_game._libDetails);
     _game.load(_game._libDetails);
+    gameState = Core::GameState::GAME_LOOP;
     bindEvents();
     std::cout << "[CORE] " << _graphical._libDetails.name << " lib loaded" << std::endl;
 }
 
 void Core::Core::restartGame() {
     _game.getInterface().restart();
+    gameState = Core::GameState::GAME_LOOP;
     bindEvents();
 }
 
 void Core::Core::goToMenu() {
-    _game.load({
-        .name = "arcade_menu.so",
-        .path = "./lib/arcade_menu.so",
-        .type = Lib::_GAMES_,
-    });
-
+    gameState = Core::GameState::MENU_LOOP;
     bindEvents();
 }
 
