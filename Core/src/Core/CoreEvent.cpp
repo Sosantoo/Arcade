@@ -45,7 +45,6 @@ void Core::Core::launchFromMenu(std::string gameLibName, std::string graphicLibN
     if (!(_game._libDetails == gameLibDetailsFound)) {
         _game.load(gameLibDetailsFound);
     }
-    std::cout << "graphics alreaady loaded: " << _graphical._libDetails.name << std::endl;
     if (!(_graphical._libDetails == graphicLibDetailsFound)) {
         tearDownGraphics();
         _graphical.load(graphicLibDetailsFound);
