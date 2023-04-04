@@ -1,6 +1,6 @@
 <p align="center">
   <a>
-    <img alt="Arcade Logo" src="./arcade.webp"/>
+    <img alt="Arcade Logo" src="./doc/assets/arcade.webp"/>
   </a>
   <p align="center">A gaming platform.</p>
 </p>
@@ -11,7 +11,7 @@ Arcade is a gaming platform, a program that lets the user choose a game to play 
 
 ## Subject
 
-[![sub](https://img.shields.io/badge/Subject-pdf-red.svg)](./B-OOP-400_arcade.pdf)
+[![sub](https://img.shields.io/badge/Subject-pdf-red.svg)](./doc/assets/B-OOP-400_arcade.pdf)
 
 ## Build
 
@@ -84,7 +84,7 @@ USAGE:
   ./arcade path_to_graphical_lib
 
 DESCRIPTION:
-  lib         path to the initial graphical library to load (./lib/arcade_lib_name.so)
+  /lib folder         path to the initial graphical library to load (./lib/arcade_lib_name.so)
 
 COMMANDS (azerty layout):
   Y           Next graphics lib.
