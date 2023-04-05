@@ -88,7 +88,6 @@ class TextSDL2
 {
 private:
     SDL_Renderer *_renderer;
-    SDL_Surface * _surface;
     SDL_Texture *_text_texture;
     TTF_Font *_font;
     SDL_Rect _rect;

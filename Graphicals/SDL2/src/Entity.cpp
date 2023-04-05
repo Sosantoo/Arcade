@@ -99,13 +99,15 @@ TextSDL2::~TextSDL2() {
 
 void TextSDL2::create(std::string str) {
     SDL_Color color = {255, 192, 203, 255};
-    _surface = TTF_RenderText_Solid(_font, str.c_str(), color);
-    _text_texture = SDL_CreateTextureFromSurface(_renderer, _surface);
+    SDL_Surface * surface = TTF_RenderText_Solid(_font, str.c_str(), color);
+    _text_texture = SDL_CreateTextureFromSurface(_renderer, surface);
 
     int texW = 0;
     int texH = 0;
     SDL_QueryTexture(_text_texture, NULL, NULL, &texW, &texH);
+    SDL_FreeSurface(surface);
     _rect = { 0, 0, texW, texH };
+    SDL_RenderCopy(_renderer, _text_texture, NULL, &_rect);
 }
 
 void TextSDL2::setPosition(int x, int y) {
@@ -115,25 +117,25 @@ void TextSDL2::setPosition(int x, int y) {
 
 void TextSDL2::destroy() {
     SDL_DestroyTexture(_text_texture);
-    SDL_FreeSurface(_surface);
     TTF_CloseFont(_font);
 }
 
 void TextSDL2::displayEntity() {
-    SDL_RenderCopy(_renderer, _text_texture, NULL, &_rect);
+    // SDL_RenderCopy(_renderer, _text_texture, NULL, &_rect);
 }
 
 void TextSDL2::changeString(std::string str) {
     SDL_Color color = {255, 218, 185, 255};
-    SDL_FreeSurface(_surface);
     SDL_DestroyTexture(_text_texture);
 
-    _surface = TTF_RenderText_Solid(_font, str.c_str(), color);
-    _text_texture = SDL_CreateTextureFromSurface(_renderer, _surface);
+    SDL_Surface * surface = TTF_RenderText_Solid(_font, str.c_str(), color);
+    _text_texture = SDL_CreateTextureFromSurface(_renderer, surface);
+    SDL_FreeSurface(surface);
 
     int texW = 0;
     int texH = 0;
     SDL_QueryTexture(_text_texture, NULL, NULL, &texW, &texH);
     _rect.w = texW;
     _rect.h = texH;
+    SDL_RenderCopy(_renderer, _text_texture, NULL, &_rect);
 }
