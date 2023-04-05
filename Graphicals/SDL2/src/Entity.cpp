@@ -125,6 +125,9 @@ void TextSDL2::displayEntity() {
 
 void TextSDL2::changeString(std::string str) {
     SDL_Color color = {255, 218, 185, 255};
+    SDL_FreeSurface(_surface);
+    SDL_DestroyTexture(_text_texture);
+
     _surface = TTF_RenderText_Solid(_font, str.c_str(), color);
     _text_texture = SDL_CreateTextureFromSurface(_renderer, _surface);
 
