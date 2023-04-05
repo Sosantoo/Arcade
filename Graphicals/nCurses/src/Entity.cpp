@@ -8,11 +8,13 @@
 #include "GraphicalFactoryNcurses.hpp"
 #include <ncurses.h>
 
-void GridNcurses::setColorPair(int colorPair, int foregroundColor, int backgroundColor) {
+void GridNcurses::setColorPair(int colorPair, int foregroundColor, int backgroundColor)
+{
     init_pair(colorPair, foregroundColor, backgroundColor);
 }
 
-void GridNcurses::setColor(int x, int y, int color) {
+void GridNcurses::setColor(int x, int y, int color)
+{
     int cellWidth, cellHeight, startX, startY;
 
     getmaxyx(_window, cellHeight, cellWidth);
@@ -30,7 +32,8 @@ void GridNcurses::setColor(int x, int y, int color) {
     wattroff(_window, COLOR_PAIR(color));
 }
 
-void GridNcurses::create(int gridRow, int gridColumn) {
+void GridNcurses::create(int gridRow, int gridColumn)
+{
     _gridRow = gridRow;
     _gridColumn = gridColumn;
     start_color();
@@ -54,22 +57,18 @@ void GridNcurses::create(int gridRow, int gridColumn) {
     refresh();
 }
 
-void GridNcurses::displayEntity() {
+void GridNcurses::displayEntity()
+{
     napms(100);
     refresh();
 }
 
-void GridNcurses::updateCell(int x, int y, Color color) {
+void GridNcurses::updateCell(int x, int y, Color color)
+{
     std::map<IEntity::Color, int> colorMap = {
-        {IEntity::Color::Blue, 1},
-        {IEntity::Color::Green, 2},
-        {IEntity::Color::Orange, 3},
-        {IEntity::Color::Red, 4},
-        {IEntity::Color::Brown, 5},
-        {IEntity::Color::Yellow, 6}
-    };
+        {IEntity::Color::Blue, 1}, {IEntity::Color::Green, 2}, {IEntity::Color::Orange, 3},
+        {IEntity::Color::Red, 4},  {IEntity::Color::Brown, 5}, {IEntity::Color::Yellow, 6}};
     setColor(x, y, colorMap[color]);
 }
 
-void GridNcurses::destroy() {
-}
+void GridNcurses::destroy() {}
