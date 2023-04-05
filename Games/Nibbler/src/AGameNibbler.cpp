@@ -157,7 +157,6 @@ void AGameNibbler::displayBoard(IGrid &grid) {
 }
 
 void AGameNibbler::snakeStuck() {
-    std::cout << "snake stuck" << std::endl;
     int headX = _snakeCoords.back().first;
     int headY = _snakeCoords.back().second;
 
