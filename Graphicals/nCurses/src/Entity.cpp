@@ -8,27 +8,11 @@
 #include "GraphicalFactoryNcurses.hpp"
 #include <ncurses.h>
 
-void GridNcurses::setColorPair(int colorPair, int foregroundColor, int backgroundColor)
-{
-    init_pair(colorPair, foregroundColor, backgroundColor);
-}
-
 void GridNcurses::setColor(int x, int y, int color)
 {
-    int cellWidth, cellHeight, startX, startY;
-
-    getmaxyx(_window, cellHeight, cellWidth);
-    cellWidth /= _gridColumn;
-    cellHeight /= _gridRow;
-    startX = x * cellWidth;
-    startY = y * cellHeight;
+    // std::cout << "setColor" << x << ", y: " << y << ", color: " << std::endl;
     wattron(_window, COLOR_PAIR(color));
-    for (int i = startY; i < startY + cellHeight; i++) {
-        for (int j = startX; j < startX + cellWidth; j++) {
-            mvwprintw(_window, y, x, " ");
-        }
-    }
-    wrefresh(_window);
+    mvwprintw(_window, y, x, "w");
     wattroff(_window, COLOR_PAIR(color));
 }
 
@@ -36,31 +20,13 @@ void GridNcurses::create(int gridRow, int gridColumn)
 {
     _gridRow = gridRow;
     _gridColumn = gridColumn;
-    start_color();
     colorBackGround = COLOR_BLACK;
-    setColorPair(1, COLOR_WHITE, COLOR_BLUE);
-    setColorPair(2, COLOR_WHITE, COLOR_GREEN);
-    setColorPair(3, COLOR_WHITE, COLOR_RED);
-    setColorPair(4, COLOR_WHITE, COLOR_MAGENTA);
-    setColorPair(5, COLOR_WHITE, COLOR_CYAN);
-    setColorPair(6, COLOR_WHITE, COLOR_YELLOW);
-    setColorPair(7, COLOR_WHITE, COLOR_WHITE);
-
-    for (int row = 0; row < gridRow; row++) {
-        for (int col = 0; col < gridColumn; col++) {
-            if (row == 0 || col == 0 || _gridRow - 1 == row || _gridColumn - 1 == col)
-                updateCell(col, row, IEntity::Color::Orange);
-            else
-                updateCell(col, row, IEntity::Color::Yellow);
-        }
-    }
     refresh();
 }
 
 void GridNcurses::displayEntity()
 {
-    napms(100);
-    refresh();
+    wrefresh(_window);
 }
 
 void GridNcurses::updateCell(int x, int y, Color color)
@@ -71,4 +37,30 @@ void GridNcurses::updateCell(int x, int y, Color color)
     setColor(x, y, colorMap[color]);
 }
 
-void GridNcurses::destroy() {}
+void GridNcurses::destroy() {
+}
+
+//text
+void TextNcurses::create(std::string str) {
+    _text = str;
+    _x = 0;
+    _y = 0;
+    mvwprintw(_window, _x, _y, " ");
+}
+
+void TextNcurses::setPosition(int x, int y) {
+    _x = x / 50;
+    _y = y / 50;
+}
+
+void TextNcurses::destroy() {
+
+}
+
+void TextNcurses::displayEntity() {
+    mvwprintw(_window, _x, _y, " ");
+}
+
+void TextNcurses::changeString(std::string str) {
+    _text = str;
+}

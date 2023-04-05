@@ -21,6 +21,7 @@ target_sources(arcade_ncurses
 target_include_directories(arcade_ncurses
     PUBLIC
         include
+        ${CURSES_INCLUDE_DIR}
 )
 
 target_compile_options(arcade_ncurses PRIVATE -Wall -Wextra -fno-gnu-unique -ggdb3)
