@@ -15,6 +15,7 @@ void WindowSFML::initWindow(std::string name, size_t width, size_t height)
 {
     _window = new sf::RenderWindow(sf::VideoMode(width, height), name);
     _window->setFramerateLimit(60);
+    _window->setKeyRepeatEnabled(false);
 };
 
 void WindowSFML::closeWindow()
@@ -37,14 +38,6 @@ void WindowSFML::display()
    _window->display();
 };
 
-bool isAnyKeyPressed(std::vector<sf::Keyboard::Key> keys) {
-    for (auto &key : keys) {
-        if (sf::Keyboard::isKeyPressed(key))
-            return true;
-    }
-    return false;
-}
-
 void WindowSFML::eventPollEvent()
 {
 
@@ -52,38 +45,42 @@ void WindowSFML::eventPollEvent()
         switch (event.type) {
             case (sf::Event::Closed):
                 return callEvent(EventType::QUIT);
-            default: break;
+            case (sf::Event::KeyPressed):
+                if (event.key.code == sf::Keyboard::Left || event.key.code == sf::Keyboard::Q)
+                    return callEvent(EventType::LEFT_pressed);
+
+                else if (event.key.code == sf::Keyboard::Right || event.key.code == sf::Keyboard::D)
+                    return callEvent(EventType::RIGHT_pressed);
+
+                else if (event.key.code == sf::Keyboard::Up || event.key.code == sf::Keyboard::Z)
+                    return callEvent(EventType::UP_pressed);
+
+                else if (event.key.code == sf::Keyboard::Down || event.key.code == sf::Keyboard::S)
+                    return callEvent(EventType::DOWN_pressed);
+
+                else if (event.key.code == sf::Keyboard::Y)
+                    return callEvent(EventType::NEXT_LIB);
+
+                else if (event.key.code == sf::Keyboard::U) {
+                    std::cout << "Enter pressed" << std::endl;
+                    return callEvent(EventType::NEXT_GAME);
+                }
+
+                else if (event.key.code == sf::Keyboard::I)
+                    return callEvent(EventType::RESTART);
+
+                else if (event.key.code == sf::Keyboard::O)
+                    return callEvent(EventType::GO_TO_MENU);
+
+                else if (event.key.code == sf::Keyboard::P)
+                    return callEvent(EventType::QUIT);
+
+                else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
+                    return callEvent(EventType::ENTER_pressed);
+                break;
+            default:
+                break;
         }
-
-        if (isAnyKeyPressed({sf::Keyboard::Left, sf::Keyboard::Q}))
-            return callEvent(EventType::LEFT_pressed);
-
-        else if (isAnyKeyPressed({sf::Keyboard::Right, sf::Keyboard::D}))
-            return callEvent(EventType::RIGHT_pressed);
-
-        else if (isAnyKeyPressed({sf::Keyboard::Up, sf::Keyboard::Z}))
-            return callEvent(EventType::UP_pressed);
-
-        else if (isAnyKeyPressed({sf::Keyboard::Down, sf::Keyboard::S}))
-            return callEvent(EventType::DOWN_pressed);
-
-        else if (isAnyKeyPressed({sf::Keyboard::Y}))
-            return callEvent(EventType::NEXT_LIB);
-
-        else if (isAnyKeyPressed({sf::Keyboard::U}))
-            return callEvent(EventType::NEXT_GAME);
-
-        else if (isAnyKeyPressed({sf::Keyboard::I}))
-            return callEvent(EventType::RESTART);
-
-        else if (isAnyKeyPressed({sf::Keyboard::O}))
-            return callEvent(EventType::GO_TO_MENU);
-
-        else if (isAnyKeyPressed({sf::Keyboard::P}))
-            return callEvent(EventType::QUIT);
-
-        else if (isAnyKeyPressed({sf::Keyboard::Enter}))
-            return callEvent(EventType::ENTER_pressed);
     }
 };
 
