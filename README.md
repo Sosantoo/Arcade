@@ -98,8 +98,8 @@ COMMANDS (azerty layout):
   Z | Up Arrow              Move up.
   S | Down Arrow            Move down.
   
-  Left/Right Arrow          Menu navigation, choose graphicals libraries.
-  Up/Down Arrow             Menu navigation, choose game libraries.      
+  Left | Right Arrow        Menu navigation, choose graphicals libraries.
+  Up | Down Arrow           Menu navigation, choose game libraries.      
 ```
 
 ## Documentation
