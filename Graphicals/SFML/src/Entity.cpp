@@ -9,7 +9,6 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
-
 void GridSFML::setColor(int x, int y, sf::Color color) {
     auto windowSize = _window->getSize();
 
