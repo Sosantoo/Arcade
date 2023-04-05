@@ -89,8 +89,8 @@ void Menu::displayTexts(
     std::array<std::reference_wrapper<IText>, 3> graphicSelector
 ) {
 
-    titleGame.changeString("Game libaries:");
-    titleGraphic.changeString("Graphicals libaries:");
+    titleGame.changeString("Game libraries:");
+    titleGraphic.changeString("Graphicals libraries:");
     titleGame.displayEntity();
     titleGraphic.displayEntity();
 

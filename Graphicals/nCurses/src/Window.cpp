@@ -9,26 +9,41 @@
 #include <ncurses.h>
 #include <stdexcept>
 
-void WindowNcurses::initWindow(std::string, size_t width, size_t height)
+static void setColorPair(int colorPair, int foregroundColor, int backgroundColor)
+{
+    init_pair(colorPair, foregroundColor, backgroundColor);
+}
+
+void WindowNcurses::initWindow(std::string, size_t, size_t)
 {
     std::cout << "[nCurses] initWindow" << std::endl;
     // std::cout.setstate(std::ios_base::failbit);
-    setlocale(LC_ALL, "");
     if (!initscr())
         throw std::runtime_error("LibGraphNcurses: could not initiate window");
-    cbreak();
-    noecho();
-    nonl();
-    nodelay(stdscr, true);
-    intrflush(stdscr, true);
-    keypad(stdscr, true);
-    curs_set(0);
 
-    getmaxyx(stdscr, yMax, xMax);
-    _window = newwin(height, width, yMax / 2, xMax / 2);
-    box(_window, 0, 0);
-    refresh();
     isOpen = true;
+
+    //init color
+    start_color();
+    setColorPair(1, COLOR_WHITE, COLOR_BLUE);
+    setColorPair(2, COLOR_WHITE, COLOR_GREEN);
+    setColorPair(3, COLOR_WHITE, COLOR_RED);
+    setColorPair(4, COLOR_WHITE, COLOR_MAGENTA);
+    setColorPair(5, COLOR_WHITE, COLOR_CYAN);
+    setColorPair(6, COLOR_WHITE, COLOR_YELLOW);
+    setColorPair(7, COLOR_WHITE, COLOR_WHITE);
+
+    // ncurses init in loadressource method
+
+    //init window
+    getmaxyx(stdscr, yMax, xMax);
+    int x = (xMax - 50) / 2;
+    int y = (yMax - 50) / 2;
+    WINDOW *win = newwin(50, 50, y, x);
+    box(win, 0, 0);
+    refresh();
+    wrefresh(win);
+    nodelay(_window, true);
 };
 
 void WindowNcurses::closeWindow()
@@ -43,8 +58,8 @@ bool WindowNcurses::windowIsOpen()
     return isOpen;
 };
 
-void WindowNcurses::clear(){
-    erase();
+void WindowNcurses::clear() {
+    wclear(_window);
 };
 
 void WindowNcurses::display()
@@ -55,21 +70,26 @@ void WindowNcurses::display()
 
 void WindowNcurses::eventPollEvent()
 {
-    int key = wgetch(_window);
+    int key = getch();
+    // int key = wgetch(_window);
 
     switch (key) {
         case -1: return;
         case 'z':
-        case KEY_UP: return callEvent(IWindow::EventType::UP_pressed);
+        case KEY_UP:
+            return callEvent(IWindow::EventType::UP_pressed);
 
         case 's':
-        case KEY_DOWN: return callEvent(IWindow::EventType::DOWN_pressed);
+        case KEY_DOWN:
+            return callEvent(IWindow::EventType::DOWN_pressed);
 
         case 'q':
-        case KEY_LEFT: return callEvent(IWindow::EventType::LEFT_pressed);
+        case KEY_LEFT:
+            return callEvent(IWindow::EventType::LEFT_pressed);
 
         case 'd':
-        case KEY_RIGHT: return callEvent(IWindow::EventType::RIGHT_pressed);
+        case KEY_RIGHT:
+            return callEvent(IWindow::EventType::RIGHT_pressed);
 
         case 'y': return callEvent(IWindow::EventType::NEXT_LIB);
         case 'u': return callEvent(IWindow::EventType::NEXT_GAME);

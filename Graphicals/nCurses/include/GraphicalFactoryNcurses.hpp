@@ -85,20 +85,23 @@ class TextNcurses
 {
 private:
     WINDOW *_window;
+    std::string _text;
+    int _x;
+    int _y;
 
 public:
     TextNcurses(WINDOW *window) : _window{window} {};
     ~TextNcurses() {};
     //Entity
-    virtual void create(std::string) final {};
+    virtual void create(std::string) final;
 
-    virtual void setPosition(int , int ) final {};
+    virtual void setPosition(int, int) final;
 
-    virtual void destroy() final {};
+    virtual void destroy() final;
 
-    virtual void displayEntity() final {};
+    virtual void displayEntity() final;
 
-    virtual void changeString(std::string) final { };
+    virtual void changeString(std::string) final;
 };
 
 class GraphicalFactoryNcurses: public IGraphicalFactory {

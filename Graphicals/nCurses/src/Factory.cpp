@@ -9,6 +9,14 @@
 
 void GraphicalFactoryNcurses::loadResource() {
     std::cout << "[NCURSES] loadResource" << std::endl;
+    //init ncurses
+    initscr();
+    cbreak();
+    noecho();
+    curs_set(0);
+    keypad(stdscr, TRUE);
+    wtimeout(stdscr, 100);
+    nodelay(stdscr, true);
 };
 
 void GraphicalFactoryNcurses::destroyRessource() {
