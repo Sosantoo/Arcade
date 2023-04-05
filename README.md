@@ -56,6 +56,9 @@ This project is documented with Doxygen, which is the de facto standard tool for
 There is also a ./doc directory, explaining how to implement new graphics libraries or game libraries compatible with
 the system.
 
+[![doc](https://img.shields.io/badge/Documentation-html-red.svg)](./doc/html)
+[![doc](https://img.shields.io/badge/Documentation-pdf-red.svg)](./doc/arcade_doc.pdf)
+
 ## Librairies
 
 `Graphicals libraries`
@@ -101,11 +104,6 @@ COMMANDS (azerty layout):
   Left | Right Arrow        Menu navigation, choose graphicals libraries.
   Up | Down Arrow           Menu navigation, choose game libraries.      
 ```
-
-## Documentation
-
-[![doc](https://img.shields.io/badge/Documentation-html-red.svg)](./doc/html)
-[![doc](https://img.shields.io/badge/Documentation-pdf-red.svg)](./doc/arcade_doc.pdf)
 
 ## Contributors
 
