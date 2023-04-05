@@ -9,7 +9,7 @@
 #include <ncurses.h>
 #include <stdexcept>
 
-void WindowNcurses::initWindow(std::string name, size_t width, size_t height)
+void WindowNcurses::initWindow(std::string, size_t width, size_t height)
 {
     std::cout << "[nCurses] initWindow" << std::endl;
     // std::cout.setstate(std::ios_base::failbit);

@@ -9,7 +9,7 @@
 #include "../../Interface/AGame.hpp"
 #include <curses.h>
 #include <ctime>
-#define INITIAL_LENGTH 3;
+#define INITIAL_LENGTH 4;
 
 class AGameSnake : public AGame
 {
@@ -20,7 +20,7 @@ class AGameSnake : public AGame
         const char wall = 'W';
         const char snake = '#';
         const char food = '*';
-        const int initialLength = 10;
+        const int initialLength = INITIAL_LENGTH;
         bool gameOver;
         int dx; // horizontal movement direction
         int dy; // vertical movement direction

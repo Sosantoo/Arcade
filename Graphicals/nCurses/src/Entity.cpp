@@ -25,7 +25,7 @@ void GridNcurses::setColor(int x, int y, int color)
     wattron(_window, COLOR_PAIR(color));
     for (int i = startY; i < startY + cellHeight; i++) {
         for (int j = startX; j < startX + cellWidth; j++) {
-            mvwprintw(_window, i, j, " ");
+            mvwprintw(_window, y, x, " ");
         }
     }
     wrefresh(_window);
