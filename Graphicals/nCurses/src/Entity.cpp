@@ -20,7 +20,7 @@ void GridNcurses::setColor(int x, int y, int color) {
     mvwprintw(_window, y, x, "  ");
     //     }
     // }
-    wrefresh(_window);
+    // wrefresh(_window);
     wattroff(_window, COLOR_PAIR(color));
 }
 
@@ -77,7 +77,7 @@ void TextNcurses::destroy() {
 }
 
 void TextNcurses::displayEntity() {
-    mvprintw(_x, _y, " ");
+    mvprintw(_x, _y, _text.c_str());
     refresh();
 }
 
