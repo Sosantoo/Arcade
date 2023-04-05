@@ -16,6 +16,24 @@ class IWindow
     public:
         ~IWindow() = default;
 
+        //event
+        enum class EventType {
+            UP_pressed,
+            DOWN_pressed,
+            LEFT_pressed,
+            RIGHT_pressed,
+            ENTER_pressed,
+            QUIT,
+            PAUSE,
+            RESUME,
+            NEXT_GAME,
+            NEXT_LIB,
+            RESTART,
+            GO_TO_MENU,
+        };
+        using EventCallBack = std::function<void()>;
+        using EventHandler = std::map<IWindow::EventType, EventCallBack>;
+
         /**
          * @brief Initializes the window object required for the implementation.
          * Its purpose is to initialize the window object with the specified name, width, and
@@ -57,21 +75,6 @@ class IWindow
          */
         virtual void display() = 0;
 
-    //event
-    enum class EventType {
-        UP_pressed,
-        DOWN_pressed,
-        LEFT_pressed,
-        RIGHT_pressed,
-        ENTER_pressed,
-        QUIT,
-        PAUSE,
-        RESUME,
-        NEXT_GAME,
-        NEXT_LIB,
-        RESTART,
-        GO_TO_MENU,
-    };
         /**
          * @brief Calls the event handler function for the specified event type.
          * Its purpose is to call the event handler function for the specified event type.
@@ -115,6 +118,4 @@ class IWindow
          * @return std::unique_ptr<IGrid>
          */
         virtual std::unique_ptr<IGrid> createIGrid() = 0;
-        using EventCallBack = std::function<void()>;
-        using EventHandler = std::map<IWindow::EventType, EventCallBack>;
 };
