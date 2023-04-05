@@ -14,7 +14,7 @@
 void WindowNcurses::initWindow(std::string, size_t, size_t)
 {
     std::cout << "[nCurses] initWindow" << std::endl;
-    // std::cout.setstate(std::ios_base::failbit);
+    std::cout.setstate(std::ios_base::failbit);
     if (!initscr())
         throw std::runtime_error("LibGraphNcurses: could not initiate window");
 
@@ -46,14 +46,14 @@ bool WindowNcurses::windowIsOpen()
 };
 
 void WindowNcurses::clear() {
-    // wclear(_window);
-    clear();
+    wclear(_window);
+    // clear();
 };
 
 void WindowNcurses::display()
 {
     // refresh();
-    // wrefresh(_window);
+    wrefresh(_window);
 };
 
 void WindowNcurses::eventPollEvent()
