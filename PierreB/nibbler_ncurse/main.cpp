@@ -70,7 +70,7 @@ void displaynibbler(WINDOW* win, const nibbler& nibbler) {
     }
 }
 
-void lookAroundHead(nibbler& nibbler, int ch, std::vector<std::pair<int, int>>& coords_w, 
+void lookAroundHead(nibbler& nibbler, int ch, std::vector<std::pair<int, int>>& coords_w,
 std::vector<std::pair <int, int> >& coords_t) {
     int safe = 4;
     for (auto coord : coords_t) {
@@ -93,6 +93,7 @@ std::vector<std::pair <int, int> >& coords_t) {
 
 void updatenibblerPosition1(nibbler& nibbler, int ch,
 std::vector<std::pair<int, int>>& coords_o, std::vector<std::pair<int, int>>& coords_w, std::vector<std::pair <int, int> >& coords_t) {
+    if (nibbler.stocky)
     int newx = nibbler.x[0] + nibbler.stockx;
     int newy = nibbler.y[0] + nibbler.stocky;
     mvprintw(33, 50, "newy = %d = %d + %d",newy, nibbler.y[0] + nibbler.stocky);
