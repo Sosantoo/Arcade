@@ -87,21 +87,24 @@ DESCRIPTION:
   /lib folder         path to the initial graphical library to load (./lib/arcade_lib_name.so)
 
 COMMANDS (azerty layout):
-  Y           Next graphics lib.
-  U           Next game.
-  I           Restart the game.
-  O           Go back to the menu.
-  P           Exit.
+  Y                         Next graphics lib.
+  U                         Next game.
+  I                         Restart the game.
+  O                         Go back to the menu.
+  P                         Exit.
 
-  D           Move right.
-  Q           Move left.
-  Z           Move up.
-  S           Move down.
+  D | Right Arrow           Move right.
+  Q | Left Arrow            Move left.
+  Z | Up Arrow              Move up.
+  S | Down Arrow            Move down.
+  
+  Left/Right Arrow          Menu navigation, choose graphicals libraries.
+  Up/Down Arrow             Menu navigation, choose game libraries.      
 ```
 
 ## Documentation
 
-[![doc](https://img.shields.io/badge/Documentation-html-red.svg)](./doc/html/index.html)
+[![doc](https://img.shields.io/badge/Documentation-html-red.svg)](./doc/html)
 [![doc](https://img.shields.io/badge/Documentation-pdf-red.svg)](./doc/arcade_doc.pdf)
 
 ## Contributors
