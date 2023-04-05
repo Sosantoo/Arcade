@@ -27,6 +27,7 @@ SharedLibLoader::~SharedLibLoader()
 }
 
 void SharedLibLoader::open(const std::string &libName, int flags) {
+    (void)flags;
     if (_Handles.size() >= 2) _Handles.erase(_Handles.begin());
 
     void *handle = dlopen(libName.c_str(), RTLD_NOW);

@@ -33,7 +33,7 @@ private:
     int yMax;
 
 public:
-    void initWindow(std::string name, size_t width, size_t height) final;
+    void initWindow(std::string, size_t, size_t) final;
 
     void closeWindow() final;
 
@@ -69,9 +69,9 @@ public:
     GridNcurses(WINDOW *window) : _window{window} {};
     ~GridNcurses() {};
     //Entity
-    virtual void create(int width, int heigth) final;
+    virtual void create(int, int ) final;
 
-    virtual void setPosition(int x, int y) final {};
+    virtual void setPosition(int, int) final { };
 
     virtual void destroy() final;
 
@@ -92,13 +92,13 @@ public:
     //Entity
     virtual void create(std::string) final {};
 
-    virtual void setPosition(int x, int y) final {};
+    virtual void setPosition(int , int ) final {};
 
     virtual void destroy() final {};
 
     virtual void displayEntity() final {};
 
-    virtual void changeString(std::string) final {};
+    virtual void changeString(std::string) final { };
 };
 
 class GraphicalFactoryNcurses: public IGraphicalFactory {
@@ -109,6 +109,6 @@ public:
 
     std::unique_ptr<IClock> createIClock() final;
 
-    std::unique_ptr<IWindow> createWindow(std::string name, size_t width, size_t height) final;
+    std::unique_ptr<IWindow> createWindow(std::string, size_t, size_t) final;
 };
 

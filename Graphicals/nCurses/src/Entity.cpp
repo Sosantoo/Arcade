@@ -21,11 +21,11 @@ void GridNcurses::setColor(int x, int y, int color) {
     startX = x * cellWidth;
     startY = y * cellHeight;
     wattron(_window, COLOR_PAIR(color));
-    // for (int i = startY; i < startY + cellHeight; i++) {
-    //     for (int j = startX; j < startX + cellWidth; j++) {
-    mvwprintw(_window, y, x, " ");
-    //     }
-    // }
+    for (int i = startY; i < startY + cellHeight; i++) {
+        for (int j = startX; j < startX + cellWidth; j++) {
+            mvwprintw(_window, y, x, " ");
+        }
+    }
     wrefresh(_window);
     wattroff(_window, COLOR_PAIR(color));
 }
