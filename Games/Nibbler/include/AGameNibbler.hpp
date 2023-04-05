@@ -7,9 +7,11 @@
 
 #pragma once
 #include "../../Interface/AGame.hpp"
-#include <curses.h>
 #include <ctime>
-#define INITIAL_LENGTH 3;
+#define INITIAL_LENGTH 4;
+#define MAP_PATH "./assets/map.txt"
+#define SPAWN_X 31
+#define SPAWN_Y 37
 
 class AGameNibbler : public AGame
 {
@@ -19,8 +21,8 @@ class AGameNibbler : public AGame
         const char empty = ' ';
         const char wall = 'W';
         const char snake = '#';
-        const char food = '*';
-        const int initialLength = 10;
+        const char food = '+';
+        const int initialLength = INITIAL_LENGTH;
         bool gameOver;
         int dx; // horizontal movement direction
         int dy; // vertical movement direction
@@ -30,14 +32,17 @@ class AGameNibbler : public AGame
         double speepFactor;
         std::clock_t _clock;
 
+        std::vector<std::vector<char>> _map;
         std::vector<std::vector<char>> _board;
         std::vector<std::pair<int, int>> _snakeCoords;
+        std::vector<std::pair<int, int>> _unavailableFoodCoo;
 
-        void generateFood();
+        void openMap();
         void clearBoard();
         void drawnSnake();
         void drawnFood();
         void displayBoard(IGrid &);
+        void snakeStuck();
         void moveAllSnake();
         void displayGraphicalInfo(IText &, IText &);
 
