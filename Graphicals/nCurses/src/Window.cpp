@@ -9,10 +9,7 @@
 #include <ncurses.h>
 #include <stdexcept>
 
-static void setColorPair(int colorPair, int foregroundColor, int backgroundColor)
-{
-    init_pair(colorPair, foregroundColor, backgroundColor);
-}
+
 
 void WindowNcurses::initWindow(std::string, size_t, size_t)
 {
@@ -23,26 +20,16 @@ void WindowNcurses::initWindow(std::string, size_t, size_t)
 
     isOpen = true;
 
-    //init color
-    start_color();
-    setColorPair(1, COLOR_WHITE, COLOR_BLUE);
-    setColorPair(2, COLOR_WHITE, COLOR_GREEN);
-    setColorPair(3, COLOR_WHITE, COLOR_RED);
-    setColorPair(4, COLOR_WHITE, COLOR_MAGENTA);
-    setColorPair(5, COLOR_WHITE, COLOR_CYAN);
-    setColorPair(6, COLOR_WHITE, COLOR_YELLOW);
-    setColorPair(7, COLOR_WHITE, COLOR_WHITE);
-
     // ncurses init in loadressource method
 
     //init window
     getmaxyx(stdscr, yMax, xMax);
     int x = (xMax - 50) / 2;
     int y = (yMax - 50) / 2;
-    WINDOW *win = newwin(50, 50, y, x);
-    box(win, 0, 0);
+    _window = newwin(50 * 2, 50, y, x);
+    box(_window, 0, 0);
     refresh();
-    wrefresh(win);
+    wrefresh(_window);
     nodelay(_window, true);
 };
 
@@ -59,13 +46,14 @@ bool WindowNcurses::windowIsOpen()
 };
 
 void WindowNcurses::clear() {
-    wclear(_window);
+    // wclear(_window);
+    clear();
 };
 
 void WindowNcurses::display()
 {
-    refresh();
-    wrefresh(_window);
+    // refresh();
+    // wrefresh(_window);
 };
 
 void WindowNcurses::eventPollEvent()
@@ -96,6 +84,7 @@ void WindowNcurses::eventPollEvent()
         case 'i': return callEvent(IWindow::EventType::RESTART);
         case 'o': return callEvent(IWindow::EventType::GO_TO_MENU);
         case 'p': return callEvent(IWindow::EventType::QUIT);
+        case 10: return callEvent(IWindow::EventType::ENTER_pressed);
 
         case 27: return callEvent(IWindow::IWindow::EventType::QUIT);
 
