@@ -20,6 +20,8 @@ AGameSnake::AGameSnake()
     : width{50}
     , height{50}
     , gameOver{false}
+    , dx{1}
+    , dy{0}
     , _score{0}
     , foodX{0}
     , foodY{0}
@@ -191,7 +193,7 @@ void AGameSnake::restart()
     dx = 1;
     dy = 0;
     _score = 0;
-    speepFactor = 0;
+    speepFactor = 5.0;
     _snakeCoords.clear();
     for (int i = 0; i < initialLength; i++) {
         _snakeCoords.push_back(std::make_pair(width / 2 + i, height / 2));
